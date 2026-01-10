@@ -31,7 +31,7 @@ coverage.xml
 *.swo
 
 # Soplos specific
-*.mo
+
 /tmp/
 
 # OS
