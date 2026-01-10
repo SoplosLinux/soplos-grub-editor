@@ -1,0 +1,29 @@
+Source: soplos-grub-editor
+Section: admin
+Priority: optional
+Maintainer: Sergi Perich <info@soploslinux.com>
+Build-Depends: debhelper-compat (= 13),
+               python3-all,
+               python3-setuptools
+
+Package: soplos-grub-editor
+Architecture: all
+Depends: ${python3:Depends},
+         ${misc:Depends},
+         debhelper-compat,
+         python3-gi (>= 3.36.0),
+         python3-cairo (>= 1.16.2),
+         python3-xlib (>= 0.27),
+         python3-polib (>= 1.1.0),
+         python3-dbus (>= 1.2.16),
+         python3-pil (>= 8.0.0),
+         grub2-common | grub2,
+         imagemagick,
+         pkexec,
+         polkitd,
+         gir1.2-polkit-1.0
+Version: 2.0.0
+Description: Editor gráfico oficial de GRUB para Soplos Linux
+ Una interfaz gráfica oficial de Soplos Linux para editar fácilmente la configuración
+ del gestor de arranque GRUB2. Permite personalizar temas, fondos, fuentes y
+ entradas de arranque de manera intuitiva.

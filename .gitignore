@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / Packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Soplos specific
+*.mo
+/tmp/
+
+# OS
+.DS_Store
+Thumbs.db

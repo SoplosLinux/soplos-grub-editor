@@ -1,0 +1,65 @@
+.TH "SOPLOS-GRUB-EDITOR" "1" "2026-01-10" "Soplos Linux" "User Commands"
+.SH NAME
+soplos-grub-editor \- Advanced graphical GRUB2 configuration editor
+.SH SYNOPSIS
+.B soplos-grub-editor
+.SH DESCRIPTION
+.B soplos-grub-editor
+is a comprehensive GTK3 graphical editor for GRUB2 bootloader configuration.
+It provides an intuitive interface for:
+.IP \[bu] 2
+General boot configuration (timeout, default entry, resolution).
+.IP \[bu]
+Installation and management of GRUB themes.
+.IP \[bu]
+Custom background and color settings.
+.IP \[bu]
+Kernel parameter configuration.
+.IP \[bu]
+Boot entry management.
+.IP \[bu]
+OS detection settings.
+.P
+The application requires root privileges and automatically elevates using pkexec.
+Compatible with GNOME, KDE Plasma, and XFCE desktop environments.
+.SH OPTIONS
+The application has no command-line options. All configuration is done through the graphical interface.
+.SH FEATURES
+.TP
+.B General Tab
+Configure timeout, default boot entry, screen resolution, kernel parameters, OS detection, recovery options, and UUID settings.
+.TP
+.B Boot Entries Tab
+View and manage GRUB boot entries.
+.TP
+.B Appearance Tab
+Install/remove themes, set backgrounds, configure menu colors.
+.SH FILES
+.TP
+.I /etc/default/grub
+Main GRUB configuration file modified by this application.
+.TP
+.I /boot/grub/themes/
+Directory containing installed GRUB themes.
+.TP
+.I /usr/share/soplos-grub-editor/
+Application resources directory.
+.SH ENVIRONMENT
+.TP
+.B SOPLOS_THEME_TYPE
+Set to 'dark' or 'light' to override automatic theme detection.
+.TP
+.B GTK_THEME
+Override GTK theme name when running as root.
+.SH AUTHOR
+Written by Sergi Perich <info@soploslinux.com> for the Soplos Linux project.
+.SH COPYRIGHT
+Copyright \(co 2026 Sergi Perich.
+License: GPL-3.0-or-later <https://www.gnu.org/licenses/gpl-3.0.html>.
+.br
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+.SH SEE ALSO
+.BR update-grub (8),
+.BR grub-mkconfig (8),
+.BR soplos-welcome (1)

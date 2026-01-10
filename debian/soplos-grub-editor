@@ -1,0 +1,101 @@
+#!/bin/bash
+# Script generado automáticamente por Soplos Packager
+# Para aplicaciones que requieren privilegios de root
+
+if [ $(id -u) -ne 0 ]; then
+    # No somos root, relanzar con pkexec
+    display=$DISPLAY
+    xauthority=$XAUTHORITY
+    xdg_runtime_dir=$XDG_RUNTIME_DIR
+    
+    pkexec --disable-internal-agent env \
+        DISPLAY=$display \
+        XAUTHORITY=$xauthority \
+        XDG_RUNTIME_DIR=$xdg_runtime_dir \
+        WMCLASS="org.soplos.grubeditor" \
+        GDK_STARTUP_NOTIFICATION_ID="${STARTUP_ID:-0}" \
+        HOME=/root \
+        python3 -c "
+import sys
+import os
+sys.path.insert(0, '/usr/share/soplos-grub-editor')
+os.environ['GDK_STARTUP_ID'] = '${GDK_STARTUP_NOTIFICATION_ID}'
+os.environ['WMCLASS'] = 'com.soplos.grubeditor'
+
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk, GLib, Gdk
+
+# Establecer el nombre de la aplicación antes de importar módulos
+GLib.set_prgname('com.soplos.grubeditor')
+GLib.set_application_name('soplos-grub-editor')
+Gtk.Window.set_default_icon_name('com.soplos.grubeditor')
+if hasattr(Gdk, 'set_program_class'):
+    Gdk.set_program_class('com.soplos.grubeditor')
+
+# Importar y ejecutar el programa principal
+import main
+try:
+    if hasattr(main, 'main'):
+        sys.exit(main.main())
+    else:
+        # Buscar una función que pueda ser el punto de entrada
+        for attr_name in dir(main):
+            if attr_name.lower() in ['main', 'run', 'start']:
+                attr = getattr(main, attr_name)
+                if callable(attr):
+                    sys.exit(attr())
+                    break
+        else:
+            # Si no hay función main, simplemente importar es suficiente
+            pass
+except Exception as e:
+    print(f'Error al ejecutar main.py: {e}')
+    sys.exit(1)
+"
+    exit $?
+else
+    # Ya somos root, ejecutar directamente con los IDs correctos
+    export WMCLASS="com.soplos.grubeditor"
+    export GDK_STARTUP_NOTIFICATION_ID="${STARTUP_ID:-0}"
+    cd /usr/share/soplos-grub-editor
+    
+    python3 -c "
+import sys
+import os
+sys.path.insert(0, '/usr/share/soplos-grub-editor')
+os.environ['GDK_STARTUP_ID'] = '${GDK_STARTUP_NOTIFICATION_ID}'
+os.environ['WMCLASS'] = 'com.soplos.grubeditor'
+
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk, GLib, Gdk
+
+# Establecer el nombre de la aplicación antes de importar módulos
+GLib.set_prgname('com.soplos.grubeditor')
+GLib.set_application_name('soplos-grub-editor')
+Gtk.Window.set_default_icon_name('com.soplos.grubeditor')
+if hasattr(Gdk, 'set_program_class'):
+    Gdk.set_program_class('com.soplos.grubeditor')
+
+# Importar y ejecutar el programa principal
+import main
+try:
+    if hasattr(main, 'main'):
+        sys.exit(main.main())
+    else:
+        # Buscar una función que pueda ser el punto de entrada
+        for attr_name in dir(main):
+            if attr_name.lower() in ['main', 'run', 'start']:
+                attr = getattr(main, attr_name)
+                if callable(attr):
+                    sys.exit(attr())
+                    break
+        else:
+            # Si no hay función main, simplemente importar es suficiente
+            pass
+except Exception as e:
+    print(f'Error al ejecutar main.py: {e}')
+    sys.exit(1)
+"
+fi

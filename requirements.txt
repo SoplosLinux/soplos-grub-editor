@@ -1,0 +1,25 @@
+PyGObject>=3.36.0
+pycairo>=1.16.2
+python-xlib>=0.27
+polib>=1.1.0
+python-dbus>=1.2.16
+Pillow>=8.0.0
+
+# Opcional: Para desarrollo y testing
+# pytest>=6.0.0
+# pytest-cov>=2.10.0
+# black>=21.0.0
+# flake8>=3.8.0
+
+# System dependencies (install via package manager)
+# python3-gi (>= 3.36.0)
+# grub2-common or grub2
+# imagemagick
+# pkexec
+# polkitd
+# gir1.2-polkit-1.0
+
+# Dependencias específicas por distribución (descomentar según necesidad)
+#python-apt>=2.0.0  # Debian/Ubuntu
+#dnf-python  # Fedora
+#zypper-python  # openSUSE

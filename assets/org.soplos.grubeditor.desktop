@@ -1,0 +1,33 @@
+[Desktop Entry]
+Version=2.0.0
+Type=Application
+Name=Soplos GRUB Editor
+Name[es]=Editor GRUB de Soplos
+Name[en]=Soplos GRUB Editor
+Name[fr]=Éditeur GRUB Soplos
+Name[de]=Soplos GRUB Editor
+Name[pt]=Editor GRUB Soplos
+Name[it]=Editor GRUB Soplos
+Name[ru]=Редактор GRUB Soplos
+Name[ro]=Editor GRUB Soplos
+
+Comment=GRUB Configuration Editor
+Comment[es]=Editor gráfico para la configuración de GRUB
+Comment[en]=Graphical editor for GRUB configuration
+Comment[fr]=Éditeur graphique pour la configuration de GRUB
+Comment[de]=Grafischer Editor für GRUB-Konfiguration
+Comment[pt]=Editor gráfico para configuração do GRUB
+Comment[it]=Editor grafico per la configurazione di GRUB
+Comment[ru]=Графический редактор конфигурации GRUB
+Comment[ro]=Editor grafic pentru configurarea GRUB
+
+Exec=soplos-grub-editor
+Icon=org.soplos.grubeditor
+Terminal=false
+OnlyShowIn=XFCE;
+X-XfcePluggable=true
+Categories=XFCE;GTK;Settings;DesktopSettings;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;
+Keywords=grub;boot;system;soplos;
+StartupWMClass=org.soplos.grubeditor
+X-GNOME-Application-ID=org.soplos.grubeditor
+X-AppStream-Metadata=/usr/share/metainfo/org.soplos.grubeditor.metainfo.xml
