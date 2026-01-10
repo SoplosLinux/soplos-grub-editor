@@ -59,6 +59,16 @@ def main():
         theme = None
         theme_type = None  # 'dark' or 'light'
         
+        # [FIX] Capture Desktop Environment and Session Type from user session
+        # pkexec strips these, causing "Unknown (X11)" in the app
+        user_desktop = os.environ.get('XDG_CURRENT_DESKTOP', '')
+        user_session_type = os.environ.get('XDG_SESSION_TYPE', '')
+        
+        if user_desktop:
+            env_vars.append(f"SOPLOS_DESKTOP={user_desktop}")
+        if user_session_type:
+            env_vars.append(f"SOPLOS_SESSION_TYPE={user_session_type}")
+        
         # Detect XFCE theme
         try:
             result = subprocess.run(['xfconf-query', '-c', 'xsettings', '-p', '/Net/ThemeName'],

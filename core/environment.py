@@ -67,8 +67,12 @@ class EnvironmentDetector:
     
     def _detect_desktop_environment(self) -> DesktopEnvironment:
         """Detects the current desktop environment."""
-        # Check XDG_CURRENT_DESKTOP first (most reliable)
-        current_desktop = os.environ.get('XDG_CURRENT_DESKTOP', '').lower()
+        # [FIX] Check SOPLOS_DESKTOP passed from main.py before elevation first
+        current_desktop = os.environ.get('SOPLOS_DESKTOP', '')
+        if not current_desktop:
+            current_desktop = os.environ.get('XDG_CURRENT_DESKTOP', '')
+        
+        current_desktop = current_desktop.lower()
         
         if 'gnome' in current_desktop:
             self._desktop_env = DesktopEnvironment.GNOME
@@ -112,7 +116,12 @@ class EnvironmentDetector:
     
     def _detect_display_protocol(self) -> DisplayProtocol:
         """Detects the display server protocol (X11 or Wayland)."""
-        session_type = os.environ.get('XDG_SESSION_TYPE', '').lower()
+        # [FIX] Check SOPLOS_SESSION_TYPE passed from main.py before elevation
+        session_type = os.environ.get('SOPLOS_SESSION_TYPE', '')
+        if not session_type:
+            session_type = os.environ.get('XDG_SESSION_TYPE', '')
+        
+        session_type = session_type.lower()
         
         if session_type == 'wayland':
             self._display_protocol = DisplayProtocol.WAYLAND
