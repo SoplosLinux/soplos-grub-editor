@@ -114,12 +114,13 @@ class SoplosGrubEditorApplication(Gtk.Application):
         """Initialize environment detection."""
         try:
             self.environment_detector = get_environment_detector()
-            env_info = self.environment_detector.detect_all()
-            
-            log_info(_("Desktop Environment: {env}").format(env=env_info['desktop_environment']))
-            
-            # Configure environment variables for optimal integration
+            # Load any parent-provided hints first, then configure environment
+            # variables (so Gtk.Settings sees the right backend), then detect.
+            self.environment_detector.load_parent_hints()
             self.environment_detector.configure_environment_variables()
+            env_info = self.environment_detector.detect_all()
+
+            log_info(_("Desktop Environment: {env}").format(env=env_info['desktop_environment']))
             
         except Exception as e:
             log_error(_("Error initializing environment detection: {err}").format(err=e))

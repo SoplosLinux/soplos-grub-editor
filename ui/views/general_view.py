@@ -29,10 +29,10 @@ class GeneralView(Gtk.Box):
         
     def _create_ui(self):
         """Create the UI matching legacy layout."""
-        # Section: Boot Configuration
+        # Section 1: Boot Configuration (Full Width)
         config_frame = Gtk.Frame(label=_("Boot Configuration"))
         config_frame.get_style_context().add_class('soplos-card')
-        config_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        config_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         config_box.set_margin_start(15)
         config_box.set_margin_end(15)
         config_box.set_margin_top(10)
@@ -50,7 +50,7 @@ class GeneralView(Gtk.Box):
         row1.pack_start(self.default_entry_combo, True, True, 0)
         config_box.pack_start(row1, False, False, 0)
         
-        # Row 2: Timeout (seconds) with spinner
+        # Row 2: Timeout (seconds)
         row2 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
         label2 = Gtk.Label(label=_("Timeout (seconds):"))
         label2.set_halign(Gtk.Align.START)
@@ -91,10 +91,16 @@ class GeneralView(Gtk.Box):
         config_frame.add(config_box)
         self.pack_start(config_frame, False, False, 0)
         
-        # Section: Advanced Options
+        # Section 2: Two Columns (Advanced Options | Kernel Parameters)
+        middle_columns_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
+        # Force equal width for split columns
+        middle_columns_box.set_homogeneous(True)
+        self.pack_start(middle_columns_box, True, True, 0)
+        
+        # -- Column 1: Advanced Options --
         advanced_frame = Gtk.Frame(label=_("Advanced Options"))
         advanced_frame.get_style_context().add_class('soplos-card')
-        advanced_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        advanced_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         advanced_box.set_margin_start(15)
         advanced_box.set_margin_end(15)
         advanced_box.set_margin_top(10)
@@ -120,9 +126,9 @@ class GeneralView(Gtk.Box):
         advanced_box.pack_start(self.uuid_check, False, False, 0)
         
         advanced_frame.add(advanced_box)
-        self.pack_start(advanced_frame, False, False, 0)
+        middle_columns_box.pack_start(advanced_frame, True, True, 0)
         
-        # Section: Kernel Parameters
+        # -- Column 2: Kernel Parameters --
         kernel_frame = Gtk.Frame(label=_("Kernel Parameters"))
         kernel_frame.get_style_context().add_class('soplos-card')
         kernel_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
@@ -140,7 +146,7 @@ class GeneralView(Gtk.Box):
         kernel_box.pack_start(self.kernel_entry, False, False, 0)
         
         kernel_frame.add(kernel_box)
-        self.pack_start(kernel_frame, False, False, 0)
+        middle_columns_box.pack_start(kernel_frame, True, True, 0)
         
         # Apply button (right-aligned, normal size)
         apply_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)

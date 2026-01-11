@@ -152,6 +152,8 @@ Developed by Sergi Perich
 
 ### New Features
 - **Smart Light/Dark Theme Detection** - Compatible with GNOME, KDE and XFCE
+- **Improved Desktop & Environment Detection** - Accurate detection of Wayland/X11 and DE
+- **Refined UI Layout** - Compact two-column design for advanced options
 - **GRUB Theme Installer/Remover** - Support for .tar.gz, .zip, .tar.xz
 - **UUID Option** - Control of GRUB_DISABLE_LINUX_UUID
 - **Expanded Resolutions** - 16:9, 16:10, 4:3 and 4K

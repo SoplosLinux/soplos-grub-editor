@@ -7,11 +7,35 @@ if [ $(id -u) -ne 0 ]; then
     display=$DISPLAY
     xauthority=$XAUTHORITY
     xdg_runtime_dir=$XDG_RUNTIME_DIR
+    xdg_session_type=$XDG_SESSION_TYPE
+    xdg_current_desktop=$XDG_CURRENT_DESKTOP
+    gtk_theme=$GTK_THEME
     
+    # Detect user theme preference (Dark/Light)
+    soplos_theme_type="light"
+    
+    # Check GTK_THEME env var first
+    if [[ "$GTK_THEME" == *"dark"* ]]; then
+        soplos_theme_type="dark"
+    # Check gsettings for GNOME/GTK
+    elif command -v gsettings &> /dev/null; then
+        scheme=$(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null)
+        if [[ "$scheme" == *"'prefer-dark'"* ]]; then
+            soplos_theme_type="dark"
+        fi
+    fi
+    # Kde/Plasma check could be added here but usually GTK_THEME is set on modern Plasma
+
+    export SOPLOS_THEME_TYPE="$soplos_theme_type"
+
     pkexec --disable-internal-agent env \
         DISPLAY=$display \
         XAUTHORITY=$xauthority \
         XDG_RUNTIME_DIR=$xdg_runtime_dir \
+        XDG_SESSION_TYPE=$xdg_session_type \
+        XDG_CURRENT_DESKTOP=$xdg_current_desktop \
+        GTK_THEME=$gtk_theme \
+        SOPLOS_THEME_TYPE=$soplos_theme_type \
         WMCLASS="org.soplos.grubeditor" \
         GDK_STARTUP_NOTIFICATION_ID="${STARTUP_ID:-0}" \
         HOME=/root \

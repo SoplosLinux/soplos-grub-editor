@@ -7,155 +7,121 @@ Main application entry point.
 
 import sys
 import os
-import warnings
 from pathlib import Path
 
 # Add the project root to PYTHONPATH
 PROJECT_ROOT = Path(__file__).parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-# Suppress accessibility warnings for a cleaner output
-warnings.filterwarnings('ignore', '.*Couldn\'t connect to accessibility bus.*', Warning)
-warnings.filterwarnings('ignore', '.*Failed to connect to socket.*', Warning)
-
-# Disable accessibility bridge unless explicitly enabled
-if not os.environ.get('ENABLE_ACCESSIBILITY'):
-    os.environ['NO_AT_BRIDGE'] = '1'
-    os.environ['AT_SPI_BUS'] = '0'
-
-def cleanup_pycache():
-    """Recursively remove __pycache__ directories."""
-    import shutil
-    try:
-        # PROJECT_ROOT is defined globally
-        for p in PROJECT_ROOT.rglob('__pycache__'):
-            if p.is_dir():
-                shutil.rmtree(p, ignore_errors=True)
-    except Exception as e:
-        print(f"Warning: Failed to cleanup pycache: {e}")
-
+# Minimal main: elevate if needed, seed session info, then run application
 def main():
-    """Main entry point for Soplos Grub Editor."""
-    
-    # Auto-elevate to root if not already root
     if os.geteuid() != 0:
         import subprocess
-        
-        # Preserve all important environment variables for desktop detection
-        env_vars = []
+        import pwd
+        import json
+        import tempfile
+        import shutil
+
+        # Tyson-like comprehensive env propagation
         important_vars = [
-            'DISPLAY', 'XAUTHORITY', 'XDG_RUNTIME_DIR', 'XDG_SESSION_TYPE',
-            'XDG_CURRENT_DESKTOP', 'XDG_SESSION_DESKTOP', 'DESKTOP_SESSION',
-            'WAYLAND_DISPLAY', 'DBUS_SESSION_BUS_ADDRESS', 'GTK_THEME',
-            'HOME', 'LANG', 'LANGUAGE', 'LC_ALL'
+            'DISPLAY', 'XAUTHORITY', 'XDG_RUNTIME_DIR', 'DBUS_SESSION_BUS_ADDRESS',
+            'WAYLAND_DISPLAY', 'XDG_CURRENT_DESKTOP', 'XDG_SESSION_TYPE',
+            'HOME', 'LANG', 'GDK_BACKEND', 'QT_QPA_PLATFORM', 'GTK_THEME'
         ]
-        for var in important_vars:
-            val = os.environ.get(var, '')
+
+        env_vars = []
+        for v in important_vars:
+            val = os.environ.get(v)
             if val:
-                env_vars.append(f"{var}={val}")
-        
-        # Detect user's GTK theme and theme type (dark/light) before elevating
-        # This is crucial because running as root loses access to user's settings
-        theme = None
-        theme_type = None  # 'dark' or 'light'
-        
-        # [FIX] Capture Desktop Environment and Session Type from user session
-        # pkexec strips these, causing "Unknown (X11)" in the app
-        user_desktop = os.environ.get('XDG_CURRENT_DESKTOP', '')
-        user_session_type = os.environ.get('XDG_SESSION_TYPE', '')
-        
-        if user_desktop:
-            env_vars.append(f"SOPLOS_DESKTOP={user_desktop}")
-        if user_session_type:
-            env_vars.append(f"SOPLOS_SESSION_TYPE={user_session_type}")
-        
-        # Detect XFCE theme
+                env_vars.append(f"{v}={val}")
+
+        real_user = pwd.getpwuid(os.getuid()).pw_name
+        env_vars.append(f"SUDO_USER={real_user}")   
+
+        # Initialize variables to avoid UnboundLocalError
+        user_desktop = ''
+        session_type = ''
+        theme_type = ''
+
+        # Pre-elevation detection: Determine environment to pass to root
         try:
-            result = subprocess.run(['xfconf-query', '-c', 'xsettings', '-p', '/Net/ThemeName'],
-                                   capture_output=True, text=True)
-            if result.returncode == 0:
-                theme = result.stdout.strip()
-                theme_type = 'dark' if 'dark' in theme.lower() else 'light'
+            # Add current directory to path to allow imports
+            sys.path.insert(0, str(Path(__file__).parent))
+            from core.environment import EnvironmentDetector
+            
+            detector = EnvironmentDetector()
+            detector.detect_all()
+            
+            if detector.desktop_environment:
+                user_desktop = detector.desktop_environment.value
+                env_vars.append(f"SOPLOS_DESKTOP={user_desktop}")
+            if detector.display_protocol:
+                session_type = detector.display_protocol.value
+                env_vars.append(f"SOPLOS_SESSION_TYPE={session_type}")
+            if detector.theme_type:
+                theme_type = detector.theme_type.value
+                env_vars.append(f"SOPLOS_THEME_TYPE={theme_type}")
+                
+        except Exception as e:
+            print(f"Warning: Pre-elevation detection failed: {e}")
+            # Fallback to existing env vars if detection fails
+            user_desktop = os.environ.get('XDG_CURRENT_DESKTOP', '')
+            session_type = os.environ.get('XDG_SESSION_TYPE', '')
+            theme_type = os.environ.get('SOPLOS_THEME_TYPE', '')
+            
+            if user_desktop:
+                env_vars.append(f"SOPLOS_DESKTOP={user_desktop}")
+            if session_type:
+                env_vars.append(f"SOPLOS_SESSION_TYPE={session_type}")
+            if theme_type:
+                env_vars.append(f"SOPLOS_THEME_TYPE={theme_type}")
+
+        # Write session JSON for elevated process to consume (secondary mechanism)
+        env_file_path = None
+        run_user_dir = f"/run/user/{os.getuid()}"
+        data = {
+            'SOPLOS_DESKTOP': user_desktop,
+            'SOPLOS_SESSION_TYPE': session_type,
+            'SOPLOS_THEME_TYPE': theme_type or ''
+        }
+        try:
+            if os.path.isdir(run_user_dir):
+                env_file_path = os.path.join(run_user_dir, f'soplos_env_{real_user}.json')
+                with open(env_file_path, 'w', encoding='utf-8') as ef:
+                    json.dump(data, ef)
+            else:
+                with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.json') as ef:
+                    env_file_path = ef.name
+                    json.dump(data, ef)
         except Exception:
-            pass
-        
-        # Detect GNOME theme
-        if not theme:
-            try:
-                # First try color-scheme (GNOME 42+)
-                result = subprocess.run(['gsettings', 'get', 'org.gnome.desktop.interface', 'color-scheme'],
-                                       capture_output=True, text=True)
-                if result.returncode == 0 and 'dark' in result.stdout.lower():
-                    theme_type = 'dark'
-                else:
-                    theme_type = 'light'
-                    
-                # Get actual theme name
-                result = subprocess.run(['gsettings', 'get', 'org.gnome.desktop.interface', 'gtk-theme'],
-                                       capture_output=True, text=True)
-                if result.returncode == 0:
-                    theme = result.stdout.strip().strip("'")
-                    if 'dark' in theme.lower():
-                        theme_type = 'dark'
-            except Exception:
-                pass
-        
-        # Detect KDE theme
-        if not theme:
-            try:
-                kdeglobals = os.path.expanduser('~/.config/kdeglobals')
-                if os.path.exists(kdeglobals):
-                    with open(kdeglobals, 'r') as f:
-                        content = f.read()
-                        for line in content.split('\n'):
-                            if line.startswith('widgetStyle='):
-                                theme = line.split('=', 1)[1].strip()
-                            if 'ColorScheme=' in line:
-                                scheme = line.split('=', 1)[1].strip().lower()
-                                if 'dark' in scheme or 'black' in scheme:
-                                    theme_type = 'dark'
-                        if theme and not theme_type:
-                            theme_type = 'dark' if 'dark' in theme.lower() else 'light'
-            except Exception:
-                pass
-        
-        if theme:
-            env_vars.append(f"GTK_THEME={theme}")
-        if theme_type:
-            env_vars.append(f"SOPLOS_THEME_TYPE={theme_type}")
-        
+            env_file_path = None
+
+        if env_file_path:
+            env_vars.append(f"SOPLOS_ENV_FILE={env_file_path}")
+
+        # Accessibility env often set in wrappers
+        env_vars.append('NO_AT_BRIDGE=1')
+
         script_path = str(Path(__file__).resolve())
-        cmd = ['pkexec', 'env'] + env_vars + [sys.executable, script_path]
-        
+        pkexec_path = shutil.which('pkexec') or 'pkexec'
+        cmd = [pkexec_path, 'env'] + env_vars + [sys.executable, script_path]
         try:
-            result = subprocess.run(cmd)
-            return result.returncode
+            return subprocess.run(cmd).returncode
         except Exception as e:
             print(f"Failed to elevate privileges: {e}")
             return 1
-    
-    exit_code = 0
+
+    # Run application as normal user/root
     try:
         from core.application import run_application
-        exit_code = run_application()
-        
+        return run_application()
     except ImportError as e:
         print(f"Import error: {e}")
-        print("Ensure all dependencies are installed:")
-        print("  sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0")
-        import traceback
-        traceback.print_exc()
-        exit_code = 1
-        
+        print("Ensure dependencies are installed: sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0")
+        return 1
     except Exception as e:
         print(f"Application error: {e}")
-        import traceback
-        traceback.print_exc()
-        exit_code = 1
-        
-    finally:
-        cleanup_pycache()
-        return exit_code
+        return 1
 
 if __name__ == '__main__':
     sys.exit(main())

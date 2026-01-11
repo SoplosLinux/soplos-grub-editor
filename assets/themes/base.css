@@ -1,9 +1,8 @@
-
-/* Base Theme for Soplos Welcome - GTK3 Compatible */
+/* Base Theme for Soplos Grub Editor - GTK3 Compatible */
 /* This file contains only neutral base styles that work across all themes */
 
 /* Application Window */
-.soplos-welcome-window {
+.soplos-window {
     background-color: @theme_bg_color;
     color: @theme_fg_color;
 }
@@ -21,7 +20,7 @@ notebook {
     background-color: @theme_base_color;
 }
 
-notebook > stack {
+notebook>stack {
     background-color: @theme_base_color;
     border-top: 1px solid @borders;
 }
@@ -47,7 +46,7 @@ notebook header tab {
     color: @theme_fg_color;
     margin: 0 2px -1px 0;
     border-radius: 6px 6px 0 0;
-    font-weight: 400;
+    font-weight: normal;
     min-height: 28px;
 }
 
@@ -55,15 +54,16 @@ notebook header tab:hover {
     background-color: @theme_bg_color;
 }
 
-notebook header tab:checked {
+notebook header tab:checked,
+notebook header tab:active {
     background-color: @theme_base_color;
     border-bottom: none;
-    font-weight: 500;
+    font-weight: bold;
     margin-bottom: -1px;
 }
 
 notebook header tab label {
-    color: inherit;
+    color: @theme_fg_color;
 }
 
 notebook header tab image {
@@ -78,7 +78,7 @@ button {
     border: 1px solid @borders;
     background-color: @theme_bg_color;
     color: @theme_fg_color;
-    font-weight: 500;
+    font-weight: bold;
 }
 
 button:hover {
@@ -144,21 +144,21 @@ separator {
     margin: 10px 0;
 }
 
-/* Welcome Screen Specific */
-.soplos-welcome-title {
+/* Repo Selector Screen Specific */
+.soplos-repo-selector-title {
     font-size: 24px;
     font-weight: bold;
     color: @theme_selected_bg_color;
     margin-bottom: 10px;
 }
 
-.soplos-welcome-subtitle {
+.soplos-repo-selector-subtitle {
     font-size: 16px;
     color: @theme_fg_color;
     margin-bottom: 20px;
 }
 
-/* Software Tab Specific */
+/* Software/Hardware Grids */
 .soplos-software-grid {
     padding: 10px;
 }
@@ -177,7 +177,6 @@ separator {
     color: @theme_selected_fg_color;
 }
 
-/* Hardware Tab Specific */
 .soplos-hardware-info {
     font-family: monospace;
     background-color: @theme_base_color;
@@ -207,33 +206,36 @@ frame {
     background-color: @theme_base_color;
 }
 
-frame > border {
+frame>border {
     border: none;
 }
 
 /* Lists and trees */
-list, treeview {
+list,
+treeview {
     background-color: @theme_base_color;
     color: @theme_fg_color;
 }
 
-list row:hover, treeview:hover {
+list row:hover,
+treeview:hover {
     background-color: @theme_selected_bg_color;
     color: @theme_selected_fg_color;
 }
 
-list row:selected, treeview:selected {
+list row:selected,
+treeview:selected {
     background-color: @theme_selected_bg_color;
     color: @theme_selected_fg_color;
 }
 
-/* Custom button styles for Welcome tab */
+/* Custom button styles */
 .soplos-button-primary {
     background-color: @theme_bg_color;
     color: @theme_fg_color;
     border: 1px solid @borders;
     padding: 10px 20px;
-    font-weight: 500;
+    font-weight: bold;
     border-radius: 4px;
 }
 
@@ -246,12 +248,12 @@ list row:selected, treeview:selected {
     color: @theme_fg_color;
     border: 1px solid @borders;
     padding: 8px 16px;
-    font-weight: 400;
+    font-weight: normal;
     border-radius: 4px;
 }
 
 .soplos-button-secondary:hover {
-    background-color: alpha(@theme_fg_color, 0.05);
+    background-color: @hover_overlay;
 }
 
 .soplos-button-accent {
@@ -259,11 +261,10 @@ list row:selected, treeview:selected {
     color: @error_color;
     border: 1px solid @error_color;
     padding: 8px 16px;
-    font-weight: 500;
+    font-weight: bold;
     border-radius: 4px;
 }
 
 .soplos-button-accent:hover {
-    background-color: alpha(@error_color, 0.1);
+    background-color: @hover_overlay;
 }
-

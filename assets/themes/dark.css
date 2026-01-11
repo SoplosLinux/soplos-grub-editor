@@ -1,6 +1,9 @@
-/* Dark Theme for Soplos Welcome - GTK3 CSS - Refined */
+/* Dark Theme for Soplos GRUB Editor - GTK3 CSS */
+/* AUTOCONTENIDO: Variables + Estilos en un solo archivo */
 
-/* Define Soplos brand colors */
+/* ============================================ */
+/* VARIABLES (Soplos Brand Colors)            */
+/* ============================================ */
 @define-color soplos_orange #ff8800;
 @define-color soplos_orange_hover #ff9922;
 @define-color soplos_dark_bg #2b2b2b;
@@ -8,14 +11,25 @@
 @define-color soplos_light_text #ffffff;
 @define-color soplos_border #3c3c3c;
 @define-color soplos_error #e74c3c;
+@define-color soplos_insensitive_fg #888888;
+@define-color soplos_unfocused_bg #2b2b2b;
 
-/* Override theme colors globally */
+/* GTK Named Colors Mapping */
 @define-color theme_bg_color @soplos_dark_bg;
 @define-color theme_fg_color @soplos_light_text;
 @define-color theme_base_color @soplos_darker_bg;
+@define-color theme_text_color @soplos_light_text;
 @define-color theme_selected_bg_color @soplos_orange;
 @define-color theme_selected_fg_color #000000;
 @define-color borders @soplos_border;
+@define-color error_color @soplos_error;
+@define-color insensitive_fg_color @soplos_insensitive_fg;
+@define-color theme_unfocused_bg_color @soplos_unfocused_bg;
+@define-color hover_overlay rgba(255, 255, 255, 0.05);
+
+/* ============================================ */
+/* BASE STYLES                                 */
+/* ============================================ */
 
 /* Application Window */
 window {
@@ -23,101 +37,37 @@ window {
     color: @soplos_light_text;
 }
 
-/* Dialog Styling - Fix for KDE Plasma white dialogs */
-dialog,
-messagedialog {
-    background-color: @soplos_dark_bg;
-    color: @soplos_light_text;
+.soplos-window {
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
 }
 
-dialog .background,
-messagedialog .background {
-    background-color: @soplos_dark_bg;
-    color: @soplos_light_text;
+/* Main Content Area */
+.soplos-content {
+    padding: 20px;
+    background-color: @theme_base_color;
+    border-radius: 8px;
 }
 
-dialog>box,
-messagedialog>box {
-    background-color: @soplos_dark_bg;
-}
-
-.dialog-action-area {
-    background-color: @soplos_darker_bg;
-    border-top: 1px solid @soplos_border;
-}
-
-.dialog-content-area {
-    background-color: @soplos_dark_bg;
-    color: @soplos_light_text;
-}
-
-/* FileChooserDialog Styling - Fix for white background in KDE Plasma */
-filechooserdialog,
-filechooser {
-    background-color: @soplos_dark_bg;
-    color: @soplos_light_text;
-}
-
-filechooser .background {
-    background-color: @soplos_dark_bg;
-}
-
-filechooser placessidebar {
-    background-color: @soplos_darker_bg;
-    color: @soplos_light_text;
-}
-
-filechooser placessidebar row {
-    background-color: @soplos_darker_bg;
-    color: @soplos_light_text;
-}
-
-filechooser placessidebar row:selected {
-    background-color: @soplos_orange;
-    color: @soplos_light_text;
-}
-
-filechooser pathbar {
-    background-color: @soplos_darker_bg;
-    color: @soplos_light_text;
-}
-
-filechooser treeview,
-filechooser treeview.view {
-    background-color: @soplos_dark_bg;
-    color: @soplos_light_text;
-}
-
-filechooser entry {
-    background-color: @soplos_darker_bg;
-    color: @soplos_light_text;
-    border-color: @soplos_border;
-}
-
-/* HeaderBar Styling - Fix for "horrible" buttons */
+/* HeaderBar */
 headerbar,
-headerbar:backdrop,
-.titlebar,
-.titlebar:backdrop {
+.titlebar {
     background-color: @soplos_darker_bg;
     color: @soplos_light_text;
     border-bottom: 1px solid @soplos_border;
     box-shadow: none;
-    min-height: 46px;
 }
 
 headerbar button.titlebutton {
     color: @soplos_light_text;
     background: transparent;
     border: none;
-    box-shadow: none;
     padding: 6px;
     border-radius: 4px;
 }
 
 headerbar button.titlebutton:hover {
     background-color: #444444;
-    color: @soplos_light_text;
 }
 
 headerbar button.titlebutton.close:hover {
@@ -125,7 +75,7 @@ headerbar button.titlebutton.close:hover {
     color: white;
 }
 
-/* Notebook (Tabs) Styling - Aggressive Overrides */
+/* Notebook and Tabs - EXACTLY like Repo Selector */
 notebook {
     background-color: @soplos_darker_bg;
     border: 1px solid @soplos_border;
@@ -135,6 +85,8 @@ notebook>header {
     background-color: @soplos_darker_bg;
     border: none;
     box-shadow: none;
+    padding: 0;
+    margin: 0;
 }
 
 notebook>header tabs {
@@ -144,7 +96,7 @@ notebook>header tabs {
     padding: 0;
 }
 
-/* Tab Styling */
+/* Tab Styling - CRITICAL: Must match Repo Selector */
 notebook>header tab {
     background-color: #1a1a1a;
     color: #cccccc;
@@ -155,6 +107,7 @@ notebook>header tab {
     border-radius: 4px 4px 0 0;
     box-shadow: none;
     outline: none;
+    min-height: 20px;
 }
 
 /* Hover State */
@@ -164,19 +117,19 @@ notebook>header tab:hover {
     box-shadow: none;
 }
 
-/* Checked/Active State - Force Orange Border */
+/* CHECKED/ACTIVE State - ORANGE TOP BORDER (like Repo Selector) */
 notebook>header tab:checked {
     background-color: @soplos_dark_bg;
     color: @soplos_orange;
     border-top: 3px solid @soplos_orange;
-    /* Top highlight */
     border-left: 1px solid @soplos_border;
     border-right: 1px solid @soplos_border;
     border-bottom: none;
     box-shadow: none;
+    font-weight: 500;
 }
 
-/* Remove any focus rings or outlines */
+/* Remove focus rings */
 notebook>header tab:focus {
     outline: none;
     box-shadow: none;
@@ -187,17 +140,25 @@ notebook>stack {
     background-color: @soplos_dark_bg;
     border: 1px solid @soplos_border;
     border-top: none;
-    /* Seamless connection with tabs */
+}
+
+notebook header tab label {
+    color: inherit;
+}
+
+notebook header tab image {
+    margin-right: 6px;
+    min-height: 16px;
 }
 
 /* Buttons */
 button {
-    background-image: none;
-    background-color: #333333;
-    color: @soplos_light_text;
-    border: 1px solid @soplos_border;
-    border-radius: 4px;
+    border-radius: 6px;
     padding: 8px 16px;
+    border: 1px solid @borders;
+    background-color: #333333;
+    color: @theme_fg_color;
+    font-weight: bold;
     box-shadow: none;
     text-shadow: none;
 }
@@ -205,46 +166,58 @@ button {
 button:hover {
     background-color: #444444;
     border-color: @soplos_orange;
-    color: @soplos_light_text;
+    color: @theme_fg_color;
 }
 
 button:active {
-    background-color: @soplos_orange;
-    color: #000000;
+    background-color: @theme_selected_bg_color;
+    color: @theme_selected_fg_color;
 }
 
-/* Suggested Action (Orange) */
 button.suggested-action {
-    background-color: @soplos_orange;
-    color: #000000;
-    border: 1px solid @soplos_orange_hover;
-    font-weight: bold;
+    background-color: @theme_selected_bg_color;
+    color: @theme_selected_fg_color;
+    border: none;
 }
 
 button.suggested-action:hover {
     background-color: @soplos_orange_hover;
-    border-color: @soplos_orange_hover;
 }
 
-/* Destructive Action (Red) */
 button.destructive-action {
-    background-color: @soplos_error;
-    color: #ffffff;
-    border: 1px solid #c0392b;
+    background-color: @error_color;
+    color: white;
+    border: none;
 }
 
 button.destructive-action:hover {
     background-color: #ff6b6b;
-    border-color: #ff6b6b;
 }
 
-/* Labels */
-label {
-    color: @soplos_light_text;
-    text-shadow: none;
+/* Cards and Containers */
+.soplos-card {
+    background-color: @theme_base_color;
+    border: 1px solid @borders;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px;
 }
 
-/* Progress Bar */
+.soplos-card:hover {
+    background-color: @theme_selected_bg_color;
+    color: @theme_selected_fg_color;
+}
+
+/* Status and Progress */
+.soplos-status-label {
+    color: @theme_fg_color;
+    font-size: 14px;
+}
+
+progressbar {
+    border-radius: 4px;
+}
+
 progressbar trough {
     background-color: @soplos_darker_bg;
     border: 1px solid @soplos_border;
@@ -254,26 +227,127 @@ progressbar trough {
 progressbar progress {
     background-color: @soplos_orange;
     border-radius: 4px;
+}
+
+/* Icons */
+.soplos-icon-large {
+    min-width: 48px;
+    min-height: 48px;
+}
+
+.soplos-icon-medium {
+    min-width: 32px;
+    min-height: 32px;
+}
+
+.soplos-icon-small {
+    min-width: 16px;
+    min-height: 16px;
+}
+
+/* Separators */
+separator {
+    background-color: @borders;
+    margin: 10px 0;
+}
+
+/* Text styles */
+.dim-label {
+    color: @insensitive_fg_color;
+}
+
+label {
+    color: @soplos_light_text;
+}
+
+/* Scrolled windows */
+scrolledwindow {
+    background-color: @theme_base_color;
+}
+
+scrolledwindow viewport {
+    background-color: @theme_base_color;
+}
+
+/* Frames */
+frame {
+    border: 1px solid @borders;
+    background-color: @theme_base_color;
+}
+
+frame>border {
     border: none;
 }
 
-/* Switch */
-switch {
-    background-color: #333333;
+/* Lists and trees - COMPACT STYLING */
+list,
+treeview {
+    background-color: @theme_base_color;
+    color: @theme_fg_color;
+    font-size: 13px;
+}
+
+/* TreeView headers */
+treeview.view header button {
+    background-color: @soplos_darker_bg;
+    color: @soplos_light_text;
     border: 1px solid @soplos_border;
-    border-radius: 12px;
+    padding: 6px 8px;
+    font-weight: 500;
+    font-size: 13px;
 }
 
-switch:checked {
+treeview.view header button:hover {
+    background-color: #333333;
+}
+
+/* TreeView cells - COMPACT */
+treeview.view {
+    background-color: @soplos_dark_bg;
+    color: @soplos_light_text;
+}
+
+treeview.view:selected {
     background-color: @soplos_orange;
-    border-color: @soplos_orange;
+    color: #000000;
 }
 
-switch slider {
-    background-color: #eeeeee;
+treeview.view:selected:focus {
+    background-color: @soplos_orange;
+    color: #000000;
 }
 
-/* Entry */
+treeview.view cell {
+    padding: 4px 8px;
+    border: none;
+}
+
+treeview.view cell:selected {
+    background-color: @soplos_orange;
+    color: #000000;
+}
+
+/* Row hover effect */
+list row:hover,
+treeview.view:hover {
+    background-color: #333333;
+}
+
+/* Grid lines */
+treeview.view.separator {
+    min-height: 1px;
+    background-color: @soplos_border;
+}
+
+/* Checkbox in TreeView */
+treeview.view check,
+treeview.view radio {
+    min-width: 18px;
+    min-height: 18px;
+    margin: 2px;
+}
+
+/* Entry fields */
 entry {
     background-color: @soplos_darker_bg;
     color: @soplos_light_text;
@@ -283,22 +357,50 @@ entry {
 
 entry:focus {
     border-color: @soplos_orange;
-    box-shadow: none;
 }
 
-/* Scrolled Window */
-scrolledwindow viewport {
-    background-color: @soplos_dark_bg;
+/* Custom button styles */
+.soplos-button-primary {
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
+    border: 1px solid @borders;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 4px;
 }
 
-/* Fix for blue lines in some themes */
-*:selected {
-    background-color: @soplos_orange;
-    color: #000000;
+.soplos-button-primary:hover {
+    background-color: @theme_unfocused_bg_color;
 }
 
-/* Remove focus dotted lines */
+.soplos-button-secondary {
+    background-color: transparent;
+    color: @theme_fg_color;
+    border: 1px solid @borders;
+    padding: 8px 16px;
+    font-weight: normal;
+    border-radius: 4px;
+}
+
+.soplos-button-secondary:hover {
+    background-color: @hover_overlay;
+}
+
+.soplos-button-accent {
+    background-color: transparent;
+    color: @error_color;
+    border: 1px solid @error_color;
+    padding: 8px 16px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.soplos-button-accent:hover {
+    background-color: @hover_overlay;
+}
+
+/* Remove focus outlines */
 * {
-    outline-color: alpha(@soplos_orange, 0.5);
+    outline-color: rgba(255, 136, 0, 0.5);
     outline-style: none;
 }

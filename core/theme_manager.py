@@ -1,294 +1,181 @@
-"""
-Theme management system for Soplos Repo Selector.
-Handles CSS theme loading, application, and dynamic theme switching.
+"""Theme management for Soplos GRUB Editor.
+
+SIMPLIFIED APPROACH (like Repo Selector):
+- Each theme file (dark.css, light.css) is SELF-CONTAINED
+- NO concatenation, NO separate base.css
+- Single CSS provider loads ONE file directly
+- Respects SOPLOS_THEME_TYPE when running as root via pkexec
 """
 
 import os
 from pathlib import Path
-from typing import Dict, Optional, List
 import gi
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk
 
-from utils.logger import log_info, log_error, log_warning
-from core.i18n_manager import _
-
-from .environment import get_environment_detector, DesktopEnvironment, ThemeType
+from typing import Optional
+from .environment import get_environment_detector
 
 
 class ThemeManager:
-    """
-    Manages CSS themes for the application with automatic detection
-    and desktop environment integration.
-    """
-    
     def __init__(self, assets_path: str):
-        """
-        Initialize the theme manager.
-        
-        Args:
-            assets_path: Path to the assets directory containing themes
-        """
         self.assets_path = Path(assets_path)
         self.themes_path = self.assets_path / 'themes'
-        self.css_provider = None
-        self.current_theme = None
-        self.environment_detector = get_environment_detector()
-        
-        # Ensure themes directory exists
-        self.themes_path.mkdir(parents=True, exist_ok=True)
-        
-        # Initialize CSS provider
+        self.css_provider: Optional[Gtk.CssProvider] = None
+        self.current_theme: Optional[str] = None
+        self.env = get_environment_detector()
         self._init_css_provider()
 
-    def get_available_themes(self) -> List[str]:
-        """
-        Get list of available theme names.
-
-        Returns:
-            List of theme names (without .css extension)
-        """
-        if not self.themes_path.exists():
-            return []
-
-        themes = []
-        for theme_file in self.themes_path.glob('*.css'):
-            themes.append(theme_file.stem)
-
-        return sorted(themes)
-    
     def _init_css_provider(self):
-        """Initialize the GTK CSS provider."""
+        """Initialize single CSS provider (like Repo Selector)."""
         self.css_provider = Gtk.CssProvider()
-        
-        # Add to default screen
         screen = Gdk.Screen.get_default()
-        style_context = Gtk.StyleContext()
-        style_context.add_provider_for_screen(
-            screen, 
-            self.css_provider, 
+        
+        # Single provider at APPLICATION priority
+        Gtk.StyleContext.add_provider_for_screen(
+            screen,
+            self.css_provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         )
-    
+        
+        print("[ThemeManager] CSS provider initialized")
+
     def detect_optimal_theme(self) -> str:
+        """Detect best theme based on environment.
+        
+        Respects SOPLOS_THEME_TYPE override (set by unprivileged launcher
+        when running as root via pkexec).
         """
-        Detects the optimal theme based on the current environment.
+        info = self.env.detect_all()
+        desktop = info.get('desktop_environment', 'unknown')
+        theme_type = info.get('theme_type', 'light')
+
+        # CRITICAL: Check SOPLOS_THEME_TYPE override
+        override = os.environ.get('SOPLOS_THEME_TYPE')
+        if override:
+            theme_type = override
+            print(f"[ThemeManager] Using SOPLOS_THEME_TYPE override: {theme_type}")
+
+        # Build candidate list
+        candidates = []
+        if desktop and desktop != 'unknown':
+            candidates.append(f"{desktop}-{theme_type}")
+            candidates.append(desktop)
+        candidates.append(theme_type)
+        candidates.append('dark')  # Safe fallback
         
-        Returns:
-            Theme name that best matches the current environment
-        """
-        # Check if theme type was passed from parent process (before root elevation)
-        theme_type_override = os.environ.get('SOPLOS_THEME_TYPE')
+        print(f"[ThemeManager] Theme candidates: {candidates}")
+
+        # Return first existing candidate
+        for c in candidates:
+            theme_file = self.themes_path / f"{c}.css"
+            if theme_file.exists():
+                print(f"[ThemeManager] Selected theme: {c}")
+                return c
         
-        if theme_type_override:
-            # Use the theme type detected before root elevation
-            theme_type = theme_type_override
-            desktop_env = self.environment_detector.detect_all().get('desktop_environment', 'unknown')
-        else:
-            env_info = self.environment_detector.detect_all()
-            desktop_env = env_info['desktop_environment']
-            theme_type = env_info['theme_type']
-        
-        # Priority order for theme selection
-        theme_candidates = []
-        
-        # 1. Desktop-specific theme with light/dark variant
-        if desktop_env != 'unknown':
-            theme_candidates.append(f"{desktop_env}-{theme_type}")
-            theme_candidates.append(f"{desktop_env}")
-        
-        # 2. Generic light/dark theme
-        theme_candidates.append(theme_type)
-        
-        # 3. Base theme
-        theme_candidates.append('base')
-        
-        # Check availability
-        for candidate in theme_candidates:
-            if (self.themes_path / f"{candidate}.css").exists():
-                return candidate
-        
-        return 'base'  # Will create if doesn't exist
-    
+        print("[ThemeManager] WARNING: No theme found, using 'dark'")
+        return 'dark'
+
     def load_theme(self, theme_name: str) -> bool:
-        """
-        Load and apply a specific theme.
+        """Load theme from a SINGLE self-contained CSS file.
+        
+        CRITICAL: Unlike the old approach, this does NOT concatenate files.
+        Each theme file must contain BOTH variables AND styles.
         
         Args:
-            theme_name: Name of the theme to load
+            theme_name: Name of theme file (without .css)
             
         Returns:
-            True if theme was loaded successfully, False otherwise
+            True if theme loaded successfully
         """
         theme_path = self.themes_path / f"{theme_name}.css"
-        
+
+        print(f"\n[ThemeManager] ========================================")
+        print(f"[ThemeManager] Loading theme: {theme_name}")
+        print(f"[ThemeManager] Theme file: {theme_path}")
+        print(f"[ThemeManager] ========================================")
+
         if not theme_path.exists():
-            # Try to create a basic theme if it doesn't exist
-            if theme_name == 'base':
-                self._create_base_theme()
-            elif theme_name in ['dark', 'light']:
-                if theme_name == 'dark':
-                    self.create_dark_theme()
-                else:
-                    self.create_light_theme()
-            else:
-                log_warning(_("Theme '{name}' not found at {path}").format(name=theme_name, path=theme_path))
-                return False
+            print(f"[ThemeManager] ✗ ERROR: Theme file not found: {theme_path}")
+            return False
         
         try:
+            # SIMPLE: Load directly from file (like Repo Selector)
             self.css_provider.load_from_path(str(theme_path))
-            self.current_theme = theme_name
-            
-            # Force GTK to use dark variant if we are loading a dark theme
-            settings = Gtk.Settings.get_default()
-            if settings:
-                is_dark = 'dark' in theme_name or theme_name == 'base' # base is dark by default
-                settings.set_property("gtk-application-prefer-dark-theme", is_dark)
-            
-            log_info(_("Successfully loaded theme: {name}").format(name=theme_name))
-            return True
+            print(f"[ThemeManager] ✓ Theme loaded from file")
         except Exception as e:
-            log_error(_("Error loading theme '{name}': {err}").format(name=theme_name, err=e))
+            print(f"[ThemeManager] ✗ ERROR loading theme: {e}")
             return False
 
-    def reload_current_theme(self):
-        """Reload the currently active theme."""
-        if self.current_theme:
-            self.load_theme(self.current_theme)
-
-    def add_custom_css(self, css_content: str):
-        """
-        Add custom CSS content to the current theme.
-
-        Args:
-            css_content: CSS content to add
-        """
+        # Set GTK dark theme preference if needed
         try:
-            self.css_provider.load_from_data(css_content.encode('utf-8'))
+            settings = Gtk.Settings.get_default()
+            if settings is not None:
+                # Check if this is a dark theme
+                is_dark = (
+                    os.environ.get('SOPLOS_THEME_TYPE') == 'dark' or
+                    'dark' in theme_name.lower()
+                )
+                settings.set_property('gtk-application-prefer-dark-theme', is_dark)
+                print(f"[ThemeManager] ✓ GTK dark theme preference: {is_dark}")
         except Exception as e:
-            log_error(_("Error adding custom CSS: {err}").format(err=e))
-    
-    def load_optimal_theme(self) -> str:
-        """Automatically detects and loads the optimal theme."""
-        optimal_theme = self.detect_optimal_theme()
+            print(f"[ThemeManager] ⚠ Could not set GTK theme preference: {e}")
+
+        self.current_theme = theme_name
+        print(f"[ThemeManager] ✓✓✓ Theme '{theme_name}' loaded successfully ✓✓✓\n")
+        return True
+
+    def switch_theme(self, theme_name: str) -> bool:
+        """Switch to a different theme at runtime."""
+        if theme_name == self.current_theme:
+            print(f"[ThemeManager] Already using theme '{theme_name}'")
+            return True
         
-        if self.load_theme(optimal_theme):
-            return optimal_theme
-        
-        if self.load_theme('base'):
-            return 'base'
-        
-        return 'none'
-    
-    def _create_base_theme(self):
-        """Create a basic base theme if it doesn't exist."""
-        base_theme_content = """
-/* Base Theme for Soplos Repo Selector */
-
-/* Application Window */
-.soplos-window {
-    background-color: @theme_bg_color;
-    color: @theme_fg_color;
-}
-
-/* Main Content Area */
-.soplos-content {
-    padding: 20px;
-    background-color: @theme_base_color;
-    border-radius: 8px;
-}
-
-/* Buttons */
-.soplos-button-primary {
-    background-color: @theme_selected_bg_color;
-    color: @theme_selected_fg_color;
-    border-radius: 6px;
-    padding: 10px 20px;
-    border: 1px solid @borders;
-    font-weight: bold;
-}
-
-/* Cards */
-.soplos-card {
-    background-color: @theme_base_color;
-    border: 1px solid @borders;
-    border-radius: 8px;
-    padding: 16px;
-    margin: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-"""
-        try:
-            with open(self.themes_path / 'base.css', 'w', encoding='utf-8') as f:
-                f.write(base_theme_content)
-        except Exception:
-            pass
-    
-    def create_dark_theme(self):
-        """Create a dark theme variant."""
-        dark_theme_content = """
-/* Dark Theme */
-@import url('base.css');
-
-@define-color theme_bg_color #2b2b2b;
-@define-color theme_fg_color #ffffff;
-@define-color theme_base_color #3c3c3c;
-@define-color theme_selected_bg_color #4a90e2;
-@define-color theme_selected_fg_color #ffffff;
-@define-color borders #555555;
-"""
-        try:
-            with open(self.themes_path / 'dark.css', 'w', encoding='utf-8') as f:
-                f.write(dark_theme_content)
-        except Exception:
-            pass
-            
-    def create_light_theme(self):
-        """Create a light theme variant."""
-        light_theme_content = """
-/* Light Theme */
-@import url('base.css');
-
-@define-color theme_bg_color #f5f5f5;
-@define-color theme_fg_color #2c3e50;
-@define-color theme_base_color #ffffff;
-@define-color theme_selected_bg_color #3498db;
-@define-color theme_selected_fg_color #ffffff;
-@define-color borders #e0e0e0;
-"""
-        try:
-            with open(self.themes_path / 'light.css', 'w', encoding='utf-8') as f:
-                f.write(light_theme_content)
-        except Exception:
-            pass
-            
-    def initialize_default_themes(self):
-        """Create default themes if they don't exist."""
-        if not (self.themes_path / 'base.css').exists():
-            self._create_base_theme()
-        if not (self.themes_path / 'dark.css').exists():
-            self.create_dark_theme()
-        if not (self.themes_path / 'light.css').exists():
-            self.create_light_theme()
+        print(f"[ThemeManager] Switching from '{self.current_theme}' to '{theme_name}'")
+        return self.load_theme(theme_name)
 
 
-# Global theme manager instance
-_theme_manager = None
+# Singleton instance
+_theme_manager: Optional[ThemeManager] = None
+
 
 def get_theme_manager(assets_path: str = None) -> ThemeManager:
-    """Returns the global theme manager instance."""
+    """Get or create the global ThemeManager instance."""
     global _theme_manager
     if _theme_manager is None:
         if assets_path is None:
-            # Default path relative to this file
             current_dir = Path(__file__).parent.parent
             assets_path = current_dir / 'assets'
         _theme_manager = ThemeManager(str(assets_path))
     return _theme_manager
 
+
 def initialize_theming(assets_path: str = None) -> str:
-    """Initialize the theming system and load the optimal theme."""
-    theme_manager = get_theme_manager(assets_path)
-    theme_manager.initialize_default_themes()
-    return theme_manager.load_optimal_theme()
+    """Initialize theming system and load optimal theme.
+    
+    Returns:
+        Name of loaded theme, or 'none' if failed
+    """
+    print("\n" + "="*60)
+    print("[ThemeManager] Initializing theming system...")
+    print("="*60)
+    
+    # Debug: Show relevant environment when running as root
+    if os.geteuid() == 0:
+        print("[ThemeManager] Running as ROOT - checking for user theme hints:")
+        for var in ['SOPLOS_THEME_TYPE', 'SOPLOS_DESKTOP', 'SOPLOS_SESSION_TYPE']:
+            val = os.environ.get(var, '(not set)')
+            print(f"[ThemeManager]   {var} = {val}")
+    
+    tm = get_theme_manager(assets_path)
+    theme_name = tm.detect_optimal_theme()
+    
+    if tm.load_theme(theme_name):
+        print(f"[ThemeManager] ✓✓✓ Theming initialized with '{theme_name}' ✓✓✓")
+        print("="*60 + "\n")
+        return theme_name
+    
+    print("[ThemeManager] ✗✗✗ Failed to initialize theming ✗✗✗")
+    print("="*60 + "\n")
+    return 'none'

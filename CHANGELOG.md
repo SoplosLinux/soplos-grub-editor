@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### ✨ New Features
 - **Smart Light/Dark Theme Detection** - Automatically detects user theme (GNOME, KDE, XFCE) before privilege elevation
+- **Improved Desktop Detection** - Accurate identification of Desktop Environment and Display Protocol
+- **Refined UI Layout** - New compact split-view for Advanced Options and Kernel Parameters
 - **GRUB Theme Installer** - Install themes from .tar.gz, .tar.xz, .tar.bz2, .zip archives
 - **GRUB Theme Remover** - Remove installed themes with confirmation
 - **UUID Option** - Checkbox to enable/disable GRUB_DISABLE_LINUX_UUID

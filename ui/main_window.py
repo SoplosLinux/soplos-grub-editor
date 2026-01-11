@@ -1,7 +1,6 @@
 """
-Main Application Window for Soplos Grub Editor.
-Handles the main UI layout and interaction using Notebook Tabs.
-Strict Soplos Welcome style: Header + Content (Tabs) + Footer.
+Main Application Window for Soplos GRUB Editor.
+FIXED: CSS priority conflicts resolved
 """
 
 import gi
@@ -22,7 +21,7 @@ from ui.views.appearance_view import AppearanceView
 
 
 class MainWindow(Gtk.ApplicationWindow):
-    """Main application window for Soplos Grub Editor."""
+    """Main application window for Soplos GRUB Editor."""
     
     def __init__(self, application, environment_detector, theme_manager, i18n_manager, grub_manager):
         """Initialize the main window."""
@@ -40,7 +39,7 @@ class MainWindow(Gtk.ApplicationWindow):
         self.set_default_size(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT)
         self.set_position(Gtk.WindowPosition.CENTER)
         
-        # Apply CSS classes (matching Welcome apps)
+        # Apply CSS classes
         self.get_style_context().add_class('soplos-window')
         try:
             self.get_style_context().add_class('soplos-welcome-window')
@@ -48,7 +47,7 @@ class MainWindow(Gtk.ApplicationWindow):
         except Exception:
             pass
         
-        # Create header bar (before UI setup)
+        # Create header bar
         self._create_header_bar_with_fallback()
         
         # Setup main UI
@@ -68,12 +67,7 @@ class MainWindow(Gtk.ApplicationWindow):
         print("Main window created successfully")
 
     def _create_header_bar_with_fallback(self):
-        """Create HeaderBar exactly like Welcome Live - CLEAN without custom buttons.
-        
-        Matches the behavior used by Soplos Welcome Live: create a minimal CSD
-        HeaderBar on GNOME-like environments and use native decorations on
-        XFCE/KDE/Plasma.
-        """
+        """Create HeaderBar matching Welcome apps."""
         desktop_env = 'unknown'
         try:
             if self.environment_detector:
@@ -87,12 +81,12 @@ class MainWindow(Gtk.ApplicationWindow):
 
         print(f"[DEBUG] Desktop detected: {desktop_env}")
 
-        # If XFCE/KDE, use native decorations (SSD)
+        # If XFCE/KDE, use native decorations
         if desktop_env in ['xfce', 'kde', 'plasma']:
-            print("Using native window decorations (SSD) for compatibility")
+            print("Using native window decorations (SSD)")
             return
 
-        # If GNOME or others, use CSD (CLEAN - no custom buttons like Welcome Live)
+        # If GNOME or others, use CSD
         print("Creating Client-Side Decorations (CSD)")
         header = Gtk.HeaderBar()
         header.set_show_close_button(True)
@@ -104,24 +98,18 @@ class MainWindow(Gtk.ApplicationWindow):
         except Exception:
             pass
 
-        # Force layout to match Welcome Live exactly
         header.set_decoration_layout("menu:minimize,maximize,close")
         header.get_style_context().add_class('titlebar')
         
-        # NO custom buttons - keep it clean like Welcome Live
-        # If you need language/theme controls, add them to the UI content instead
-        
-        # Set as titlebar (NO header.show_all())
         self.set_titlebar(header)
         self.header = header
 
     def _setup_ui(self):
-        """Initializes the main UI, matching the Welcome layout."""
-        # Main vertical container
+        """Initialize main UI."""
         main_vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
         self.add(main_vbox)
 
-        # --- TAB CONTENT (Notebook) ---
+        # Notebook
         self.notebook = Gtk.Notebook()
         self.notebook.set_scrollable(True)
         self.notebook.set_tab_pos(Gtk.PositionType.TOP)
@@ -133,28 +121,22 @@ class MainWindow(Gtk.ApplicationWindow):
         except Exception:
             pass
         
-        try:
-            self._apply_notebook_custom_css()
-        except Exception:
-            pass
+        # REMOVED: _apply_notebook_custom_css() 
+        # The theme CSS should handle this, not inline CSS
         
-        # Pack notebook (main content area)
         main_vbox.pack_start(self.notebook, True, True, 0)
 
-        # Create all tabs (matching legacy GRUB Editor)
-        # Tab 1: General Configuration
+        # Create tabs
         self.general_view = GeneralView(self)
         self._add_tab(self.general_view, _("General Configuration"), "preferences-system")
 
-        # Tab 2: Boot Entries
         self.boot_entries_view = BootEntriesView(self)
         self._add_tab(self.boot_entries_view, _("Boot Entries"), "system-run")
 
-        # Tab 3: Appearance
         self.appearance_view = AppearanceView(self)
         self._add_tab(self.appearance_view, _("Appearance"), "preferences-desktop-theme")
 
-        # --- HIDDEN PROGRESS BAR (Bottom, Welcome Live style) ---
+        # Progress bar (hidden)
         self.progress_revealer = Gtk.Revealer()
         self.progress_revealer.set_transition_type(Gtk.RevealerTransitionType.SLIDE_UP)
 
@@ -173,14 +155,13 @@ class MainWindow(Gtk.ApplicationWindow):
         self.progress_revealer.add(progress_box)
         self.progress_revealer.set_reveal_child(False)
         
-        # Pack progress at the end (bottom of window, before status bar)
         main_vbox.pack_end(self.progress_revealer, False, True, 0)
 
-        # --- FOOTER (Status Bar) ---
+        # Status bar
         self._create_status_bar(main_vbox)
 
     def _add_tab(self, content_widget, title, icon_name):
-        """Helper to add tabs with icons."""
+        """Add tab with icon."""
         label_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
         icon = Gtk.Image.new_from_icon_name(icon_name, Gtk.IconSize.MENU)
         label = Gtk.Label(label=title)
@@ -190,36 +171,6 @@ class MainWindow(Gtk.ApplicationWindow):
         label_box.show_all()
         
         self.notebook.append_page(content_widget, label_box)
-
-    def _apply_notebook_custom_css(self):
-        """Apply custom CSS to make the notebook tab bar thicker (copied from Soplos Welcome)."""
-        css_provider = Gtk.CssProvider()
-        css_data = """
-        notebook > header {
-            min-height: 20px;
-            padding: 0px 0;
-        }
-        
-        notebook > header > tabs > tab {
-            min-height: 20px;
-            padding: 8px 12px;
-        }
-        
-        notebook > header > tabs > tab label {
-            padding: 4px 8px;
-        }
-        """
-        try:
-            css_provider.load_from_data(css_data.encode('utf-8'))
-            screen = Gdk.Screen.get_default()
-            style_context = Gtk.StyleContext()
-            style_context.add_provider_for_screen(
-                screen,
-                css_provider,
-                Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-            )
-        except Exception as e:
-            print(f"Error applying notebook CSS: {e}")
 
     def _create_status_bar(self, main_vbox):
         """Create footer status bar."""
@@ -235,14 +186,13 @@ class MainWindow(Gtk.ApplicationWindow):
         self.system_label.get_style_context().add_class('dim-label')
         status_box.pack_start(self.system_label, False, False, 0)
         
-        # Right: App Version (only version, no name)
+        # Right: Version
         version_text = f"v{APP_VERSION}"
         version_label = Gtk.Label(label=version_text)
         version_label.set_halign(Gtk.Align.END)
         version_label.get_style_context().add_class('dim-label')
         status_box.pack_end(version_label, False, False, 0)
         
-        # Pack at the very end (after progress revealer)
         main_vbox.pack_end(status_box, False, False, 0)
 
     def _update_system_info(self):
@@ -277,13 +227,7 @@ class MainWindow(Gtk.ApplicationWindow):
         return protocol_map.get(protocol.lower(), _("Unknown"))
 
     def show_progress(self, message, fraction=None):
-        """
-        Show progress bar with message.
-        
-        Args:
-            message: Progress message to display
-            fraction: Progress fraction (0.0-1.0), None for pulse mode
-        """
+        """Show progress bar."""
         self.progress_label.set_text(message)
         
         if fraction is not None:
@@ -295,7 +239,6 @@ class MainWindow(Gtk.ApplicationWindow):
         
         self.progress_revealer.set_reveal_child(True)
         
-        # Process pending events to update UI
         while Gtk.events_pending():
             Gtk.main_iteration()
 
@@ -306,25 +249,20 @@ class MainWindow(Gtk.ApplicationWindow):
         self.progress_bar.set_fraction(0.0)
         self.progress_bar.set_text("")
 
-    # ==================== Event Handlers ====================
-
     def _on_delete_event(self, widget, event):
-        """Handle window close event."""
+        """Handle window close."""
         print("Main window closing...")
-        return False  # Allow window to close
+        return False
 
     def _on_key_press(self, widget, event):
-        """Handle key press events."""
+        """Handle key press."""
         keyval = event.keyval
         state = event.state
         
-        # Check for Ctrl+Q to quit
         if state & Gdk.ModifierType.CONTROL_MASK:
             if keyval == Gdk.KEY_q:
                 self.close()
                 return True
-            
-            # Ctrl+Tab to switch tabs
             elif keyval == Gdk.KEY_Tab:
                 current_page = self.notebook.get_current_page()
                 total_pages = self.notebook.get_n_pages()
