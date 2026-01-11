@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### 🎉 Major Release - Complete Rewrite
 
 #### ✨ New Features
+- **Complete Internationalization** - Native support for 8 languages (ES, EN, DE, FR, IT, PT, RO, RU)
 - **Smart Light/Dark Theme Detection** - Automatically detects user theme (GNOME, KDE, XFCE) before privilege elevation
 - **Improved Desktop Detection** - Accurate identification of Desktop Environment and Display Protocol
 - **Refined UI Layout** - New compact split-view for Advanced Options and Kernel Parameters

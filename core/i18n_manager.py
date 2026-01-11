@@ -216,7 +216,7 @@ class I18nManager:
 # Global i18n manager instance
 _i18n_manager = None
 
-def get_i18n_manager(locale_dir: str = None, domain: str = 'soplos-repo-selector') -> I18nManager:
+def get_i18n_manager(locale_dir: str = None, domain: str = 'soplos-grub-editor') -> I18nManager:
     """Returns the global i18n manager instance."""
     global _i18n_manager
     if _i18n_manager is None:

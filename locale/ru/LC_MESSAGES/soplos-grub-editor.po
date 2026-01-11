@@ -1,0 +1,518 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Soplos GRUB Editor 2.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-11 18:39+0100\n"
+"PO-Revision-Date: 2026-01-11 00:00+0000\n"
+"Last-Translator: Sergi Perich <info@soploslinux.com>\n"
+"Language-Team: Sergi Perich <info@soploslinux.com>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "/boot/grub/background.png"
+msgstr "/boot/grub/background.png"
+
+msgid "About"
+msgstr "О программе"
+
+msgid "Add Entry"
+msgstr "Добавить запись"
+
+msgid "Add entry"
+msgstr "Добавить запись"
+
+msgid "Advanced Options"
+msgstr "Расширенные параметры"
+
+msgid "Appearance"
+msgstr "Внешний вид"
+
+#, python-brace-format
+msgid "Application error: {err}"
+msgstr "Ошибка приложения: {err}"
+
+msgid "Application error: {}"
+msgstr "Ошибка приложения: {}"
+
+msgid "Application initialization completed"
+msgstr "Инициализация приложения завершена"
+
+msgid "Apply"
+msgstr "Применить"
+
+msgid "Apply Background"
+msgstr "Применить фон"
+
+msgid "Apply Background Settings"
+msgstr "Применить настройки фона"
+
+msgid "Apply Changes"
+msgstr "Применить изменения"
+
+msgid "Apply Theme"
+msgstr "Применить тему"
+
+msgid "Apply selected font"
+msgstr "Применить выбранный шрифт"
+
+msgid ""
+"Applying theme '{}' will disable any custom background and colors. Continue?"
+msgstr "Применение темы '{}' отключит пользовательский фон и цвета. Продолжить?"
+
+msgid "Background"
+msgstr "Фон"
+
+msgid "Background applied successfully!"
+msgstr "Фон успешно применен!"
+
+msgid "Background color:"
+msgstr "Цвет фона:"
+
+msgid "Background image:"
+msgstr "Изображение фона:"
+
+msgid "Background removed successfully!"
+msgstr "Фон успешно удален!"
+
+msgid "Boot Configuration"
+msgstr "Конфигурация загрузки"
+
+msgid "Boot Entries"
+msgstr "Загрузочные записи"
+
+msgid "Browse..."
+msgstr "Обзор..."
+
+msgid "Changes Saved"
+msgstr "Изменения сохранены"
+
+#, python-brace-format
+msgid "Cleanup warning: {err}"
+msgstr "Предупреждение очистки: {err}"
+
+msgid "Colors (when not using theme):"
+msgstr "Цвета (без темы):"
+
+msgid "Convert TrueType fonts to GRUB format (PF2):"
+msgstr "Конвертировать шрифты TrueType в формат GRUB (PF2):"
+
+msgid "Convert and Install Font"
+msgstr "Конвертировать и установить шрифт"
+
+msgid "Creating Client-Side Decorations (CSD)"
+msgstr "Создание клиентских декораций (CSD)"
+
+msgid "Custom entry dialog - TODO"
+msgstr "Диалог пользовательской записи - TODO"
+
+msgid "Default Boot Entry:"
+msgstr "Запись загрузки по умолчанию:"
+
+#, python-brace-format
+msgid "Desktop Environment: {env}"
+msgstr "Среда рабочего стола: {env}"
+
+msgid "Detect other operating systems"
+msgstr "Обнаружить другие операционные системы"
+
+msgid "Disable"
+msgstr "Отключить"
+
+msgid "Disable Theme"
+msgstr "Отключить тему"
+
+msgid "Enabled"
+msgstr "Включено"
+
+msgid ""
+"Ensure dependencies are installed: sudo apt install python3-gi python3-gi-"
+"cairo gir1.2-gtk-3.0"
+msgstr "Убедитесь, что установлены зависимости: sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0"
+
+msgid "Entry {}"
+msgstr "Запись {}"
+
+msgid "Error"
+msgstr "Ошибка"
+
+#, python-brace-format
+msgid "Error creating main window: {err}"
+msgstr "Ошибка создания главного окна: {err}"
+
+#, python-brace-format
+msgid "Error initializing GRUB Manager: {err}"
+msgstr "Ошибка инициализации менеджера GRUB: {err}"
+
+#, python-brace-format
+msgid "Error initializing environment detection: {err}"
+msgstr "Ошибка инициализации обнаружения среды: {err}"
+
+#, python-brace-format
+msgid "Error initializing internationalization: {err}"
+msgstr "Ошибка инициализации интернационализации: {err}"
+
+#, python-brace-format
+msgid "Error initializing theming: {err}"
+msgstr "Ошибка инициализации тем: {err}"
+
+msgid "Error installing theme: {}"
+msgstr "Ошибка установки темы: {}"
+
+msgid "Error loading GRUB config: {}"
+msgstr "Ошибка загрузки конфигурации GRUB: {}"
+
+msgid "Error parsing grub.cfg: {}"
+msgstr "Ошибка разбора grub.cfg: {}"
+
+msgid "Error reading GRUB config: {}"
+msgstr "Ошибка чтения конфигурации GRUB: {}"
+
+#, python-brace-format
+msgid "Error removing config key: {err}"
+msgstr "Ошибка удаления ключа конфигурации: {err}"
+
+#, python-brace-format
+msgid "Error running update-grub: {err}"
+msgstr "Ошибка запуска update-grub: {err}"
+
+#, python-brace-format
+msgid "Error saving GRUB config: {err}"
+msgstr "Ошибка сохранения конфигурации GRUB: {err}"
+
+#, python-brace-format
+msgid "Error setting application icon: {err}"
+msgstr "Ошибка установки иконки приложения: {err}"
+
+#, python-brace-format
+msgid "Error setting up application menu: {err}"
+msgstr "Ошибка настройки меню приложения: {err}"
+
+msgid "Failed to convert font: {}"
+msgstr "Не удалось конвертировать шрифт: {}"
+
+msgid "Failed to elevate privileges: {}"
+msgstr "Не удалось повысить привилегии: {}"
+
+msgid "Failed to extract archive: {}"
+msgstr "Не удалось извлечь архив: {}"
+
+msgid "Failed to install theme: {}"
+msgstr "Не удалось установить тему: {}"
+
+msgid "Failed to remove theme: {}"
+msgstr "Не удалось удалить тему: {}"
+
+#, python-brace-format
+msgid "Failed to save config: {err}"
+msgstr "Не удалось сохранить конфигурацию: {err}"
+
+msgid "Failed to save configuration"
+msgstr "Не удалось сохранить конфигурацию"
+
+msgid "Failed to update GRUB"
+msgstr "Не удалось обновить GRUB"
+
+msgid "Failed to update GRUB. Check logs for details."
+msgstr "Не удалось обновить GRUB. Проверьте логи для деталей."
+
+#, python-brace-format
+msgid "Failed to update GRUB: {err}"
+msgstr "Не удалось обновить GRUB: {err}"
+
+msgid "Font '{}' will be used after running update-grub."
+msgstr "Шрифт '{}' будет использован после запуска update-grub."
+
+msgid "Font Applied"
+msgstr "Шрифт применен"
+
+msgid "Font converted and installed: {}"
+msgstr "Шрифт конвертирован и установлен: {}"
+
+msgid "Font files"
+msgstr "Файлы шрифтов"
+
+msgid "Font size:"
+msgstr "Размер шрифта:"
+
+msgid "Fonts"
+msgstr "Шрифты"
+
+msgid "GNOME"
+msgstr "GNOME"
+
+msgid "GRUB Manager initialized"
+msgstr "Менеджер GRUB инициализирован"
+
+msgid "GRUB config not found at {}"
+msgstr "Конфигурация GRUB не найдена в {}"
+
+msgid "GRUB configuration updated successfully!"
+msgstr "Конфигурация GRUB успешно обновлена!"
+
+msgid "GRUB updated successfully!"
+msgstr "GRUB успешно обновлен!"
+
+msgid "General Configuration"
+msgstr "Общая конфигурация"
+
+msgid "Highlight background:"
+msgstr "Фон выделения:"
+
+msgid "Highlight text:"
+msgstr "Текст выделения:"
+
+msgid "Images"
+msgstr "Изображения"
+
+msgid "Import error: {}"
+msgstr "Ошибка импорта: {}"
+
+msgid "Include recovery options"
+msgstr "Включить опции восстановления"
+
+msgid "Information"
+msgstr "Информация"
+
+msgid "Install..."
+msgstr "Установить..."
+
+msgid "Installed GRUB fonts:"
+msgstr "Установленные шрифты GRUB:"
+
+msgid "KDE Plasma"
+msgstr "KDE Plasma"
+
+msgid "Kernel Parameters"
+msgstr "Параметры ядра"
+
+msgid "Kernel Parameters:"
+msgstr "Параметры ядра:"
+
+#, python-brace-format
+msgid "Language initialized: {lang}"
+msgstr "Язык инициализирован: {lang}"
+
+msgid "Main window closing..."
+msgstr "Закрытие главного окна..."
+
+msgid "Main window created successfully"
+msgstr "Главное окно успешно создано"
+
+msgid "Name:"
+msgstr "Имя:"
+
+msgid "No Background"
+msgstr "Без фона"
+
+msgid "No theme.txt found in archive"
+msgstr "theme.txt не найден в архиве"
+
+msgid "Path"
+msgstr "Путь"
+
+msgid "Please select a background image first."
+msgstr "Пожалуйста, сначала выберите фоновое изображение."
+
+msgid "Please select a valid font file."
+msgstr "Пожалуйста, выберите действительный файл шрифта."
+
+msgid "Preview"
+msgstr "Предпросмотр"
+
+msgid "Quit"
+msgstr "Выход"
+
+msgid "Ready"
+msgstr "Готово"
+
+#, python-brace-format
+msgid "Received signal {num}, shutting down..."
+msgstr "Получен сигнал {num}, выключение..."
+
+msgid "Remove"
+msgstr "Удалить"
+
+msgid "Remove Background"
+msgstr "Удалить фон"
+
+msgid "Remove Entry"
+msgstr "Удалить запись"
+
+msgid "Remove Theme"
+msgstr "Удалить тему"
+
+msgid "Remove entry"
+msgstr "Удалить запись"
+
+msgid "Remove entry '{}'?"
+msgstr "Удалить запись '{}'?"
+
+#, python-brace-format
+msgid "Removed key {key} from config"
+msgstr "Удален ключ {key} из конфигурации"
+
+msgid "Run update-grub now to apply changes?"
+msgstr "Запустить update-grub сейчас для применения изменений?"
+
+msgid "Running on {} ({})"
+msgstr "Запуск на {} ({})"
+
+msgid "Screen Resolution:"
+msgstr "Разрешение экрана:"
+
+msgid "Select TTF/OTF font file..."
+msgstr "Выберите файл шрифта TTF/OTF..."
+
+msgid "Select background image"
+msgstr "Выберите изображение фона"
+
+msgid "Select font file"
+msgstr "Выберите файл шрифта"
+
+msgid "Select theme archive"
+msgstr "Выберите архив темы"
+
+msgid "Show boot menu"
+msgstr "Показать меню загрузки"
+
+msgid "Shutting down Soplos Grub Editor..."
+msgstr "Выключение Soplos Grub Editor..."
+
+#, python-brace-format
+msgid "Starting {name} v{ver}..."
+msgstr "Запуск {name} v{ver}..."
+
+msgid "Success"
+msgstr "Успех"
+
+#, python-brace-format
+msgid "Successfully saved config to {path}"
+msgstr "Конфигурация успешно сохранена в {path}"
+
+msgid "Successfully saved config using pkexec"
+msgstr "Конфигурация успешно сохранена с использованием pkexec"
+
+msgid "Successfully updated GRUB"
+msgstr "GRUB успешно обновлен"
+
+msgid "Text color:"
+msgstr "Цвет текста:"
+
+msgid "Theme"
+msgstr "Тема"
+
+msgid "Theme '{}' installed successfully!"
+msgstr "Тема '{}' успешно установлена!"
+
+msgid "Theme '{}' removed successfully!"
+msgstr "Тема '{}' успешно удалена!"
+
+msgid "Theme applied successfully!"
+msgstr "Тема успешно применена!"
+
+msgid "Theme archives"
+msgstr "Архивы тем"
+
+msgid "Theme disabled."
+msgstr "Тема отключена."
+
+#, python-brace-format
+msgid "Theme loaded: {theme}"
+msgstr "Тема загружена: {theme}"
+
+msgid "Theme:"
+msgstr "Тема:"
+
+msgid "Themes include colors and fonts. Use 'Background' tab for custom setup."
+msgstr "Темы включают цвета и шрифты. Используйте вкладку 'Фон' для пользовательской настройки."
+
+msgid ""
+"This will disable any theme and use the custom background with your color "
+"settings. Continue?"
+msgstr "Это отключит любую тему и будет использовать пользовательский фон с вашими настройками цвета. Продолжить?"
+
+msgid "This will permanently delete theme '{}'. Are you sure?"
+msgstr "Это навсегда удалит тему '{}'. Вы уверены?"
+
+msgid "This will remove the background image from GRUB. Continue?"
+msgstr "Это удалит фоновое изображение из GRUB. Продолжить?"
+
+msgid "This will remove the theme and set default colors. Continue?"
+msgstr "Это удалит тему и установит цвета по умолчанию. Продолжить?"
+
+msgid "Timeout (seconds):"
+msgstr "Тайм-аут (секунды):"
+
+msgid "Type:"
+msgstr "Тип:"
+
+msgid "Unknown"
+msgstr "Неизвестно"
+
+msgid "Unsupported archive format"
+msgstr "Неподдерживаемый формат архива"
+
+msgid "Use UUID for root partition"
+msgstr "Использовать UUID для корневого раздела"
+
+msgid "Using native window decorations (SSD)"
+msgstr "Использование нативных декораций окна (SSD)"
+
+msgid "Warning: Pre-elevation detection failed: {}"
+msgstr "Предупреждение: Обнаружение до повышения прав не удалось: {}"
+
+msgid "Wayland"
+msgstr "Wayland"
+
+msgid "Working..."
+msgstr "Работаю..."
+
+msgid "Would set GRUB_FONT={}"
+msgstr "Установил бы GRUB_FONT={}"
+
+msgid "X11"
+msgstr "X11"
+
+msgid "XFCE"
+msgstr "XFCE"
+
+msgid "[DEBUG] Desktop detected: {}"
+msgstr "[DEBUG] Рабочий стол обнаружен: {}"
+
+msgid "[ThemeManager] WARNING: No theme found, using 'dark'"
+msgstr "[ThemeManager] ПРЕДУПРЕЖДЕНИЕ: Тема не найдена, используется 'dark'"
+
+msgid "[ThemeManager] ⚠ Could not set GTK theme preference: {}"
+msgstr "[ThemeManager] ⚠ Не удалось установить предпочтение темы GTK: {}"
+
+msgid "[ThemeManager] ✗ ERROR loading theme: {}"
+msgstr "[ThemeManager] ✗ ОШИБКА загрузки темы: {}"
+
+msgid "[ThemeManager] ✗ ERROR: Theme file not found: {}"
+msgstr "[ThemeManager] ✗ ОШИБКА: Файл темы не найден: {}"
+
+msgid "[ThemeManager] ✗✗✗ Failed to initialize theming ✗✗✗"
+msgstr "[ThemeManager] ✗✗✗ Не удалось инициализировать темы ✗✗✗"
+
+msgid "auto"
+msgstr "auto"
+
+msgid "firmware"
+msgstr "firmware"
+
+msgid "memtest"
+msgstr "memtest"
+
+msgid "quiet splash resume=UUID=..."
+msgstr "quiet splash resume=UUID=..."
+
+msgid "recovery"
+msgstr "recovery"
+
+msgid "system"
+msgstr "system"
+
+msgid "update-grub not found"
+msgstr "update-grub не найден"

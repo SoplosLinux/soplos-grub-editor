@@ -16,6 +16,7 @@ from gi.repository import Gtk, Gdk
 
 from typing import Optional
 from .environment import get_environment_detector
+from .i18n_manager import _
 
 
 class ThemeManager:
@@ -74,7 +75,7 @@ class ThemeManager:
                 print(f"[ThemeManager] Selected theme: {c}")
                 return c
         
-        print("[ThemeManager] WARNING: No theme found, using 'dark'")
+        print(_("[ThemeManager] WARNING: No theme found, using 'dark'"))
         return 'dark'
 
     def load_theme(self, theme_name: str) -> bool:
@@ -97,7 +98,7 @@ class ThemeManager:
         print(f"[ThemeManager] ========================================")
 
         if not theme_path.exists():
-            print(f"[ThemeManager] ✗ ERROR: Theme file not found: {theme_path}")
+            print(_("[ThemeManager] ✗ ERROR: Theme file not found: {}").format(theme_path))
             return False
         
         try:
@@ -105,7 +106,7 @@ class ThemeManager:
             self.css_provider.load_from_path(str(theme_path))
             print(f"[ThemeManager] ✓ Theme loaded from file")
         except Exception as e:
-            print(f"[ThemeManager] ✗ ERROR loading theme: {e}")
+            print(_("[ThemeManager] ✗ ERROR loading theme: {}").format(e))
             return False
 
         # Set GTK dark theme preference if needed
@@ -120,7 +121,7 @@ class ThemeManager:
                 settings.set_property('gtk-application-prefer-dark-theme', is_dark)
                 print(f"[ThemeManager] ✓ GTK dark theme preference: {is_dark}")
         except Exception as e:
-            print(f"[ThemeManager] ⚠ Could not set GTK theme preference: {e}")
+            print(_("[ThemeManager] ⚠ Could not set GTK theme preference: {}").format(e))
 
         self.current_theme = theme_name
         print(f"[ThemeManager] ✓✓✓ Theme '{theme_name}' loaded successfully ✓✓✓\n")
@@ -176,6 +177,6 @@ def initialize_theming(assets_path: str = None) -> str:
         print("="*60 + "\n")
         return theme_name
     
-    print("[ThemeManager] ✗✗✗ Failed to initialize theming ✗✗✗")
+    print(_("[ThemeManager] ✗✗✗ Failed to initialize theming ✗✗✗"))
     print("="*60 + "\n")
     return 'none'

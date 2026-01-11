@@ -130,7 +130,7 @@ class AppearanceView(Gtk.ScrolledWindow):
         
         bg_row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
         self.bg_entry = Gtk.Entry()
-        self.bg_entry.set_placeholder_text("/boot/grub/background.png")
+        self.bg_entry.set_placeholder_text(_("/boot/grub/background.png"))
         self.bg_entry.set_hexpand(True)
         self.bg_entry.connect('changed', self._on_bg_entry_changed)
         bg_row.pack_start(self.bg_entry, True, True, 0)
@@ -912,7 +912,7 @@ class AppearanceView(Gtk.ScrolledWindow):
         if font_name:
             # GRUB_FONT config
             font_path = f"/boot/grub/fonts/{font_name}"
-            print(f"Would set GRUB_FONT={font_path}")
+            print(_("Would set GRUB_FONT={}").format(font_path))
             
             dialog = Gtk.MessageDialog(
                 transient_for=self.parent_window,

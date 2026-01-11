@@ -35,7 +35,7 @@ class GrubManager:
         self.config_data = {}
         
         if not self.config_path.exists():
-            log_error(f"GRUB config not found at {self.config_path}")
+            log_error(_("GRUB config not found at {}").format(self.config_path))
             return {}
             
         try:
@@ -53,7 +53,7 @@ class GrubManager:
                         
             return self.config_data
         except Exception as e:
-            log_error(f"Error reading GRUB config: {e}")
+            log_error(_("Error reading GRUB config: {}").format(e))
             return {}
             
     def save_config(self, new_config: Dict[str, str]) -> bool:
@@ -331,16 +331,16 @@ class GrubManager:
             matches = re.findall(pattern, content)
             
             for i, name in enumerate(matches):
-                entry_type = 'system'
+                entry_type = _('system')
                 path = ''
                 
                 if 'recovery' in name.lower():
-                    entry_type = 'recovery'
+                    entry_type = _('recovery')
                 elif 'memtest' in name.lower():
-                    entry_type = 'memtest'
+                    entry_type = _('memtest')
                     path = '/boot/memtest86+x64.bin' if 'x64' in name.lower() else '/boot/memtest86+.bin'
                 elif 'uefi' in name.lower() or 'firmware' in name.lower():
-                    entry_type = 'firmware'
+                    entry_type = _('firmware')
                     
                 entries.append({
                     'name': name,
@@ -350,7 +350,7 @@ class GrubManager:
                 })
                 
         except Exception as e:
-            log_error(f"Error parsing grub.cfg: {e}")
+            log_error(_("Error parsing grub.cfg: {}").format(e))
             
         # Cache the results
         self._cached_entries = entries

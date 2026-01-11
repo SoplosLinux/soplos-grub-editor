@@ -3,15 +3,15 @@
 from setuptools import setup, find_packages
 import os
 
-# Leer el README para la descripción larga
+# Read README for long description
 def read_readme():
     readme_path = os.path.join(os.path.dirname(__file__), 'README.md')
     if os.path.exists(readme_path):
         with open(readme_path, 'r', encoding='utf-8') as f:
             return f.read()
-    return 'Editor gráfico oficial de GRUB para Soplos Linux'
+    return 'Official GRUB graphical editor for Soplos Linux'
 
-# Leer los requerimientos
+# Read requirements
 def read_requirements():
     req_path = os.path.join(os.path.dirname(__file__), 'requirements.txt')
     if os.path.exists(req_path):
@@ -29,7 +29,7 @@ def read_requirements():
 setup(
     name='soplos-grub-editor',
     version='2.0.0',
-    description='Editor gráfico oficial de GRUB para Soplos Linux',
+    description='Official GRUB graphical editor for Soplos Linux',
     long_description=read_readme(),
     long_description_content_type='text/markdown',
     author='Sergi Perich',

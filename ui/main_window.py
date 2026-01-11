@@ -64,7 +64,7 @@ class MainWindow(Gtk.ApplicationWindow):
         self.connect('delete-event', self._on_delete_event)
         self.connect('key-press-event', self._on_key_press)
         
-        print("Main window created successfully")
+        print(_("Main window created successfully"))
 
     def _create_header_bar_with_fallback(self):
         """Create HeaderBar matching Welcome apps."""
@@ -79,15 +79,15 @@ class MainWindow(Gtk.ApplicationWindow):
         except Exception:
             pass
 
-        print(f"[DEBUG] Desktop detected: {desktop_env}")
+        print(_("[DEBUG] Desktop detected: {}").format(desktop_env))
 
         # If XFCE/KDE, use native decorations
         if desktop_env in ['xfce', 'kde', 'plasma']:
-            print("Using native window decorations (SSD)")
+            print(_("Using native window decorations (SSD)"))
             return
 
         # If GNOME or others, use CSD
-        print("Creating Client-Side Decorations (CSD)")
+        print(_("Creating Client-Side Decorations (CSD)"))
         header = Gtk.HeaderBar()
         header.set_show_close_button(True)
         header.set_title(_(APP_NAME))
@@ -120,9 +120,6 @@ class MainWindow(Gtk.ApplicationWindow):
             self.notebook.get_style_context().add_class('soplos-notebook')
         except Exception:
             pass
-        
-        # REMOVED: _apply_notebook_custom_css() 
-        # The theme CSS should handle this, not inline CSS
         
         main_vbox.pack_start(self.notebook, True, True, 0)
 
@@ -251,7 +248,7 @@ class MainWindow(Gtk.ApplicationWindow):
 
     def _on_delete_event(self, widget, event):
         """Handle window close."""
-        print("Main window closing...")
+        print(_("Main window closing..."))
         return False
 
     def _on_key_press(self, widget, event):

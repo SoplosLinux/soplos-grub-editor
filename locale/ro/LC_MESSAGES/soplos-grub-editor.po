@@ -1,0 +1,518 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Soplos GRUB Editor 2.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-11 18:39+0100\n"
+"PO-Revision-Date: 2026-01-11 00:00+0000\n"
+"Last-Translator: Sergi Perich <info@soploslinux.com>\n"
+"Language-Team: Sergi Perich <info@soploslinux.com>\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "/boot/grub/background.png"
+msgstr "/boot/grub/background.png"
+
+msgid "About"
+msgstr "Despre"
+
+msgid "Add Entry"
+msgstr "Adaugă intrare"
+
+msgid "Add entry"
+msgstr "Adaugă intrare"
+
+msgid "Advanced Options"
+msgstr "Opțiuni avansate"
+
+msgid "Appearance"
+msgstr "Aspect"
+
+#, python-brace-format
+msgid "Application error: {err}"
+msgstr "Eroare aplicație: {err}"
+
+msgid "Application error: {}"
+msgstr "Eroare aplicație: {}"
+
+msgid "Application initialization completed"
+msgstr "Inițializare aplicație completă"
+
+msgid "Apply"
+msgstr "Aplică"
+
+msgid "Apply Background"
+msgstr "Aplică fundal"
+
+msgid "Apply Background Settings"
+msgstr "Aplică setări fundal"
+
+msgid "Apply Changes"
+msgstr "Aplică modificări"
+
+msgid "Apply Theme"
+msgstr "Aplică temă"
+
+msgid "Apply selected font"
+msgstr "Aplică fontul selectat"
+
+msgid ""
+"Applying theme '{}' will disable any custom background and colors. Continue?"
+msgstr "Aplicarea temei '{}' va dezactiva fundalul și culorile personalizate. Continuați?"
+
+msgid "Background"
+msgstr "Fundal"
+
+msgid "Background applied successfully!"
+msgstr "Fundal aplicat cu succes!"
+
+msgid "Background color:"
+msgstr "Culoare fundal:"
+
+msgid "Background image:"
+msgstr "Imagine fundal:"
+
+msgid "Background removed successfully!"
+msgstr "Fundal eliminat cu succes!"
+
+msgid "Boot Configuration"
+msgstr "Configurație boot"
+
+msgid "Boot Entries"
+msgstr "Intrări boot"
+
+msgid "Browse..."
+msgstr "Răsfoiește..."
+
+msgid "Changes Saved"
+msgstr "Modificări salvate"
+
+#, python-brace-format
+msgid "Cleanup warning: {err}"
+msgstr "Avertisment curățare: {err}"
+
+msgid "Colors (when not using theme):"
+msgstr "Culori (fără temă):"
+
+msgid "Convert TrueType fonts to GRUB format (PF2):"
+msgstr "Convertește fonturi TrueType în format GRUB (PF2):"
+
+msgid "Convert and Install Font"
+msgstr "Convertește și instalează font"
+
+msgid "Creating Client-Side Decorations (CSD)"
+msgstr "Se creează decorațiuni client (CSD)"
+
+msgid "Custom entry dialog - TODO"
+msgstr "Dialog intrare personalizată - TODO"
+
+msgid "Default Boot Entry:"
+msgstr "Intrare boot implicită:"
+
+#, python-brace-format
+msgid "Desktop Environment: {env}"
+msgstr "Mediu desktop: {env}"
+
+msgid "Detect other operating systems"
+msgstr "Detectează alte sisteme de operare"
+
+msgid "Disable"
+msgstr "Dezactivează"
+
+msgid "Disable Theme"
+msgstr "Dezactivează temă"
+
+msgid "Enabled"
+msgstr "Activat"
+
+msgid ""
+"Ensure dependencies are installed: sudo apt install python3-gi python3-gi-"
+"cairo gir1.2-gtk-3.0"
+msgstr "Asigurați-vă că dependențele sunt instalate: sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0"
+
+msgid "Entry {}"
+msgstr "Intrare {}"
+
+msgid "Error"
+msgstr "Eroare"
+
+#, python-brace-format
+msgid "Error creating main window: {err}"
+msgstr "Eroare creare fereastră principală: {err}"
+
+#, python-brace-format
+msgid "Error initializing GRUB Manager: {err}"
+msgstr "Eroare inițializare Manager GRUB: {err}"
+
+#, python-brace-format
+msgid "Error initializing environment detection: {err}"
+msgstr "Eroare inițializare detecție mediu: {err}"
+
+#, python-brace-format
+msgid "Error initializing internationalization: {err}"
+msgstr "Eroare inițializare internaționalizare: {err}"
+
+#, python-brace-format
+msgid "Error initializing theming: {err}"
+msgstr "Eroare inițializare teme: {err}"
+
+msgid "Error installing theme: {}"
+msgstr "Eroare instalare temă: {}"
+
+msgid "Error loading GRUB config: {}"
+msgstr "Eroare încărcare config GRUB: {}"
+
+msgid "Error parsing grub.cfg: {}"
+msgstr "Eroare analiză grub.cfg: {}"
+
+msgid "Error reading GRUB config: {}"
+msgstr "Eroare citire config GRUB: {}"
+
+#, python-brace-format
+msgid "Error removing config key: {err}"
+msgstr "Eroare eliminare cheie config: {err}"
+
+#, python-brace-format
+msgid "Error running update-grub: {err}"
+msgstr "Eroare rulare update-grub: {err}"
+
+#, python-brace-format
+msgid "Error saving GRUB config: {err}"
+msgstr "Eroare salvare config GRUB: {err}"
+
+#, python-brace-format
+msgid "Error setting application icon: {err}"
+msgstr "Eroare setare pictogramă aplicație: {err}"
+
+#, python-brace-format
+msgid "Error setting up application menu: {err}"
+msgstr "Eroare configurare meniu aplicație: {err}"
+
+msgid "Failed to convert font: {}"
+msgstr "Eșec conversie font: {}"
+
+msgid "Failed to elevate privileges: {}"
+msgstr "Eșec ridicare privilegii: {}"
+
+msgid "Failed to extract archive: {}"
+msgstr "Eșec extragere arhivă: {}"
+
+msgid "Failed to install theme: {}"
+msgstr "Eșec instalare temă: {}"
+
+msgid "Failed to remove theme: {}"
+msgstr "Eșec eliminare temă: {}"
+
+#, python-brace-format
+msgid "Failed to save config: {err}"
+msgstr "Eșec salvare config: {err}"
+
+msgid "Failed to save configuration"
+msgstr "Eșec salvare configurație"
+
+msgid "Failed to update GRUB"
+msgstr "Eșec actualizare GRUB"
+
+msgid "Failed to update GRUB. Check logs for details."
+msgstr "Eșec actualizare GRUB. Verificați jurnalele pentru detalii."
+
+#, python-brace-format
+msgid "Failed to update GRUB: {err}"
+msgstr "Eșec actualizare GRUB: {err}"
+
+msgid "Font '{}' will be used after running update-grub."
+msgstr "Fontul '{}' va fi folosit după rularea update-grub."
+
+msgid "Font Applied"
+msgstr "Font aplicat"
+
+msgid "Font converted and installed: {}"
+msgstr "Font convertit și instalat: {}"
+
+msgid "Font files"
+msgstr "Fișiere font"
+
+msgid "Font size:"
+msgstr "Mărime font:"
+
+msgid "Fonts"
+msgstr "Fonturi"
+
+msgid "GNOME"
+msgstr "GNOME"
+
+msgid "GRUB Manager initialized"
+msgstr "Manager GRUB inițializat"
+
+msgid "GRUB config not found at {}"
+msgstr "Configurație GRUB negăsită la {}"
+
+msgid "GRUB configuration updated successfully!"
+msgstr "Configurație GRUB actualizată cu succes!"
+
+msgid "GRUB updated successfully!"
+msgstr "GRUB actualizat cu succes!"
+
+msgid "General Configuration"
+msgstr "Configurație generală"
+
+msgid "Highlight background:"
+msgstr "Fundal evidențiere:"
+
+msgid "Highlight text:"
+msgstr "Text evidențiere:"
+
+msgid "Images"
+msgstr "Imagini"
+
+msgid "Import error: {}"
+msgstr "Eroare import: {}"
+
+msgid "Include recovery options"
+msgstr "Include opțiuni recuperare"
+
+msgid "Information"
+msgstr "Informație"
+
+msgid "Install..."
+msgstr "Instalare..."
+
+msgid "Installed GRUB fonts:"
+msgstr "Fonturi GRUB instalate:"
+
+msgid "KDE Plasma"
+msgstr "KDE Plasma"
+
+msgid "Kernel Parameters"
+msgstr "Parametri nucleu"
+
+msgid "Kernel Parameters:"
+msgstr "Parametri nucleu:"
+
+#, python-brace-format
+msgid "Language initialized: {lang}"
+msgstr "Limbă inițializată: {lang}"
+
+msgid "Main window closing..."
+msgstr "Închidere fereastră principală..."
+
+msgid "Main window created successfully"
+msgstr "Fereastră principală creată cu succes"
+
+msgid "Name:"
+msgstr "Nume:"
+
+msgid "No Background"
+msgstr "Fără fundal"
+
+msgid "No theme.txt found in archive"
+msgstr "Niciun theme.txt găsit în arhivă"
+
+msgid "Path"
+msgstr "Cale"
+
+msgid "Please select a background image first."
+msgstr "Vă rugăm să selectați mai întâi o imagine de fundal."
+
+msgid "Please select a valid font file."
+msgstr "Vă rugăm să selectați un fișier font valid."
+
+msgid "Preview"
+msgstr "Previzualizare"
+
+msgid "Quit"
+msgstr "Ieșire"
+
+msgid "Ready"
+msgstr "Pregătit"
+
+#, python-brace-format
+msgid "Received signal {num}, shutting down..."
+msgstr "Semnal {num} primit, se oprește..."
+
+msgid "Remove"
+msgstr "Elimină"
+
+msgid "Remove Background"
+msgstr "Elimină fundal"
+
+msgid "Remove Entry"
+msgstr "Elimină intrare"
+
+msgid "Remove Theme"
+msgstr "Elimină temă"
+
+msgid "Remove entry"
+msgstr "Elimină intrare"
+
+msgid "Remove entry '{}'?"
+msgstr "Elimini intrarea '{}'?"
+
+#, python-brace-format
+msgid "Removed key {key} from config"
+msgstr "Eliminat cheie {key} din config"
+
+msgid "Run update-grub now to apply changes?"
+msgstr "Rulați update-grub acum pentru a aplica?"
+
+msgid "Running on {} ({})"
+msgstr "Rulează pe {} ({})"
+
+msgid "Screen Resolution:"
+msgstr "Rezoluție ecran:"
+
+msgid "Select TTF/OTF font file..."
+msgstr "Selectare fișier font TTF/OTF..."
+
+msgid "Select background image"
+msgstr "Selectare imagine fundal"
+
+msgid "Select font file"
+msgstr "Selectare fișier font"
+
+msgid "Select theme archive"
+msgstr "Selectare arhivă temă"
+
+msgid "Show boot menu"
+msgstr "Afișare meniu boot"
+
+msgid "Shutting down Soplos Grub Editor..."
+msgstr "Se oprește Soplos Grub Editor..."
+
+#, python-brace-format
+msgid "Starting {name} v{ver}..."
+msgstr "Pornește {name} v{ver}..."
+
+msgid "Success"
+msgstr "Succes"
+
+#, python-brace-format
+msgid "Successfully saved config to {path}"
+msgstr "Configurație salvată cu succes la {path}"
+
+msgid "Successfully saved config using pkexec"
+msgstr "Configurație salvată cu succes folosind pkexec"
+
+msgid "Successfully updated GRUB"
+msgstr "GRUB actualizat cu succes"
+
+msgid "Text color:"
+msgstr "Culoare text:"
+
+msgid "Theme"
+msgstr "Temă"
+
+msgid "Theme '{}' installed successfully!"
+msgstr "Tema '{}' instalată cu succes!"
+
+msgid "Theme '{}' removed successfully!"
+msgstr "Tema '{}' eliminată cu succes!"
+
+msgid "Theme applied successfully!"
+msgstr "Temă aplicată cu succes!"
+
+msgid "Theme archives"
+msgstr "Arhive temă"
+
+msgid "Theme disabled."
+msgstr "Temă dezactivată."
+
+#, python-brace-format
+msgid "Theme loaded: {theme}"
+msgstr "Temă încărcată: {theme}"
+
+msgid "Theme:"
+msgstr "Temă:"
+
+msgid "Themes include colors and fonts. Use 'Background' tab for custom setup."
+msgstr "Temele includ culori și fonturi. Folosiți 'Fundal' pentru setări personalizate."
+
+msgid ""
+"This will disable any theme and use the custom background with your color "
+"settings. Continue?"
+msgstr "Aceasta va dezactiva orice temă și va folosi fundalul personalizat cu culorile dvs. Continuați?"
+
+msgid "This will permanently delete theme '{}'. Are you sure?"
+msgstr "Aceasta va șterge definitiv tema '{}'. Sunteți sigur?"
+
+msgid "This will remove the background image from GRUB. Continue?"
+msgstr "Aceasta va elimina imaginea de fundal din GRUB. Continuați?"
+
+msgid "This will remove the theme and set default colors. Continue?"
+msgstr "Aceasta va elimina tema și va seta culorile implicite. Continuați?"
+
+msgid "Timeout (seconds):"
+msgstr "Expirare (secunde):"
+
+msgid "Type:"
+msgstr "Tip:"
+
+msgid "Unknown"
+msgstr "Necunoscut"
+
+msgid "Unsupported archive format"
+msgstr "Format arhivă neacceptat"
+
+msgid "Use UUID for root partition"
+msgstr "Folosește UUID pentru partiția root"
+
+msgid "Using native window decorations (SSD)"
+msgstr "Se folosesc decorațiuni native (SSD)"
+
+msgid "Warning: Pre-elevation detection failed: {}"
+msgstr "Avertisment: Detecția pre-elevare a eșuat: {}"
+
+msgid "Wayland"
+msgstr "Wayland"
+
+msgid "Working..."
+msgstr "Se lucrează..."
+
+msgid "Would set GRUB_FONT={}"
+msgstr "Ar seta GRUB_FONT={}"
+
+msgid "X11"
+msgstr "X11"
+
+msgid "XFCE"
+msgstr "XFCE"
+
+msgid "[DEBUG] Desktop detected: {}"
+msgstr "[DEBUG] Desktop detectat: {}"
+
+msgid "[ThemeManager] WARNING: No theme found, using 'dark'"
+msgstr "[ThemeManager] AVERTISMENT: Nicio temă găsită, se folosește 'dark'"
+
+msgid "[ThemeManager] ⚠ Could not set GTK theme preference: {}"
+msgstr "[ThemeManager] ⚠ Nu s-a putut seta preferința temă GTK: {}"
+
+msgid "[ThemeManager] ✗ ERROR loading theme: {}"
+msgstr "[ThemeManager] ✗ EROARE încărcare temă: {}"
+
+msgid "[ThemeManager] ✗ ERROR: Theme file not found: {}"
+msgstr "[ThemeManager] ✗ EROARE: Fișier temă negăsit: {}"
+
+msgid "[ThemeManager] ✗✗✗ Failed to initialize theming ✗✗✗"
+msgstr "[ThemeManager] ✗✗✗ Eșec inițializare teme ✗✗✗"
+
+msgid "auto"
+msgstr "auto"
+
+msgid "firmware"
+msgstr "firmware"
+
+msgid "memtest"
+msgstr "memtest"
+
+msgid "quiet splash resume=UUID=..."
+msgstr "quiet splash resume=UUID=..."
+
+msgid "recovery"
+msgstr "recuperare"
+
+msgid "system"
+msgstr "sistem"
+
+msgid "update-grub not found"
+msgstr "update-grub negăsit"

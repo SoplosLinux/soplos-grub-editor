@@ -73,7 +73,7 @@ class GeneralView(Gtk.Box):
         self.resolution_combo.set_hexpand(True)
         # 16:9, 16:10, 4:3, and legacy resolutions
         resolutions = [
-            "auto",
+            _("auto"),
             # 16:9 (widescreen)
             "3840x2160", "2560x1440", "1920x1080", "1600x900", "1366x768", "1280x720",
             # 16:10 (widescreen)
@@ -142,7 +142,7 @@ class GeneralView(Gtk.Box):
         kernel_box.pack_start(kernel_label, False, False, 0)
         
         self.kernel_entry = Gtk.Entry()
-        self.kernel_entry.set_placeholder_text("quiet splash resume=UUID=...")
+        self.kernel_entry.set_placeholder_text(_("quiet splash resume=UUID=..."))
         kernel_box.pack_start(self.kernel_entry, False, False, 0)
         
         kernel_frame.add(kernel_box)
@@ -172,7 +172,8 @@ class GeneralView(Gtk.Box):
             self.default_entry_combo.remove_all()
             for i, entry in enumerate(entries):
                 # Format: "0: Entry Name"
-                display_text = f"{i}: {entry.get('name', 'Unknown')}"
+                name = entry.get('name', _('Unknown'))
+                display_text = f"{i}: {name}"
                 self.default_entry_combo.append_text(display_text)
             
             # Select current default
@@ -222,7 +223,7 @@ class GeneralView(Gtk.Box):
             self.uuid_check.set_active(disable_uuid.lower() != 'true')
             
         except Exception as e:
-            print(f"Error loading GRUB config: {e}")
+            print(_("Error loading GRUB config: {}").format(e))
     
     def get_config(self):
         """Return current configuration from UI - only changed/existing keys."""

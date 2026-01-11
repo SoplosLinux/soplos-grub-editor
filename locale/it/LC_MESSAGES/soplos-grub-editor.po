@@ -1,0 +1,518 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Soplos GRUB Editor 2.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-11 18:39+0100\n"
+"PO-Revision-Date: 2026-01-11 00:00+0000\n"
+"Last-Translator: Sergi Perich <info@soploslinux.com>\n"
+"Language-Team: Sergi Perich <info@soploslinux.com>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "/boot/grub/background.png"
+msgstr "/boot/grub/background.png"
+
+msgid "About"
+msgstr "Informazioni"
+
+msgid "Add Entry"
+msgstr "Aggiungi voce"
+
+msgid "Add entry"
+msgstr "Aggiungi voce"
+
+msgid "Advanced Options"
+msgstr "Opzioni avanzate"
+
+msgid "Appearance"
+msgstr "Aspetto"
+
+#, python-brace-format
+msgid "Application error: {err}"
+msgstr "Errore dell'applicazione: {err}"
+
+msgid "Application error: {}"
+msgstr "Errore dell'applicazione: {}"
+
+msgid "Application initialization completed"
+msgstr "Inizializzazione applicazione completata"
+
+msgid "Apply"
+msgstr "Applica"
+
+msgid "Apply Background"
+msgstr "Applica sfondo"
+
+msgid "Apply Background Settings"
+msgstr "Applica impostazioni sfondo"
+
+msgid "Apply Changes"
+msgstr "Applica modifiche"
+
+msgid "Apply Theme"
+msgstr "Applica tema"
+
+msgid "Apply selected font"
+msgstr "Applica carattere selezionato"
+
+msgid ""
+"Applying theme '{}' will disable any custom background and colors. Continue?"
+msgstr "Applicando il tema '{}' verranno disabilitati sfondo e colori personalizzati. Continuare?"
+
+msgid "Background"
+msgstr "Sfondo"
+
+msgid "Background applied successfully!"
+msgstr "Sfondo applicato correttamente!"
+
+msgid "Background color:"
+msgstr "Colore sfondo:"
+
+msgid "Background image:"
+msgstr "Immagine sfondo:"
+
+msgid "Background removed successfully!"
+msgstr "Sfondo rimosso correttamente!"
+
+msgid "Boot Configuration"
+msgstr "Configurazione avvio"
+
+msgid "Boot Entries"
+msgstr "Voci di avvio"
+
+msgid "Browse..."
+msgstr "Sfoglia..."
+
+msgid "Changes Saved"
+msgstr "Modifiche salvate"
+
+#, python-brace-format
+msgid "Cleanup warning: {err}"
+msgstr "Attenzione pulizia: {err}"
+
+msgid "Colors (when not using theme):"
+msgstr "Colori (senza tema):"
+
+msgid "Convert TrueType fonts to GRUB format (PF2):"
+msgstr "Converti font TrueType in formato GRUB (PF2):"
+
+msgid "Convert and Install Font"
+msgstr "Converti e installa carattere"
+
+msgid "Creating Client-Side Decorations (CSD)"
+msgstr "Creazione decorazioni lato client (CSD)"
+
+msgid "Custom entry dialog - TODO"
+msgstr "Dialogo voce personalizzata - TODO"
+
+msgid "Default Boot Entry:"
+msgstr "Voce di avvio predefinita:"
+
+#, python-brace-format
+msgid "Desktop Environment: {env}"
+msgstr "Ambiente desktop: {env}"
+
+msgid "Detect other operating systems"
+msgstr "Rileva altri sistemi operativi"
+
+msgid "Disable"
+msgstr "Disabilita"
+
+msgid "Disable Theme"
+msgstr "Disabilita tema"
+
+msgid "Enabled"
+msgstr "Abilitato"
+
+msgid ""
+"Ensure dependencies are installed: sudo apt install python3-gi python3-gi-"
+"cairo gir1.2-gtk-3.0"
+msgstr "Assicurati che le dipendenze siano installate: sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0"
+
+msgid "Entry {}"
+msgstr "Voce {}"
+
+msgid "Error"
+msgstr "Errore"
+
+#, python-brace-format
+msgid "Error creating main window: {err}"
+msgstr "Errore creazione finestra principale: {err}"
+
+#, python-brace-format
+msgid "Error initializing GRUB Manager: {err}"
+msgstr "Errore inizializzazione Gestore GRUB: {err}"
+
+#, python-brace-format
+msgid "Error initializing environment detection: {err}"
+msgstr "Errore inizializzazione rilevamento ambiente: {err}"
+
+#, python-brace-format
+msgid "Error initializing internationalization: {err}"
+msgstr "Errore inizializzazione internazionalizzazione: {err}"
+
+#, python-brace-format
+msgid "Error initializing theming: {err}"
+msgstr "Errore inizializzazione temi: {err}"
+
+msgid "Error installing theme: {}"
+msgstr "Errore installazione tema: {}"
+
+msgid "Error loading GRUB config: {}"
+msgstr "Errore caricamento configurazione GRUB: {}"
+
+msgid "Error parsing grub.cfg: {}"
+msgstr "Errore analisi grub.cfg: {}"
+
+msgid "Error reading GRUB config: {}"
+msgstr "Errore lettura configurazione GRUB: {}"
+
+#, python-brace-format
+msgid "Error removing config key: {err}"
+msgstr "Errore rimozione chiave config: {err}"
+
+#, python-brace-format
+msgid "Error running update-grub: {err}"
+msgstr "Errore esecuzione update-grub: {err}"
+
+#, python-brace-format
+msgid "Error saving GRUB config: {err}"
+msgstr "Errore salvataggio configurazione GRUB: {err}"
+
+#, python-brace-format
+msgid "Error setting application icon: {err}"
+msgstr "Errore impostazione icona applicazione: {err}"
+
+#, python-brace-format
+msgid "Error setting up application menu: {err}"
+msgstr "Errore configurazione menu applicazione: {err}"
+
+msgid "Failed to convert font: {}"
+msgstr "Impossibile convertire il carattere: {}"
+
+msgid "Failed to elevate privileges: {}"
+msgstr "Impossibile elevare i privilegi: {}"
+
+msgid "Failed to extract archive: {}"
+msgstr "Impossibile estrarre l'archivio: {}"
+
+msgid "Failed to install theme: {}"
+msgstr "Impossibile installare il tema: {}"
+
+msgid "Failed to remove theme: {}"
+msgstr "Impossibile rimuovere il tema: {}"
+
+#, python-brace-format
+msgid "Failed to save config: {err}"
+msgstr "Impossibile salvare la configurazione: {err}"
+
+msgid "Failed to save configuration"
+msgstr "Impossibile salvare la configurazione"
+
+msgid "Failed to update GRUB"
+msgstr "Aggiornamento GRUB fallito"
+
+msgid "Failed to update GRUB. Check logs for details."
+msgstr "Aggiornamento GRUB fallito. Controlla i log per dettagli."
+
+#, python-brace-format
+msgid "Failed to update GRUB: {err}"
+msgstr "Aggiornamento GRUB fallito: {err}"
+
+msgid "Font '{}' will be used after running update-grub."
+msgstr "Il carattere '{}' verrà usato dopo update-grub."
+
+msgid "Font Applied"
+msgstr "Carattere applicato"
+
+msgid "Font converted and installed: {}"
+msgstr "Carattere convertito e installato: {}"
+
+msgid "Font files"
+msgstr "File font"
+
+msgid "Font size:"
+msgstr "Dimensione carattere:"
+
+msgid "Fonts"
+msgstr "Caratteri"
+
+msgid "GNOME"
+msgstr "GNOME"
+
+msgid "GRUB Manager initialized"
+msgstr "Gestore GRUB inizializzato"
+
+msgid "GRUB config not found at {}"
+msgstr "Configurazione GRUB non trovata in {}"
+
+msgid "GRUB configuration updated successfully!"
+msgstr "Configurazione GRUB aggiornata correttamente!"
+
+msgid "GRUB updated successfully!"
+msgstr "GRUB aggiornato correttamente!"
+
+msgid "General Configuration"
+msgstr "Configurazione generale"
+
+msgid "Highlight background:"
+msgstr "Sfondo evidenziazione:"
+
+msgid "Highlight text:"
+msgstr "Testo evidenziazione:"
+
+msgid "Images"
+msgstr "Immagini"
+
+msgid "Import error: {}"
+msgstr "Errore importazione: {}"
+
+msgid "Include recovery options"
+msgstr "Includi opzioni di ripristino"
+
+msgid "Information"
+msgstr "Informazioni"
+
+msgid "Install..."
+msgstr "Installa..."
+
+msgid "Installed GRUB fonts:"
+msgstr "Caratteri GRUB installati:"
+
+msgid "KDE Plasma"
+msgstr "KDE Plasma"
+
+msgid "Kernel Parameters"
+msgstr "Parametri del kernel"
+
+msgid "Kernel Parameters:"
+msgstr "Parametri del kernel:"
+
+#, python-brace-format
+msgid "Language initialized: {lang}"
+msgstr "Lingua inizializzata: {lang}"
+
+msgid "Main window closing..."
+msgstr "Chiusura finestra principale..."
+
+msgid "Main window created successfully"
+msgstr "Finestra principale creata correttamente"
+
+msgid "Name:"
+msgstr "Nome:"
+
+msgid "No Background"
+msgstr "Nessuno sfondo"
+
+msgid "No theme.txt found in archive"
+msgstr "Nessun theme.txt trovato nell'archivio"
+
+msgid "Path"
+msgstr "Percorso"
+
+msgid "Please select a background image first."
+msgstr "Seleziona prima un'immagine di sfondo."
+
+msgid "Please select a valid font file."
+msgstr "Seleziona un file di carattere valido."
+
+msgid "Preview"
+msgstr "Anteprima"
+
+msgid "Quit"
+msgstr "Esci"
+
+msgid "Ready"
+msgstr "Pronto"
+
+#, python-brace-format
+msgid "Received signal {num}, shutting down..."
+msgstr "Ricevuto segnale {num}, arresto..."
+
+msgid "Remove"
+msgstr "Rimuovi"
+
+msgid "Remove Background"
+msgstr "Rimuovi sfondo"
+
+msgid "Remove Entry"
+msgstr "Rimuovi voce"
+
+msgid "Remove Theme"
+msgstr "Rimuovi tema"
+
+msgid "Remove entry"
+msgstr "Rimuovi voce"
+
+msgid "Remove entry '{}'?"
+msgstr "Rimuovere voce '{}'?"
+
+#, python-brace-format
+msgid "Removed key {key} from config"
+msgstr "Rimossa chiave {key} da config"
+
+msgid "Run update-grub now to apply changes?"
+msgstr "Eseguire update-grub ora per applicare?"
+
+msgid "Running on {} ({})"
+msgstr "In esecuzione su {} ({})"
+
+msgid "Screen Resolution:"
+msgstr "Risoluzione schermo:"
+
+msgid "Select TTF/OTF font file..."
+msgstr "Seleziona file font TTF/OTF..."
+
+msgid "Select background image"
+msgstr "Seleziona immagine sfondo"
+
+msgid "Select font file"
+msgstr "Seleziona file carattere"
+
+msgid "Select theme archive"
+msgstr "Seleziona archivio tema"
+
+msgid "Show boot menu"
+msgstr "Mostra menu avvio"
+
+msgid "Shutting down Soplos Grub Editor..."
+msgstr "Chiusura Soplos Grub Editor..."
+
+#, python-brace-format
+msgid "Starting {name} v{ver}..."
+msgstr "Avvio di {name} v{ver}..."
+
+msgid "Success"
+msgstr "Successo"
+
+#, python-brace-format
+msgid "Successfully saved config to {path}"
+msgstr "Configurazione salvata in {path}"
+
+msgid "Successfully saved config using pkexec"
+msgstr "Configurazione salvata usando pkexec"
+
+msgid "Successfully updated GRUB"
+msgstr "GRUB aggiornato correttamente"
+
+msgid "Text color:"
+msgstr "Colore testo:"
+
+msgid "Theme"
+msgstr "Tema"
+
+msgid "Theme '{}' installed successfully!"
+msgstr "Tema '{}' installato correttamente!"
+
+msgid "Theme '{}' removed successfully!"
+msgstr "Tema '{}' rimosso correttamente!"
+
+msgid "Theme applied successfully!"
+msgstr "Tema applicato correttamente!"
+
+msgid "Theme archives"
+msgstr "Archivi temi"
+
+msgid "Theme disabled."
+msgstr "Tema disabilitato."
+
+#, python-brace-format
+msgid "Theme loaded: {theme}"
+msgstr "Tema caricato: {theme}"
+
+msgid "Theme:"
+msgstr "Tema:"
+
+msgid "Themes include colors and fonts. Use 'Background' tab for custom setup."
+msgstr "I temi includono colori e font. Usa la scheda 'Sfondo' per personalizzare."
+
+msgid ""
+"This will disable any theme and use the custom background with your color "
+"settings. Continue?"
+msgstr "Questo disabiliterà il tema e userà lo sfondo personalizzato con i tuoi colori. Continuare?"
+
+msgid "This will permanently delete theme '{}'. Are you sure?"
+msgstr "Questo eliminerà definitivamente il tema '{}'. Sei sicuro?"
+
+msgid "This will remove the background image from GRUB. Continue?"
+msgstr "Questo rimuoverà l'immagine di sfondo da GRUB. Continuare?"
+
+msgid "This will remove the theme and set default colors. Continue?"
+msgstr "Questo rimuoverà il tema e imposterà i colori predefiniti. Continuare?"
+
+msgid "Timeout (seconds):"
+msgstr "Timeout (secondi):"
+
+msgid "Type:"
+msgstr "Tipo:"
+
+msgid "Unknown"
+msgstr "Sconosciuto"
+
+msgid "Unsupported archive format"
+msgstr "Formato archivio non supportato"
+
+msgid "Use UUID for root partition"
+msgstr "Usa UUID per partizione root"
+
+msgid "Using native window decorations (SSD)"
+msgstr "Uso decorazioni finestra native (SSD)"
+
+msgid "Warning: Pre-elevation detection failed: {}"
+msgstr "Attenzione: Rilevamento pre-elevazione fallito: {}"
+
+msgid "Wayland"
+msgstr "Wayland"
+
+msgid "Working..."
+msgstr "In corso..."
+
+msgid "Would set GRUB_FONT={}"
+msgstr "Imposterebbe GRUB_FONT={}"
+
+msgid "X11"
+msgstr "X11"
+
+msgid "XFCE"
+msgstr "XFCE"
+
+msgid "[DEBUG] Desktop detected: {}"
+msgstr "[DEBUG] Desktop rilevato: {}"
+
+msgid "[ThemeManager] WARNING: No theme found, using 'dark'"
+msgstr "[ThemeManager] ATTENZIONE: Nessun tema trovato, uso 'dark'"
+
+msgid "[ThemeManager] ⚠ Could not set GTK theme preference: {}"
+msgstr "[ThemeManager] ⚠ Impossibile impostare preferenza tema GTK: {}"
+
+msgid "[ThemeManager] ✗ ERROR loading theme: {}"
+msgstr "[ThemeManager] ✗ ERRORE caricamento tema: {}"
+
+msgid "[ThemeManager] ✗ ERROR: Theme file not found: {}"
+msgstr "[ThemeManager] ✗ ERRORE: File tema non trovato: {}"
+
+msgid "[ThemeManager] ✗✗✗ Failed to initialize theming ✗✗✗"
+msgstr "[ThemeManager] ✗✗✗ Inizializzazione temi fallita ✗✗✗"
+
+msgid "auto"
+msgstr "auto"
+
+msgid "firmware"
+msgstr "firmware"
+
+msgid "memtest"
+msgstr "memtest"
+
+msgid "quiet splash resume=UUID=..."
+msgstr "quiet splash resume=UUID=..."
+
+msgid "recovery"
+msgstr "ripristino"
+
+msgid "system"
+msgstr "sistema"
+
+msgid "update-grub not found"
+msgstr "update-grub non trovato"

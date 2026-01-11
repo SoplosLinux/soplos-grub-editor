@@ -12,6 +12,7 @@ from pathlib import Path
 # Add the project root to PYTHONPATH
 PROJECT_ROOT = Path(__file__).parent
 sys.path.insert(0, str(PROJECT_ROOT))
+from core.i18n_manager import _
 
 # Minimal main: elevate if needed, seed session info, then run application
 def main():
@@ -67,7 +68,7 @@ def main():
                 env_vars.append(f"GTK_THEME={gtk_theme}")
                 
         except Exception as e:
-            print(f"Warning: Pre-elevation detection failed: {e}")
+            print(_("Warning: Pre-elevation detection failed: {}").format(e))
             # Fallback to existing env vars if detection fails
             user_desktop = os.environ.get('XDG_CURRENT_DESKTOP', '')
             session_type = os.environ.get('XDG_SESSION_TYPE', '')
@@ -118,7 +119,7 @@ def main():
         try:
             return subprocess.run(cmd).returncode
         except Exception as e:
-            print(f"Failed to elevate privileges: {e}")
+            print(_("Failed to elevate privileges: {}").format(e))
             return 1
 
     # Run application as normal user/root
@@ -126,11 +127,11 @@ def main():
         from core.application import run_application
         return run_application()
     except ImportError as e:
-        print(f"Import error: {e}")
-        print("Ensure dependencies are installed: sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0")
+        print(_("Import error: {}").format(e))
+        print(_("Ensure dependencies are installed: sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0"))
         return 1
     except Exception as e:
-        print(f"Application error: {e}")
+        print(_("Application error: {}").format(e))
         return 1
 
 if __name__ == '__main__':

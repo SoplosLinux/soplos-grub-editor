@@ -151,6 +151,7 @@ Developed by Sergi Perich
 ## 🆕 New in version 2.0.0 (January 10, 2026)
 
 ### New Features
+- **Complete Internationalization** - Native support for 8 languages (ES, EN, DE, FR, IT, PT, RO, RU)
 - **Smart Light/Dark Theme Detection** - Compatible with GNOME, KDE and XFCE
 - **Improved Desktop & Environment Detection** - Accurate detection of Wayland/X11 and DE
 - **Refined UI Layout** - Compact two-column design for advanced options

@@ -123,8 +123,8 @@ class BootEntriesView(Gtk.Box):
         for i, entry in enumerate(entries):
             self.store.append([
                 i,
-                entry.get('name', f'Entry {i}'),
-                entry.get('type', 'system'),
+                entry.get('name', _('Entry {}').format(i)),
+                entry.get('type', _('system')),
                 entry.get('path', ''),
                 entry.get('enabled', True)
             ])
