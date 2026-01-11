@@ -42,6 +42,7 @@ def main():
         user_desktop = ''
         session_type = ''
         theme_type = ''
+        gtk_theme = ''
 
         # Pre-elevation detection: Determine environment to pass to root
         try:
@@ -61,6 +62,9 @@ def main():
             if detector.theme_type:
                 theme_type = detector.theme_type.value
                 env_vars.append(f"SOPLOS_THEME_TYPE={theme_type}")
+            if detector.gtk_theme_name:
+                gtk_theme = detector.gtk_theme_name
+                env_vars.append(f"GTK_THEME={gtk_theme}")
                 
         except Exception as e:
             print(f"Warning: Pre-elevation detection failed: {e}")
@@ -68,6 +72,7 @@ def main():
             user_desktop = os.environ.get('XDG_CURRENT_DESKTOP', '')
             session_type = os.environ.get('XDG_SESSION_TYPE', '')
             theme_type = os.environ.get('SOPLOS_THEME_TYPE', '')
+            gtk_theme = os.environ.get('GTK_THEME', '')
             
             if user_desktop:
                 env_vars.append(f"SOPLOS_DESKTOP={user_desktop}")
@@ -75,6 +80,10 @@ def main():
                 env_vars.append(f"SOPLOS_SESSION_TYPE={session_type}")
             if theme_type:
                 env_vars.append(f"SOPLOS_THEME_TYPE={theme_type}")
+            if gtk_theme:
+                env_vars.append(f"GTK_THEME={gtk_theme}")
+            if gtk_theme:
+                env_vars.append(f"GTK_THEME={gtk_theme}")
 
         # Write session JSON for elevated process to consume (secondary mechanism)
         env_file_path = None
@@ -82,7 +91,8 @@ def main():
         data = {
             'SOPLOS_DESKTOP': user_desktop,
             'SOPLOS_SESSION_TYPE': session_type,
-            'SOPLOS_THEME_TYPE': theme_type or ''
+            'SOPLOS_THEME_TYPE': theme_type or '',
+            'GTK_THEME': gtk_theme or '',
         }
         try:
             if os.path.isdir(run_user_dir):

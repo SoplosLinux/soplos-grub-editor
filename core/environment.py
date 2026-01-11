@@ -9,7 +9,7 @@ Focused, small implementation that:
 
 import os
 import subprocess
-from typing import Dict
+from typing import Dict, Optional
 from enum import Enum
 from pathlib import Path
 import pwd
@@ -41,6 +41,7 @@ class EnvironmentDetector:
         self._desktop = DesktopEnvironment.UNKNOWN
         self._display = DisplayProtocol.UNKNOWN
         self._theme = ThemeType.LIGHT
+        self._gtk_theme_name = None
 
     def detect_all(self) -> Dict[str, str]:
         # Load parent-provided hints if available (kept for backward compat)
@@ -54,6 +55,7 @@ class EnvironmentDetector:
             'desktop_environment': self._desktop.value,
             'display_protocol': self._display.value,
             'theme_type': self._theme.value,
+            'gtk_theme_name': self._gtk_theme_name,
         }
 
     def _detect_desktop(self):
@@ -188,6 +190,7 @@ class EnvironmentDetector:
                 try:
                     # Fallback: inspect theme name for 'dark' substring
                     tn = s.get_property('gtk-theme-name')
+                    self._gtk_theme_name = tn
                     if tn and isinstance(tn, str) and 'dark' in tn.lower():
                         self._theme = ThemeType.DARK
                         return
@@ -213,6 +216,7 @@ class EnvironmentDetector:
                     return
             if cfg.has_option('Settings', 'gtk-theme-name'):
                 tn = cfg.get('Settings', 'gtk-theme-name')
+                self._gtk_theme_name = tn
                 if tn and 'dark' in tn.lower():
                     self._theme = ThemeType.DARK
                     return
@@ -280,10 +284,10 @@ class EnvironmentDetector:
         return self._display
 
     @property
-    def theme_type(self) -> ThemeType:
-        if self._theme is None:
+    def gtk_theme_name(self) -> Optional[str]:
+        if self._gtk_theme_name is None:
             self._detect_theme()
-        return self._theme
+        return self._gtk_theme_name
 
     @property
     def is_wayland(self) -> bool:

@@ -1,7 +1,9 @@
-/* Light Theme for Soplos Grub Editor */
-/* Variables ONLY - consumed by base.css */
+/* Light Theme for Soplos GRUB Editor - GTK3 CSS */
+/* AUTOCONTENIDO: Variables + Estilos en un solo archivo */
 
-/* Soplos Brand Colors */
+/* ============================================ */
+/* VARIABLES (Soplos Brand Colors)            */
+/* ============================================ */
 @define-color soplos_orange #ff8800;
 @define-color soplos_orange_hover #ff9922;
 @define-color soplos_light_bg #f5f5f5;
@@ -23,5 +25,373 @@
 @define-color error_color @soplos_error;
 @define-color insensitive_fg_color @soplos_insensitive_fg;
 @define-color theme_unfocused_bg_color @soplos_unfocused_bg;
-@define-color tab_active_bg @theme_base_color;
 @define-color hover_overlay rgba(0, 0, 0, 0.05);
+
+/* ============================================ */
+/* BASE STYLES                                 */
+/* ============================================ */
+
+/* Application Window */
+window {
+    background-color: @soplos_light_bg;
+    color: @soplos_dark_text;
+}
+
+.soplos-window {
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
+}
+
+/* Main Content Area */
+.soplos-content {
+    padding: 20px;
+    background-color: @theme_base_color;
+    border-radius: 8px;
+}
+
+/* HeaderBar */
+headerbar,
+.titlebar {
+    background-color: #e8e8e8;
+    color: @soplos_dark_text;
+    border-bottom: 1px solid @soplos_border;
+    box-shadow: none;
+}
+
+headerbar button.titlebutton {
+    color: @soplos_dark_text;
+    background: transparent;
+    border: none;
+    padding: 6px;
+    border-radius: 4px;
+}
+
+headerbar button.titlebutton:hover {
+    background-color: #d0d0d0;
+}
+
+headerbar button.titlebutton.close:hover {
+    background-color: @soplos_error;
+    color: white;
+}
+
+/* Notebook and Tabs - EXACTLY like dark.css structure */
+notebook {
+    background-color: @soplos_lighter_bg;
+    border: 1px solid @soplos_border;
+}
+
+notebook>header {
+    background-color: #e8e8e8;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+}
+
+notebook>header tabs {
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Tab Styling - CRITICAL: Must match dark.css */
+notebook>header tab {
+    background-color: #e0e0e0;
+    color: #666666;
+    border: 1px solid @soplos_border;
+    border-bottom: none;
+    margin: 0 2px 0 0;
+    padding: 8px 20px;
+    border-radius: 4px 4px 0 0;
+    box-shadow: none;
+    outline: none;
+    min-height: 20px;
+}
+
+/* Hover State */
+notebook>header tab:hover {
+    background-color: #f0f0f0;
+    color: @soplos_dark_text;
+    box-shadow: none;
+}
+
+/* CHECKED/ACTIVE State - ORANGE TOP BORDER */
+notebook>header tab:checked {
+    background-color: @soplos_light_bg;
+    color: @soplos_orange;
+    border-top: 3px solid @soplos_orange;
+    border-left: 1px solid @soplos_border;
+    border-right: 1px solid @soplos_border;
+    border-bottom: none;
+    box-shadow: none;
+    font-weight: 500;
+}
+
+/* Remove focus rings */
+notebook>header tab:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Content Area */
+notebook>stack {
+    background-color: @soplos_light_bg;
+    border: 1px solid @soplos_border;
+    border-top: none;
+}
+
+/* Buttons */
+button {
+    border-radius: 6px;
+    padding: 8px 16px;
+    border: 1px solid @borders;
+    background-color: #ffffff;
+    color: @theme_fg_color;
+    font-weight: bold;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+button:hover {
+    background-color: #f0f0f0;
+    border-color: @soplos_orange;
+    color: @theme_fg_color;
+}
+
+button:active {
+    background-color: @theme_selected_bg_color;
+    color: @theme_selected_fg_color;
+}
+
+button.suggested-action {
+    background-color: @theme_selected_bg_color;
+    color: @theme_selected_fg_color;
+    border: none;
+}
+
+button.suggested-action:hover {
+    background-color: @soplos_orange_hover;
+}
+
+button.destructive-action {
+    background-color: @error_color;
+    color: white;
+    border: none;
+}
+
+button.destructive-action:hover {
+    background-color: #ff6b6b;
+}
+
+/* Cards and Containers */
+.soplos-card {
+    background-color: @theme_base_color;
+    border: 1px solid @borders;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px;
+}
+
+.soplos-card:hover {
+    background-color: @theme_selected_bg_color;
+    color: @theme_selected_fg_color;
+}
+
+/* Status and Progress */
+.soplos-status-label {
+    color: @theme_fg_color;
+    font-size: 14px;
+}
+
+progressbar {
+    border-radius: 4px;
+}
+
+progressbar trough {
+    background-color: #e0e0e0;
+    border: 1px solid @soplos_border;
+    border-radius: 4px;
+}
+
+progressbar progress {
+    background-color: @soplos_orange;
+    border-radius: 4px;
+}
+
+/* Icons */
+.soplos-icon-large {
+    min-width: 48px;
+    min-height: 48px;
+}
+
+.soplos-icon-medium {
+    min-width: 32px;
+    min-height: 32px;
+}
+
+.soplos-icon-small {
+    min-width: 16px;
+    min-height: 16px;
+}
+
+/* Separators */
+separator {
+    background-color: @borders;
+    margin: 10px 0;
+}
+
+/* Text styles */
+.dim-label {
+    color: @insensitive_fg_color;
+}
+
+label {
+    color: @soplos_dark_text;
+}
+
+/* Scrolled windows */
+scrolledwindow {
+    background-color: @theme_base_color;
+}
+
+scrolledwindow viewport {
+    background-color: @theme_base_color;
+}
+
+/* Frames */
+frame {
+    border: 1px solid @borders;
+    background-color: @theme_base_color;
+}
+
+frame>border {
+    border: none;
+}
+
+/* Lists and trees - COMPACT STYLING */
+list,
+treeview {
+    background-color: @theme_base_color;
+    color: @theme_fg_color;
+    font-size: 13px;
+}
+
+/* TreeView headers */
+treeview.view header button {
+    background-color: #e8e8e8;
+    color: @soplos_dark_text;
+    border: 1px solid @soplos_border;
+    padding: 6px 8px;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+treeview.view header button:hover {
+    background-color: #f0f0f0;
+}
+
+/* TreeView cells - COMPACT */
+treeview.view {
+    background-color: @soplos_light_bg;
+    color: @soplos_dark_text;
+}
+
+treeview.view:selected {
+    background-color: @soplos_orange;
+    color: #000000;
+}
+
+treeview.view:selected:focus {
+    background-color: @soplos_orange;
+    color: #000000;
+}
+
+treeview.view cell {
+    padding: 4px 8px;
+    border: none;
+}
+
+treeview.view cell:selected {
+    background-color: @soplos_orange;
+    color: #000000;
+}
+
+/* Row hover effect */
+list row:hover,
+treeview.view:hover {
+    background-color: #f0f0f0;
+}
+
+/* Grid lines */
+treeview.view.separator {
+    min-height: 1px;
+    background-color: @soplos_border;
+}
+
+/* Checkbox in TreeView */
+treeview.view check,
+treeview.view radio {
+    min-width: 18px;
+    min-height: 18px;
+    margin: 2px;
+}
+
+/* Entry fields */
+entry {
+    background-color: @soplos_lighter_bg;
+    color: @soplos_dark_text;
+    border: 1px solid @soplos_border;
+    box-shadow: none;
+}
+
+entry:focus {
+    border-color: @soplos_orange;
+}
+
+/* Custom button styles */
+.soplos-button-primary {
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
+    border: 1px solid @borders;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.soplos-button-primary:hover {
+    background-color: @theme_unfocused_bg_color;
+}
+
+.soplos-button-secondary {
+    background-color: transparent;
+    color: @theme_fg_color;
+    border: 1px solid @borders;
+    padding: 8px 16px;
+    font-weight: normal;
+    border-radius: 4px;
+}
+
+.soplos-button-secondary:hover {
+    background-color: @hover_overlay;
+}
+
+.soplos-button-accent {
+    background-color: transparent;
+    color: @error_color;
+    border: 1px solid @error_color;
+    padding: 8px 16px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.soplos-button-accent:hover {
+    background-color: @hover_overlay;
+}
+
+/* Remove focus outlines */
+* {
+    outline-color: rgba(255, 136, 0, 0.5);
+    outline-style: none;
+}
