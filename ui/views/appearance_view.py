@@ -201,7 +201,7 @@ class AppearanceView(Gtk.ScrolledWindow):
         bg_box.pack_start(hl_bg_row, False, False, 0)
         
         # Apply background button
-        apply_bg_btn = Gtk.Button(label=_("Apply Background Settings"))
+        apply_bg_btn = Gtk.Button(label=_("Apply Appearance Settings"))
         apply_bg_btn.get_style_context().add_class('suggested-action')
         apply_bg_btn.connect('clicked', self._on_apply_background)
         bg_box.pack_start(apply_bg_btn, False, False, 10)
@@ -258,10 +258,21 @@ class AppearanceView(Gtk.ScrolledWindow):
         self._load_installed_fonts()
         fonts_box.pack_start(self.fonts_combo, False, False, 0)
         
+        # Font actions row
+        actions_row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
+        
         # Apply font button
         apply_font_btn = Gtk.Button(label=_("Apply selected font"))
         apply_font_btn.connect('clicked', self._on_apply_font)
-        fonts_box.pack_start(apply_font_btn, False, False, 0)
+        actions_row.pack_start(apply_font_btn, True, True, 0)
+        
+        # Remove font button
+        remove_font_btn = Gtk.Button(label=_("Remove selected font"))
+        remove_font_btn.get_style_context().add_class('destructive-action')
+        remove_font_btn.connect('clicked', self._on_remove_font)
+        actions_row.pack_start(remove_font_btn, True, True, 0)
+        
+        fonts_box.pack_start(actions_row, False, False, 0)
         
         sub_notebook.append_page(fonts_box, Gtk.Label(label=_("Fonts")))
         
@@ -270,6 +281,74 @@ class AppearanceView(Gtk.ScrolledWindow):
         self.content_box.pack_start(controls_box, True, True, 0)
         
         self.show_all()
+
+    def _on_apply_font(self, button):
+        """Apply selected font to GRUB configuration."""
+        font_name = self.fonts_combo.get_active_text()
+        print(f"[DEBUG] _on_apply_font called. Selected: {font_name}")
+        if font_name:
+            font_path = f"/boot/grub/fonts/{font_name}"
+            
+            # Save to /etc/default/grub
+            if self.grub_manager.save_config({'GRUB_FONT': font_path}):
+                self._ask_update_grub(_("Font Applied"))
+            else:
+                self._show_error(_("Failed to save font configuration to /etc/default/grub"))
+
+    def _on_remove_font(self, button):
+        """Remove selected font from system."""
+        font_name = self.fonts_combo.get_active_text()
+        if not font_name:
+            return
+
+        # Confirm deletion
+        dialog = Gtk.MessageDialog(
+            transient_for=self.parent_window,
+            flags=0,
+            message_type=Gtk.MessageType.WARNING,
+            buttons=Gtk.ButtonsType.YES_NO,
+            text=_("Delete Font?")
+        )
+        dialog.format_secondary_text(
+            _("Are you sure you want to permanently delete '{}'?").format(font_name)
+        )
+        response = dialog.run()
+        dialog.destroy()
+
+        if response == Gtk.ResponseType.YES:
+            import os
+            import subprocess
+            
+            font_path = f"/boot/grub/fonts/{font_name}"
+            
+            try:
+                # 1. Delete physical file
+                if os.geteuid() == 0:
+                    os.remove(font_path)
+                else:
+                    subprocess.run(['pkexec', 'rm', font_path], check=True)
+                
+                # 2. Check if it was currently applied
+                current_config = self.grub_manager.read_config()
+                current_font = current_config.get('GRUB_FONT', '')
+                
+                # If deleted font was the active one, clear config
+                config_changed = False
+                if current_font == font_path:
+                    self.grub_manager.remove_config_key('GRUB_FONT')
+                    config_changed = True
+                    # If we changed config, we SHOULD update grub
+                
+                # 3. Reload list
+                self._load_installed_fonts()
+
+                if config_changed:
+                    self._ask_update_grub(_("Font deleted. GRUB configuration updated."))
+                else:
+                    self._show_info(_("Font deleted successfully."))
+                
+            except Exception as e:
+                self._show_error(_("Failed to delete font: {}").format(e))
     
     def _load_data(self):
         """Load current GRUB appearance configuration."""
@@ -505,18 +584,13 @@ class AppearanceView(Gtk.ScrolledWindow):
         if response != Gtk.ResponseType.YES:
             return
         
-        # Update config: set theme, clear background AND colors (theme has its own)
-        new_config = {
-            'GRUB_THEME': f"/boot/grub/themes/{theme_name}/theme.txt",
-            'GRUB_BACKGROUND': '',
-            'GRUB_COLOR_NORMAL': '',
-            'GRUB_COLOR_HIGHLIGHT': '',
-        }
+        # Use new method to apply theme safely
+        theme_path = f"/boot/grub/themes/{theme_name}/theme.txt"
         
-        if self.grub_manager.save_config(new_config):
+        if self.grub_manager.apply_theme_settings(theme_path):
             self.bg_entry.set_text('')
             self._ask_update_grub(_("Theme applied successfully!"))
-    
+
     def _on_disable_theme(self, button):
         """Disable current theme and set default colors."""
         dialog = Gtk.MessageDialog(
@@ -534,12 +608,10 @@ class AppearanceView(Gtk.ScrolledWindow):
             return
         
         # Remove theme but keep default colors so menu is readable
-        new_config = {
-            'GRUB_THEME': '',
-            'GRUB_COLOR_NORMAL': 'white/black',
-            'GRUB_COLOR_HIGHLIGHT': 'black/white',
-        }
-        if self.grub_manager.save_config(new_config):
+        # Here we just want to reset to a clean state.
+        # Clearing theme in /etc/default/grub effectively disables it.
+        # We can use save_custom_ui_settings with defaults to ensure cleanliness.
+        if self.grub_manager.save_custom_ui_settings('', 'white/black', 'black/white'):
             self.theme_combo.set_active(-1)
             self.preview_image.set_from_icon_name('image-missing', Gtk.IconSize.DIALOG)
             # Update color buttons to show defaults
@@ -644,11 +716,8 @@ class AppearanceView(Gtk.ScrolledWindow):
             # Clear theme config if it was the active one
             current_theme = self.grub_manager.config.get('GRUB_THEME', '')
             if theme_name in current_theme:
-                self.grub_manager.save_config({
-                    'GRUB_THEME': '',
-                    'GRUB_COLOR_NORMAL': 'white/black',
-                    'GRUB_COLOR_HIGHLIGHT': 'black/white',
-                })
+                # Reset to safe defaults
+                self.grub_manager.save_custom_ui_settings('', 'white/black', 'black/white')
             # Refresh theme list
             self._load_data()
         else:
@@ -704,42 +773,37 @@ class AppearanceView(Gtk.ScrolledWindow):
         self.bg_entry.set_text('')
         self.preview_image.set_from_icon_name('image-missing', Gtk.IconSize.DIALOG)
         
-        if self.grub_manager.remove_config_key('GRUB_BACKGROUND'):
-            self._ask_update_grub(_("Background removed successfully!"))
+        # We want to keep colors but remove background
+        # We can just apply current colors with empty BG
+        # This will update custom.cfg accordingly
+        self._on_apply_background(None)
     
     def _on_apply_background(self, button):
         """Apply background settings and clear any theme."""
         bg_path = self.bg_entry.get_text().strip()
         
-        if not bg_path:
+        # Validation relaxed: we allow empty background if user wants to just set colors.
+        # But if it's empty, warn only if they pressed "Apply" explicitly, maybe? 
+        # Actually, "Apply Background Settings" implies applying what's there (colors too).
+        # So we proceed even if bg_path is empty.
+        
+        if button is not None: # Only confirm if user clicked the button
+            # Confirm with user
             dialog = Gtk.MessageDialog(
                 transient_for=self.parent_window,
                 flags=0,
-                message_type=Gtk.MessageType.WARNING,
-                buttons=Gtk.ButtonsType.OK,
-                text=_("No Background")
+                message_type=Gtk.MessageType.QUESTION,
+                buttons=Gtk.ButtonsType.YES_NO,
+                text=_("Apply Appearance Settings") # Renamed from "Apply Background" since it covers colors too
             )
-            dialog.format_secondary_text(_("Please select a background image first."))
-            dialog.run()
+            dialog.format_secondary_text(
+                _("This will disable any theme and use your custom background/colors. Continue?")
+            )
+            response = dialog.run()
             dialog.destroy()
-            return
-        
-        # Confirm with user
-        dialog = Gtk.MessageDialog(
-            transient_for=self.parent_window,
-            flags=0,
-            message_type=Gtk.MessageType.QUESTION,
-            buttons=Gtk.ButtonsType.YES_NO,
-            text=_("Apply Background")
-        )
-        dialog.format_secondary_text(
-            _("This will disable any theme and use the custom background with your color settings. Continue?")
-        )
-        response = dialog.run()
-        dialog.destroy()
-        
-        if response != Gtk.ResponseType.YES:
-            return
+            
+            if response != Gtk.ResponseType.YES:
+                return
         
         # Get colors as GRUB format (e.g., "white/black")
         def rgba_to_grub_color(rgba):
@@ -768,17 +832,14 @@ class AppearanceView(Gtk.ScrolledWindow):
         hl_text = rgba_to_grub_color(self.hl_color_btn.get_rgba())
         hl_bg = rgba_to_grub_color(self.hl_bg_color_btn.get_rgba())
         
-        new_config = {
-            'GRUB_THEME': '',  # Clear theme
-            'GRUB_BACKGROUND': bg_path,
-            'GRUB_COLOR_NORMAL': f"{text_color}/{bg_color}",
-            'GRUB_COLOR_HIGHLIGHT': f"{hl_text}/{hl_bg}",
-        }
+        color_normal = f"{text_color}/{bg_color}"
+        color_highlight = f"{hl_text}/{hl_bg}"
         
-        if self.grub_manager.save_config(new_config):
+        # Use new method to save custom settings
+        if self.grub_manager.save_custom_ui_settings(bg_path, color_normal, color_highlight):
             # Clear theme selection in UI
             self.theme_combo.set_active(-1)
-            self._ask_update_grub(_("Background applied successfully!"))
+            self._ask_update_grub(_("Settings applied successfully!"))
     
     def get_config(self):
         """Return current configuration from UI."""
@@ -910,17 +971,8 @@ class AppearanceView(Gtk.ScrolledWindow):
         """Apply selected font to GRUB configuration."""
         font_name = self.fonts_combo.get_active_text()
         if font_name:
-            # GRUB_FONT config
             font_path = f"/boot/grub/fonts/{font_name}"
-            print(_("Would set GRUB_FONT={}").format(font_path))
             
-            dialog = Gtk.MessageDialog(
-                transient_for=self.parent_window,
-                flags=0,
-                message_type=Gtk.MessageType.INFO,
-                buttons=Gtk.ButtonsType.OK,
-                text=_("Font Applied")
-            )
-            dialog.format_secondary_text(_("Font '{}' will be used after running update-grub.").format(font_name))
-            dialog.run()
-            dialog.destroy()
+            # Save to /etc/default/grub
+            if self.grub_manager.save_config({'GRUB_FONT': font_path}):
+                self._ask_update_grub(_("Font Applied"))

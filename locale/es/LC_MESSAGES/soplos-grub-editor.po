@@ -42,8 +42,8 @@ msgstr "Inicialización de la aplicación completada"
 msgid "Apply"
 msgstr "Aplicar"
 
-msgid "Apply Background"
-msgstr "Aplicar fondo"
+msgid "Apply Appearance Settings"
+msgstr "Aplicar configuración de apariencia"
 
 msgid "Apply Background Settings"
 msgstr "Aplicar configuración de fondo"
@@ -59,13 +59,15 @@ msgstr "Aplicar fuente seleccionada"
 
 msgid ""
 "Applying theme '{}' will disable any custom background and colors. Continue?"
-msgstr "Aplicar el tema '{}' desactivará cualquier fondo y colores personalizados. ¿Desea continuar?"
+msgstr ""
+"Aplicar el tema '{}' desactivará cualquier fondo y colores personalizados. "
+"¿Desea continuar?"
 
 msgid "Background"
 msgstr "Fondo"
 
-msgid "Background applied successfully!"
-msgstr "¡Fondo aplicado correctamente!"
+msgid "Settings applied successfully!"
+msgstr "¡Configuración aplicada correctamente!"
 
 msgid "Background color:"
 msgstr "Color de fondo:"
@@ -129,7 +131,9 @@ msgstr "Habilitado"
 msgid ""
 "Ensure dependencies are installed: sudo apt install python3-gi python3-gi-"
 "cairo gir1.2-gtk-3.0"
-msgstr "Asegúrese de que las dependencias están instaladas: sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0"
+msgstr ""
+"Asegúrese de que las dependencias están instaladas: sudo apt install python3-"
+"gi python3-gi-cairo gir1.2-gtk-3.0"
 
 msgid "Entry {}"
 msgstr "Entrada {}"
@@ -181,6 +185,9 @@ msgstr "Error al ejecutar update-grub: {err}"
 msgid "Error saving GRUB config: {err}"
 msgstr "Error al guardar la configuración de GRUB: {err}"
 
+msgid "Error writing custom.cfg: {err}"
+msgstr "Error escribiendo custom.cfg: {err}"
+
 #, python-brace-format
 msgid "Error setting application icon: {err}"
 msgstr "Error estableciendo icono de aplicación: {err}"
@@ -207,6 +214,12 @@ msgstr "Fallo al eliminar el tema: {}"
 #, python-brace-format
 msgid "Failed to save config: {err}"
 msgstr "Fallo al guardar la configuración: {err}"
+
+msgid "Failed to change 05_debian_theme permissions: {err}"
+msgstr "Fallo al cambiar permisos de 05_debian_theme: {err}"
+
+msgid "Failed to write custom.cfg: {err}"
+msgstr "Fallo al escribir custom.cfg: {err}"
 
 msgid "Failed to save configuration"
 msgstr "Fallo al guardar la configuración"
@@ -374,6 +387,9 @@ msgstr "Seleccionar archivo de fuente"
 msgid "Select theme archive"
 msgstr "Seleccionar archivo de tema"
 
+msgid "Set 05_debian_theme active={active}"
+msgstr "Establecer 05_debian_theme activo={active}"
+
 msgid "Show boot menu"
 msgstr "Mostrar menú de arranque"
 
@@ -426,12 +442,15 @@ msgid "Theme:"
 msgstr "Tema:"
 
 msgid "Themes include colors and fonts. Use 'Background' tab for custom setup."
-msgstr "Los temas incluyen colores y fuentes. Use la pestaña 'Fondo' para una configuración personalizada."
+msgstr ""
+"Los temas incluyen colores y fuentes. Use la pestaña 'Fondo' para una "
+"configuración personalizada."
 
 msgid ""
-"This will disable any theme and use the custom background with your color "
-"settings. Continue?"
-msgstr "Esto desactivará cualquier tema y usará el fondo personalizado con tu configuración de colores. ¿Desa continuar?"
+"This will disable any theme and use your custom background/colors. Continue?"
+msgstr ""
+"Esto desactivará cualquier tema y usará su fondo/colores personalizados. "
+"¿Desea continuar?"
 
 msgid "This will permanently delete theme '{}'. Are you sure?"
 msgstr "Esto eliminará permanentemente el tema '{}'. ¿Está seguro?"
@@ -440,7 +459,9 @@ msgid "This will remove the background image from GRUB. Continue?"
 msgstr "Esto eliminará la imagen de fondo de GRUB. ¿Desea continuar?"
 
 msgid "This will remove the theme and set default colors. Continue?"
-msgstr "Esto eliminará el tema y establecerá los colores predeterminados. ¿Desea continuar?"
+msgstr ""
+"Esto eliminará el tema y establecerá los colores predeterminados. ¿Desea "
+"continuar?"
 
 msgid "Timeout (seconds):"
 msgstr "Tiempo de espera (segundos):"
@@ -516,3 +537,27 @@ msgstr "sistema"
 
 msgid "update-grub not found"
 msgstr "update-grub no encontrado"
+
+msgid "Remove selected font"
+msgstr "Eliminar fuente seleccionada"
+
+msgid "Delete Font?"
+msgstr "¿Eliminar fuente?"
+
+msgid "Are you sure you want to permanently delete '{}'?"
+msgstr "¿Estás seguro de que quieres eliminar permanentemente '{}'?"
+
+msgid "Font deleted and removed from configuration."
+msgstr "Fuente eliminada y quitada de la configuración."
+
+msgid "Font deleted successfully."
+msgstr "Fuente eliminada con éxito."
+
+msgid "Failed to delete font: {}"
+msgstr "Error al eliminar la fuente: {}"
+
+msgid "Failed to save font configuration to /etc/default/grub"
+msgstr "Error al guardar la configuración de la fuente en /etc/default/grub"
+
+msgid "Font deleted. GRUB configuration updated."
+msgstr "Fuente eliminada. Configuración de GRUB actualizada."

@@ -42,8 +42,8 @@ msgstr "Inițializare aplicație completă"
 msgid "Apply"
 msgstr "Aplică"
 
-msgid "Apply Background"
-msgstr "Aplică fundal"
+msgid "Apply Appearance Settings"
+msgstr "Aplică setările de aspect"
 
 msgid "Apply Background Settings"
 msgstr "Aplică setări fundal"
@@ -59,13 +59,15 @@ msgstr "Aplică fontul selectat"
 
 msgid ""
 "Applying theme '{}' will disable any custom background and colors. Continue?"
-msgstr "Aplicarea temei '{}' va dezactiva fundalul și culorile personalizate. Continuați?"
+msgstr ""
+"Aplicarea temei '{}' va dezactiva fundalul și culorile personalizate. "
+"Continuați?"
 
 msgid "Background"
 msgstr "Fundal"
 
-msgid "Background applied successfully!"
-msgstr "Fundal aplicat cu succes!"
+msgid "Settings applied successfully!"
+msgstr "Setările au fost aplicate cu succes!"
 
 msgid "Background color:"
 msgstr "Culoare fundal:"
@@ -129,7 +131,9 @@ msgstr "Activat"
 msgid ""
 "Ensure dependencies are installed: sudo apt install python3-gi python3-gi-"
 "cairo gir1.2-gtk-3.0"
-msgstr "Asigurați-vă că dependențele sunt instalate: sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0"
+msgstr ""
+"Asigurați-vă că dependențele sunt instalate: sudo apt install python3-gi "
+"python3-gi-cairo gir1.2-gtk-3.0"
 
 msgid "Entry {}"
 msgstr "Intrare {}"
@@ -181,6 +185,9 @@ msgstr "Eroare rulare update-grub: {err}"
 msgid "Error saving GRUB config: {err}"
 msgstr "Eroare salvare config GRUB: {err}"
 
+msgid "Error writing custom.cfg: {err}"
+msgstr "Eroare la scrierea custom.cfg: {err}"
+
 #, python-brace-format
 msgid "Error setting application icon: {err}"
 msgstr "Eroare setare pictogramă aplicație: {err}"
@@ -207,6 +214,12 @@ msgstr "Eșec eliminare temă: {}"
 #, python-brace-format
 msgid "Failed to save config: {err}"
 msgstr "Eșec salvare config: {err}"
+
+msgid "Failed to change 05_debian_theme permissions: {err}"
+msgstr "Nu s-a reușit modificarea permisiunilor 05_debian_theme: {err}"
+
+msgid "Failed to write custom.cfg: {err}"
+msgstr "Nu s-a reușit scrierea custom.cfg: {err}"
 
 msgid "Failed to save configuration"
 msgstr "Eșec salvare configurație"
@@ -374,6 +387,9 @@ msgstr "Selectare fișier font"
 msgid "Select theme archive"
 msgstr "Selectare arhivă temă"
 
+msgid "Set 05_debian_theme active={active}"
+msgstr "Setează 05_debian_theme activ={active}"
+
 msgid "Show boot menu"
 msgstr "Afișare meniu boot"
 
@@ -426,12 +442,15 @@ msgid "Theme:"
 msgstr "Temă:"
 
 msgid "Themes include colors and fonts. Use 'Background' tab for custom setup."
-msgstr "Temele includ culori și fonturi. Folosiți 'Fundal' pentru setări personalizate."
+msgstr ""
+"Temele includ culori și fonturi. Folosiți 'Fundal' pentru setări "
+"personalizate."
 
 msgid ""
-"This will disable any theme and use the custom background with your color "
-"settings. Continue?"
-msgstr "Aceasta va dezactiva orice temă și va folosi fundalul personalizat cu culorile dvs. Continuați?"
+"This will disable any theme and use your custom background/colors. Continue?"
+msgstr ""
+"Aceasta va dezactiva orice temă și va utiliza fundalul/culorile dvs. "
+"personalizate. Continuați?"
 
 msgid "This will permanently delete theme '{}'. Are you sure?"
 msgstr "Aceasta va șterge definitiv tema '{}'. Sunteți sigur?"
@@ -516,3 +535,27 @@ msgstr "sistem"
 
 msgid "update-grub not found"
 msgstr "update-grub negăsit"
+
+msgid "Remove selected font"
+msgstr "Șterge fontul selectat"
+
+msgid "Delete Font?"
+msgstr "Șterge fontul?"
+
+msgid "Are you sure you want to permanently delete '{}'?"
+msgstr "Sunteți sigur că doriți să ștergeți definitiv '{}'?"
+
+msgid "Font deleted and removed from configuration."
+msgstr "Font șters și eliminat din configurație."
+
+msgid "Font deleted successfully."
+msgstr "Font șters cu succes."
+
+msgid "Failed to delete font: {}"
+msgstr "Nu s-a putut șterge fontul: {}"
+
+msgid "Failed to save font configuration to /etc/default/grub"
+msgstr "Nu s-a putut salva configurația fontului în /etc/default/grub"
+
+msgid "Font deleted. GRUB configuration updated."
+msgstr "Font șters. Configurația GRUB actualizată."

@@ -48,8 +48,8 @@ msgstr "Application initialization completed"
 msgid "Apply"
 msgstr "Apply"
 
-msgid "Apply Background"
-msgstr "Apply Background"
+msgid "Apply Appearance Settings"
+msgstr "Apply Appearance Settings"
 
 msgid "Apply Background Settings"
 msgstr "Apply Background Settings"
@@ -71,8 +71,8 @@ msgstr ""
 msgid "Background"
 msgstr "Background"
 
-msgid "Background applied successfully!"
-msgstr "Background applied successfully!"
+msgid "Settings applied successfully!"
+msgstr "Settings applied successfully!"
 
 msgid "Background color:"
 msgstr "Background color:"
@@ -190,6 +190,9 @@ msgstr "Error running update-grub: {err}"
 msgid "Error saving GRUB config: {err}"
 msgstr "Error saving GRUB config: {err}"
 
+msgid "Error writing custom.cfg: {err}"
+msgstr "Error writing custom.cfg: {err}"
+
 #, python-brace-format
 msgid "Error setting application icon: {err}"
 msgstr "Error setting application icon: {err}"
@@ -216,6 +219,12 @@ msgstr "Failed to remove theme: {}"
 #, python-brace-format
 msgid "Failed to save config: {err}"
 msgstr "Failed to save config: {err}"
+
+msgid "Failed to change 05_debian_theme permissions: {err}"
+msgstr "Failed to change 05_debian_theme permissions: {err}"
+
+msgid "Failed to write custom.cfg: {err}"
+msgstr "Failed to write custom.cfg: {err}"
 
 msgid "Failed to save configuration"
 msgstr "Failed to save configuration"
@@ -383,6 +392,9 @@ msgstr "Select font file"
 msgid "Select theme archive"
 msgstr "Select theme archive"
 
+msgid "Set 05_debian_theme active={active}"
+msgstr "Set 05_debian_theme active={active}"
+
 msgid "Show boot menu"
 msgstr "Show boot menu"
 
@@ -439,11 +451,9 @@ msgstr ""
 "Themes include colors and fonts. Use 'Background' tab for custom setup."
 
 msgid ""
-"This will disable any theme and use the custom background with your color "
-"settings. Continue?"
+"This will disable any theme and use your custom background/colors. Continue?"
 msgstr ""
-"This will disable any theme and use the custom background with your color "
-"settings. Continue?"
+"This will disable any theme and use your custom background/colors. Continue?"
 
 msgid "This will permanently delete theme '{}'. Are you sure?"
 msgstr "This will permanently delete theme '{}'. Are you sure?"
@@ -528,3 +538,27 @@ msgstr "system"
 
 msgid "update-grub not found"
 msgstr "update-grub not found"
+
+msgid "Remove selected font"
+msgstr "Remove selected font"
+
+msgid "Delete Font?"
+msgstr "Delete Font?"
+
+msgid "Are you sure you want to permanently delete '{}'?"
+msgstr "Are you sure you want to permanently delete '{}'?"
+
+msgid "Font deleted and removed from configuration."
+msgstr "Font deleted and removed from configuration."
+
+msgid "Font deleted successfully."
+msgstr "Font deleted successfully."
+
+msgid "Failed to delete font: {}"
+msgstr "Failed to delete font: {}"
+
+msgid "Failed to save font configuration to /etc/default/grub"
+msgstr "Failed to save font configuration to /etc/default/grub"
+
+msgid "Font deleted. GRUB configuration updated."
+msgstr "Font deleted. GRUB configuration updated."

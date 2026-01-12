@@ -290,6 +290,12 @@ class EnvironmentDetector:
         return self._gtk_theme_name
 
     @property
+    def theme_type(self) -> ThemeType:
+        if self._theme is None:
+            self._detect_theme()
+        return self._theme
+
+    @property
     def is_wayland(self) -> bool:
         return self.display_protocol == DisplayProtocol.WAYLAND
 

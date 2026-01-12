@@ -112,6 +112,16 @@ def main():
 
         # Accessibility env often set in wrappers
         env_vars.append('NO_AT_BRIDGE=1')
+        
+        # Suppress dconf warnings by using memory backend
+        env_vars.append('GSETTINGS_BACKEND=memory')
+        
+        # Suppress IBUS warnings
+        env_vars.append('GTK_IM_MODULE=gtk-im-context-simple')
+        
+        # Suppress GVFS/D-Bus proxy errors
+        env_vars.append('GIO_USE_VFS=local')
+        env_vars.append('GVFS_REMOTE_VOLUME_MONITOR_IGNORE=1')
 
         script_path = str(Path(__file__).resolve())
         pkexec_path = shutil.which('pkexec') or 'pkexec'

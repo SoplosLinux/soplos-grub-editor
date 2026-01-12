@@ -42,8 +42,8 @@ msgstr "Инициализация приложения завершена"
 msgid "Apply"
 msgstr "Применить"
 
-msgid "Apply Background"
-msgstr "Применить фон"
+msgid "Apply Appearance Settings"
+msgstr "Применить настройки внешнего вида"
 
 msgid "Apply Background Settings"
 msgstr "Применить настройки фона"
@@ -59,13 +59,14 @@ msgstr "Применить выбранный шрифт"
 
 msgid ""
 "Applying theme '{}' will disable any custom background and colors. Continue?"
-msgstr "Применение темы '{}' отключит пользовательский фон и цвета. Продолжить?"
+msgstr ""
+"Применение темы '{}' отключит пользовательский фон и цвета. Продолжить?"
 
 msgid "Background"
 msgstr "Фон"
 
-msgid "Background applied successfully!"
-msgstr "Фон успешно применен!"
+msgid "Settings applied successfully!"
+msgstr "Настройки успешно применены!"
 
 msgid "Background color:"
 msgstr "Цвет фона:"
@@ -129,7 +130,9 @@ msgstr "Включено"
 msgid ""
 "Ensure dependencies are installed: sudo apt install python3-gi python3-gi-"
 "cairo gir1.2-gtk-3.0"
-msgstr "Убедитесь, что установлены зависимости: sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0"
+msgstr ""
+"Убедитесь, что установлены зависимости: sudo apt install python3-gi python3-"
+"gi-cairo gir1.2-gtk-3.0"
 
 msgid "Entry {}"
 msgstr "Запись {}"
@@ -181,6 +184,9 @@ msgstr "Ошибка запуска update-grub: {err}"
 msgid "Error saving GRUB config: {err}"
 msgstr "Ошибка сохранения конфигурации GRUB: {err}"
 
+msgid "Error writing custom.cfg: {err}"
+msgstr "Ошибка записи custom.cfg: {err}"
+
 #, python-brace-format
 msgid "Error setting application icon: {err}"
 msgstr "Ошибка установки иконки приложения: {err}"
@@ -207,6 +213,12 @@ msgstr "Не удалось удалить тему: {}"
 #, python-brace-format
 msgid "Failed to save config: {err}"
 msgstr "Не удалось сохранить конфигурацию: {err}"
+
+msgid "Failed to change 05_debian_theme permissions: {err}"
+msgstr "Не удалось изменить права доступа 05_debian_theme: {err}"
+
+msgid "Failed to write custom.cfg: {err}"
+msgstr "Не удалось записать custom.cfg: {err}"
 
 msgid "Failed to save configuration"
 msgstr "Не удалось сохранить конфигурацию"
@@ -374,6 +386,9 @@ msgstr "Выберите файл шрифта"
 msgid "Select theme archive"
 msgstr "Выберите архив темы"
 
+msgid "Set 05_debian_theme active={active}"
+msgstr "Установить 05_debian_theme активным={active}"
+
 msgid "Show boot menu"
 msgstr "Показать меню загрузки"
 
@@ -426,12 +441,15 @@ msgid "Theme:"
 msgstr "Тема:"
 
 msgid "Themes include colors and fonts. Use 'Background' tab for custom setup."
-msgstr "Темы включают цвета и шрифты. Используйте вкладку 'Фон' для пользовательской настройки."
+msgstr ""
+"Темы включают цвета и шрифты. Используйте вкладку 'Фон' для пользовательской "
+"настройки."
 
 msgid ""
-"This will disable any theme and use the custom background with your color "
-"settings. Continue?"
-msgstr "Это отключит любую тему и будет использовать пользовательский фон с вашими настройками цвета. Продолжить?"
+"This will disable any theme and use your custom background/colors. Continue?"
+msgstr ""
+"Это отключит любую тему и будет использовать ваш пользовательский фон/цвета. "
+"Продолжить?"
 
 msgid "This will permanently delete theme '{}'. Are you sure?"
 msgstr "Это навсегда удалит тему '{}'. Вы уверены?"
@@ -516,3 +534,27 @@ msgstr "system"
 
 msgid "update-grub not found"
 msgstr "update-grub не найден"
+
+msgid "Remove selected font"
+msgstr "Удалить выбранный шрифт"
+
+msgid "Delete Font?"
+msgstr "Удалить шрифт?"
+
+msgid "Are you sure you want to permanently delete '{}'?"
+msgstr "Вы уверены, что хотите безвозвратно удалить '{}'?"
+
+msgid "Font deleted and removed from configuration."
+msgstr "Шрифт удален и убран из конфигурации."
+
+msgid "Font deleted successfully."
+msgstr "Шрифт успешно удален."
+
+msgid "Failed to delete font: {}"
+msgstr "Не удалось удалить шрифт: {}"
+
+msgid "Failed to save font configuration to /etc/default/grub"
+msgstr "Не удалось сохранить конфигурацию шрифта в /etc/default/grub"
+
+msgid "Font deleted. GRUB configuration updated."
+msgstr "Шрифт удален. Конфигурация GRUB обновлена."

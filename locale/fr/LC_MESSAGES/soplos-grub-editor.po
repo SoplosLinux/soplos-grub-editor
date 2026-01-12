@@ -42,8 +42,8 @@ msgstr "Initialisation de l'application terminée"
 msgid "Apply"
 msgstr "Appliquer"
 
-msgid "Apply Background"
-msgstr "Appliquer l'arrière-plan"
+msgid "Apply Appearance Settings"
+msgstr "Appliquer les paramètres d'apparence"
 
 msgid "Apply Background Settings"
 msgstr "Appliquer les paramètres d'arrière-plan"
@@ -59,13 +59,15 @@ msgstr "Appliquer la police sélectionnée"
 
 msgid ""
 "Applying theme '{}' will disable any custom background and colors. Continue?"
-msgstr "Appliquer le thème '{}' désactivera l'arrière-plan et les couleurs personnalisés. Continuer ?"
+msgstr ""
+"Appliquer le thème '{}' désactivera l'arrière-plan et les couleurs "
+"personnalisés. Continuer ?"
 
 msgid "Background"
 msgstr "Arrière-plan"
 
-msgid "Background applied successfully!"
-msgstr "Arrière-plan appliqué avec succès !"
+msgid "Settings applied successfully!"
+msgstr "Paramètres appliqués avec succès !"
 
 msgid "Background color:"
 msgstr "Couleur d'arrière-plan :"
@@ -129,7 +131,9 @@ msgstr "Activé"
 msgid ""
 "Ensure dependencies are installed: sudo apt install python3-gi python3-gi-"
 "cairo gir1.2-gtk-3.0"
-msgstr "Assurez-vous que les dépendances sont installées : sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0"
+msgstr ""
+"Assurez-vous que les dépendances sont installées : sudo apt install python3-"
+"gi python3-gi-cairo gir1.2-gtk-3.0"
 
 msgid "Entry {}"
 msgstr "Entrée {}"
@@ -147,7 +151,8 @@ msgstr "Erreur lors de l'initialisation du gestionnaire GRUB : {err}"
 
 #, python-brace-format
 msgid "Error initializing environment detection: {err}"
-msgstr "Erreur lors de l'initialisation de la détection d'environnement : {err}"
+msgstr ""
+"Erreur lors de l'initialisation de la détection d'environnement : {err}"
 
 #, python-brace-format
 msgid "Error initializing internationalization: {err}"
@@ -181,6 +186,9 @@ msgstr "Erreur lors de l'exécution de update-grub : {err}"
 msgid "Error saving GRUB config: {err}"
 msgstr "Erreur lors de l'enregistrement de la configuration GRUB : {err}"
 
+msgid "Error writing custom.cfg: {err}"
+msgstr "Erreur lors de l'écriture de custom.cfg : {err}"
+
 #, python-brace-format
 msgid "Error setting application icon: {err}"
 msgstr "Erreur lors de la définition de l'icône de l'application : {err}"
@@ -208,6 +216,12 @@ msgstr "Échec de la suppression du thème : {}"
 msgid "Failed to save config: {err}"
 msgstr "Échec de l'enregistrement de la config : {err}"
 
+msgid "Failed to change 05_debian_theme permissions: {err}"
+msgstr "Échec de la modification des permissions de 05_debian_theme : {err}"
+
+msgid "Failed to write custom.cfg: {err}"
+msgstr "Échec de l'écriture de custom.cfg : {err}"
+
 msgid "Failed to save configuration"
 msgstr "Échec de l'enregistrement de la configuration"
 
@@ -215,7 +229,8 @@ msgid "Failed to update GRUB"
 msgstr "Échec de la mise à jour de GRUB"
 
 msgid "Failed to update GRUB. Check logs for details."
-msgstr "Échec de la mise à jour de GRUB. Vérifiez les journaux pour plus de détails."
+msgstr ""
+"Échec de la mise à jour de GRUB. Vérifiez les journaux pour plus de détails."
 
 #, python-brace-format
 msgid "Failed to update GRUB: {err}"
@@ -374,6 +389,9 @@ msgstr "Sélectionner un fichier de police"
 msgid "Select theme archive"
 msgstr "Sélectionner une archive de thème"
 
+msgid "Set 05_debian_theme active={active}"
+msgstr "Définir 05_debian_theme actif={active}"
+
 msgid "Show boot menu"
 msgstr "Afficher le menu de démarrage"
 
@@ -426,12 +444,15 @@ msgid "Theme:"
 msgstr "Thème :"
 
 msgid "Themes include colors and fonts. Use 'Background' tab for custom setup."
-msgstr "Les thèmes incluent couleurs et polices. Utilisez l'onglet 'Arrière-plan' pour personnaliser."
+msgstr ""
+"Les thèmes incluent couleurs et polices. Utilisez l'onglet 'Arrière-plan' "
+"pour personnaliser."
 
 msgid ""
-"This will disable any theme and use the custom background with your color "
-"settings. Continue?"
-msgstr "Ceci désactivera tout thème et utilisera l'arrière-plan personnalisé avec vos couleurs. Continuer ?"
+"This will disable any theme and use your custom background/colors. Continue?"
+msgstr ""
+"Ceci désactivera tout thème et utilisera votre arrière-plan/couleurs "
+"personnalisés. Continuer ?"
 
 msgid "This will permanently delete theme '{}'. Are you sure?"
 msgstr "Ceci supprimera définitivement le thème '{}'. Êtes-vous sûr ?"
@@ -440,7 +461,8 @@ msgid "This will remove the background image from GRUB. Continue?"
 msgstr "Ceci supprimera l'image d'arrière-plan de GRUB. Continuer ?"
 
 msgid "This will remove the theme and set default colors. Continue?"
-msgstr "Ceci supprimera le thème et rétablira les couleurs par défaut. Continuer ?"
+msgstr ""
+"Ceci supprimera le thème et rétablira les couleurs par défaut. Continuer ?"
 
 msgid "Timeout (seconds):"
 msgstr "Délai (secondes) :"
@@ -516,3 +538,29 @@ msgstr "système"
 
 msgid "update-grub not found"
 msgstr "update-grub non trouvé"
+
+msgid "Remove selected font"
+msgstr "Supprimer la police sélectionnée"
+
+msgid "Delete Font?"
+msgstr "Supprimer la police ?"
+
+msgid "Are you sure you want to permanently delete '{}'?"
+msgstr "Voulez-vous vraiment supprimer définitivement '{}' ?"
+
+msgid "Font deleted and removed from configuration."
+msgstr "Police supprimée et retirée de la configuration."
+
+msgid "Font deleted successfully."
+msgstr "Police supprimée avec succès."
+
+msgid "Failed to delete font: {}"
+msgstr "Échec de la suppression de la police : {}"
+
+msgid "Failed to save font configuration to /etc/default/grub"
+msgstr ""
+"Échec de l'enregistrement de la configuration de la police dans /etc/default/"
+"grub"
+
+msgid "Font deleted. GRUB configuration updated."
+msgstr "Police supprimée. Configuration GRUB mise à jour."

@@ -42,8 +42,8 @@ msgstr "Inizializzazione applicazione completata"
 msgid "Apply"
 msgstr "Applica"
 
-msgid "Apply Background"
-msgstr "Applica sfondo"
+msgid "Apply Appearance Settings"
+msgstr "Applica impostazioni aspetto"
 
 msgid "Apply Background Settings"
 msgstr "Applica impostazioni sfondo"
@@ -59,13 +59,15 @@ msgstr "Applica carattere selezionato"
 
 msgid ""
 "Applying theme '{}' will disable any custom background and colors. Continue?"
-msgstr "Applicando il tema '{}' verranno disabilitati sfondo e colori personalizzati. Continuare?"
+msgstr ""
+"Applicando il tema '{}' verranno disabilitati sfondo e colori "
+"personalizzati. Continuare?"
 
 msgid "Background"
 msgstr "Sfondo"
 
-msgid "Background applied successfully!"
-msgstr "Sfondo applicato correttamente!"
+msgid "Settings applied successfully!"
+msgstr "Impostazioni applicate con successo!"
 
 msgid "Background color:"
 msgstr "Colore sfondo:"
@@ -129,7 +131,9 @@ msgstr "Abilitato"
 msgid ""
 "Ensure dependencies are installed: sudo apt install python3-gi python3-gi-"
 "cairo gir1.2-gtk-3.0"
-msgstr "Assicurati che le dipendenze siano installate: sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0"
+msgstr ""
+"Assicurati che le dipendenze siano installate: sudo apt install python3-gi "
+"python3-gi-cairo gir1.2-gtk-3.0"
 
 msgid "Entry {}"
 msgstr "Voce {}"
@@ -181,6 +185,9 @@ msgstr "Errore esecuzione update-grub: {err}"
 msgid "Error saving GRUB config: {err}"
 msgstr "Errore salvataggio configurazione GRUB: {err}"
 
+msgid "Error writing custom.cfg: {err}"
+msgstr "Errore durante la scrittura di custom.cfg: {err}"
+
 #, python-brace-format
 msgid "Error setting application icon: {err}"
 msgstr "Errore impostazione icona applicazione: {err}"
@@ -207,6 +214,12 @@ msgstr "Impossibile rimuovere il tema: {}"
 #, python-brace-format
 msgid "Failed to save config: {err}"
 msgstr "Impossibile salvare la configurazione: {err}"
+
+msgid "Failed to change 05_debian_theme permissions: {err}"
+msgstr "Impossibile modificare i permessi di 05_debian_theme: {err}"
+
+msgid "Failed to write custom.cfg: {err}"
+msgstr "Impossibile scrivere custom.cfg: {err}"
 
 msgid "Failed to save configuration"
 msgstr "Impossibile salvare la configurazione"
@@ -374,6 +387,9 @@ msgstr "Seleziona file carattere"
 msgid "Select theme archive"
 msgstr "Seleziona archivio tema"
 
+msgid "Set 05_debian_theme active={active}"
+msgstr "Imposta 05_debian_theme attivo={active}"
+
 msgid "Show boot menu"
 msgstr "Mostra menu avvio"
 
@@ -426,12 +442,14 @@ msgid "Theme:"
 msgstr "Tema:"
 
 msgid "Themes include colors and fonts. Use 'Background' tab for custom setup."
-msgstr "I temi includono colori e font. Usa la scheda 'Sfondo' per personalizzare."
+msgstr ""
+"I temi includono colori e font. Usa la scheda 'Sfondo' per personalizzare."
 
 msgid ""
-"This will disable any theme and use the custom background with your color "
-"settings. Continue?"
-msgstr "Questo disabiliterà il tema e userà lo sfondo personalizzato con i tuoi colori. Continuare?"
+"This will disable any theme and use your custom background/colors. Continue?"
+msgstr ""
+"Questo disabiliterà qualsiasi tema e utilizzerà lo sfondo/colori "
+"personalizzati. Continuare?"
 
 msgid "This will permanently delete theme '{}'. Are you sure?"
 msgstr "Questo eliminerà definitivamente il tema '{}'. Sei sicuro?"
@@ -516,3 +534,28 @@ msgstr "sistema"
 
 msgid "update-grub not found"
 msgstr "update-grub non trovato"
+
+msgid "Remove selected font"
+msgstr "Rimuovi carattere selezionato"
+
+msgid "Delete Font?"
+msgstr "Eliminare carattere?"
+
+msgid "Are you sure you want to permanently delete '{}'?"
+msgstr "Sei sicuro di voler eliminare definitivamente '{}'?"
+
+msgid "Font deleted and removed from configuration."
+msgstr "Carattere eliminato e rimosso dalla configurazione."
+
+msgid "Font deleted successfully."
+msgstr "Carattere eliminato con successo."
+
+msgid "Failed to delete font: {}"
+msgstr "Impossibile eliminare il carattere: {}"
+
+msgid "Failed to save font configuration to /etc/default/grub"
+msgstr ""
+"Impossibile salvare la configurazione del carattere in /etc/default/grub"
+
+msgid "Font deleted. GRUB configuration updated."
+msgstr "Carattere eliminato. Configurazione GRUB aggiornata."
