@@ -381,6 +381,9 @@ msgstr "Seleccionar archivo de fuente TTF/OTF..."
 msgid "Select background image"
 msgstr "Seleccionar imagen de fondo"
 
+msgid "No image selected"
+msgstr "Ninguna imagen seleccionada"
+
 msgid "Select font file"
 msgstr "Seleccionar archivo de fuente"
 

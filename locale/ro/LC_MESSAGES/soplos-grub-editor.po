@@ -381,6 +381,9 @@ msgstr "Selectare fișier font TTF/OTF..."
 msgid "Select background image"
 msgstr "Selectare imagine fundal"
 
+msgid "No image selected"
+msgstr "Nicio imagine selectată"
+
 msgid "Select font file"
 msgstr "Selectare fișier font"
 

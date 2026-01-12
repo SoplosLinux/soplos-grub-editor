@@ -380,6 +380,9 @@ msgstr "Выберите файл шрифта TTF/OTF..."
 msgid "Select background image"
 msgstr "Выберите изображение фона"
 
+msgid "No image selected"
+msgstr "Изображение не выбрано"
+
 msgid "Select font file"
 msgstr "Выберите файл шрифта"
 

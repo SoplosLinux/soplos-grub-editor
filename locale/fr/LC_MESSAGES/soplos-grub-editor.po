@@ -383,6 +383,9 @@ msgstr "Sélectionner un fichier de police TTF/OTF..."
 msgid "Select background image"
 msgstr "Sélectionner une image d'arrière-plan"
 
+msgid "No image selected"
+msgstr "Aucune image sélectionnée"
+
 msgid "Select font file"
 msgstr "Sélectionner un fichier de police"
 

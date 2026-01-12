@@ -130,7 +130,7 @@ class AppearanceView(Gtk.ScrolledWindow):
         
         bg_row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
         self.bg_entry = Gtk.Entry()
-        self.bg_entry.set_placeholder_text(_("/boot/grub/background.png"))
+        self.bg_entry.set_placeholder_text(_("No image selected"))
         self.bg_entry.set_hexpand(True)
         self.bg_entry.connect('changed', self._on_bg_entry_changed)
         bg_row.pack_start(self.bg_entry, True, True, 0)
@@ -413,8 +413,26 @@ class AppearanceView(Gtk.ScrolledWindow):
         default_normal = 'white/black'
         default_highlight = 'black/white'
         
-        color_normal = self.grub_manager.config.get('GRUB_COLOR_NORMAL', default_normal)
-        color_highlight = self.grub_manager.config.get('GRUB_COLOR_HIGHLIGHT', default_highlight)
+        color_normal = self.grub_manager.config.get('GRUB_COLOR_NORMAL')
+        color_highlight = self.grub_manager.config.get('GRUB_COLOR_HIGHLIGHT')
+
+        # If not in main config, try loading from custom.cfg
+        if not color_normal or not color_highlight:
+            try:
+                import os
+                custom_cfg = '/boot/grub/custom.cfg'
+                if os.path.exists(custom_cfg):
+                    with open(custom_cfg, 'r') as f:
+                        for line in f:
+                            if 'set color_normal=' in line:
+                                color_normal = line.split('=')[1].strip().strip('"')
+                            elif 'set color_highlight=' in line:
+                                color_highlight = line.split('=')[1].strip().strip('"')
+            except Exception:
+                pass
+
+        if not color_normal: color_normal = default_normal
+        if not color_highlight: color_highlight = default_highlight
         
         # Parse "text/background" format
         if '/' in color_normal:
@@ -882,6 +900,7 @@ class AppearanceView(Gtk.ScrolledWindow):
             parent=self.parent_window,
             action=Gtk.FileChooserAction.OPEN
         )
+        dialog.set_current_folder('/usr/share/fonts')
         dialog.add_buttons(
             Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
             Gtk.STOCK_OPEN, Gtk.ResponseType.OK
