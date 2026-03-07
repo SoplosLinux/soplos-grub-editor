@@ -60,6 +60,7 @@ class GeneralView(Gtk.Box):
         self.timeout_spin.set_increments(1, 5)
         self.timeout_spin.set_value(5)
         self.timeout_spin.set_hexpand(True)
+        self.timeout_spin.connect('value-changed', self._on_timeout_changed)
         row2.pack_start(label2, False, False, 0)
         row2.pack_start(self.timeout_spin, True, True, 0)
         config_box.pack_start(row2, False, False, 0)
@@ -222,9 +223,29 @@ class GeneralView(Gtk.Box):
             disable_uuid = config.get('GRUB_DISABLE_LINUX_UUID', 'false')
             self.uuid_check.set_active(disable_uuid.lower() != 'true')
             
+            # Apply UI automation rules for initial state
+            self._update_menu_checkbox_state()
+            
         except Exception as e:
             print(_("Error loading GRUB config: {}").format(e))
     
+    def _on_timeout_changed(self, spin_button):
+        """Handle timeout changes to enforce logical rules."""
+        self._update_menu_checkbox_state()
+
+    def _update_menu_checkbox_state(self):
+        """
+        If timeout is 0, it makes no sense to show the menu.
+        Automatically uncheck and disable the checkbox to guide the user.
+        """
+        if int(self.timeout_spin.get_value()) == 0:
+            self.show_menu_check.set_active(False)
+            self.show_menu_check.set_sensitive(False)
+            self.show_menu_check.set_tooltip_text(_("Menu cannot be shown when timeout is 0"))
+        else:
+            self.show_menu_check.set_sensitive(True)
+            self.show_menu_check.set_tooltip_text("")
+            
     def get_config(self):
         """Return current configuration from UI - only changed/existing keys."""
         original = self.grub_manager.config

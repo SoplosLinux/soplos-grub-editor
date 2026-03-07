@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Soplos Grub Editor 2.0.0 - GRUB Configuration Editor
+Soplos Grub Editor 2.0.1 - GRUB Configuration Editor
 Main application entry point.
 """
 

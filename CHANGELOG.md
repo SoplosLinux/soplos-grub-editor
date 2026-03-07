@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.1] - 2026-03-07
+
+### 🐛 Fixes
+- **Robust Theme Management** - Now correctly disables both `05_debian_theme` and `05_soplos_theme` to prevent system conflicts.
+- **Cache Cleanup** - Automatically removes problematic `.background_cache.*` images (like progressive JPEGs) that caused the "invalid argument" GRUB crash.
+- **Smart UI Automation** - "Show boot menu" checkbox is now automatically disabled and unchecked when Timeout is set to 0.
+
 ## [2.0.0] - 2026-01-10
 
 ### 🎉 Major Release - Complete Rewrite

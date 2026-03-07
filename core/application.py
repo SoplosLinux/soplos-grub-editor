@@ -21,7 +21,7 @@ from utils.logger import log_info, log_error, log_warning
 # Constants (Move to a config file ideally, but here for now)
 APP_ID = "org.soplos.grubeditor"
 APP_NAME = "Soplos GRUB Editor"
-APP_VERSION = "2.0.0"
+APP_VERSION = "2.0.1"
 
 
 class SoplosGrubEditorApplication(Gtk.Application):

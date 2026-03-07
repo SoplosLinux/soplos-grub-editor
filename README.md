@@ -1,7 +1,7 @@
 # Soplos GRUB Editor
 
 [![License: GPL-3.0+](https://img.shields.io/badge/License-GPL--3.0%2B-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Version](https://img.shields.io/badge/version-2.0.0-green.svg)]()
+[![Version](https://img.shields.io/badge/version-2.0.1-green.svg)]()
 
 Advanced graphical editor for GRUB2 configuration, compatible with XFCE, Plasma and GNOME.
 
@@ -147,6 +147,13 @@ Developed by Sergi Perich
 - [Website](https://soplos.org)
 - [Report Issues](https://github.com/SoplosLinux/soplos-grub-editor/issues)
 - [Documentation](https://soplos.org/docs/soplos-grub-editor)
+
+## 🆕 New in version 2.0.1 (March 7, 2026)
+
+### Fixes
+- **Robust Theme Management**: Prevents system conflicts by reliably disabling background defaults from Debian and Soplos scripts.
+- **Cache Cleanup**: Solves the "invalid argument" GRUB crash by deleting stale progressive JPEG `.background_cache` files.
+- **Smart UI Automation**: Automatically grays out and unchecks the "Show boot menu" option when Timeout is exactly 0.
 
 ## 🆕 New in version 2.0.0 (January 10, 2026)
 
