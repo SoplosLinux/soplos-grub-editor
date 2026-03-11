@@ -575,3 +575,6 @@ msgstr "Stille Aktualisierung"
 
 msgid "Updating GRUB on startup..."
 msgstr "GRUB wird beim Start aktualisiert..."
+
+msgid "Disable submenus"
+msgstr "Untermenüs deaktivieren"

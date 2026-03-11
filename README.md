@@ -20,9 +20,11 @@ A GTK3 graphical interface to configure and customize the GRUB2 bootloader: entr
 - ⚙️ Advanced kernel parameter configuration
 
 ### 🚀 Recent Updates (v2.0.2)
-- **Hierarchical Submenus**: Detailed kernel selection (e.g., "0: Submenu » Entry").
-- **Background Sync**: Automatic `update-grub` on startup to ensure consistency.
-- **UI Compact Mode**: Optimized table layouts for more information at a glance.
+- **Hierarchical Submenus**: Full support for selecting kernels in submenus.
+- **Submenu Toggle**: Option to enable/disable GRUB submenus (`GRUB_DISABLE_SUBMENU`).
+- **Background Sync**: Automatic silent `update-grub` on startup.
+- **UI Optimizations**: Compact layouts and improved path selection.
+- **Localization**: Updated translations for all 8 supported languages.
 - 💾 Automatic backup and restore
 - 🌍 Complete internationalization (8 languages)
 - 🖥️ Compatible with XFCE, Plasma and GNOME

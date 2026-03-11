@@ -570,3 +570,6 @@ msgstr "Тихое обновление"
 
 msgid "Updating GRUB on startup..."
 msgstr "Обновление GRUB при запуске..."
+
+msgid "Disable submenus"
+msgstr "Отключить подменю"

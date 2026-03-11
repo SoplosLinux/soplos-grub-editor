@@ -576,3 +576,6 @@ msgstr "Atualização silenciosa"
 
 msgid "Updating GRUB on startup..."
 msgstr "A atualizar o GRUB no arranque..."
+
+msgid "Disable submenus"
+msgstr "Desativar submenus"

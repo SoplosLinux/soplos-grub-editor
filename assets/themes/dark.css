@@ -203,6 +203,14 @@ button.destructive-action:hover {
     margin: 8px;
 }
 
+.soplos-card-compact {
+    background-color: @theme_base_color;
+    border: 1px solid @borders;
+    border-radius: 8px;
+    padding: 6px;
+    margin: 8px;
+}
+
 .soplos-card:hover {
     background-color: @theme_selected_bg_color;
     color: @theme_selected_fg_color;

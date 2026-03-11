@@ -130,40 +130,52 @@ class GeneralView(Gtk.Box):
         self.uuid_check.set_active(True)
         advanced_box.pack_start(self.uuid_check, False, False, 0)
         
+        # Checkbox: Disable submenus
+        self.disable_submenu_check = Gtk.CheckButton(label=_("Disable submenus"))
+        self.disable_submenu_check.set_active(False)
+        advanced_box.pack_start(self.disable_submenu_check, False, False, 0)
+        
         advanced_frame.add(advanced_box)
         middle_columns_box.pack_start(advanced_frame, True, True, 0)
         
         # -- Column 2: Kernel Parameters --
         kernel_frame = Gtk.Frame(label=_("Kernel Parameters"))
-        kernel_frame.get_style_context().add_class('soplos-card')
-        kernel_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
-        kernel_box.set_margin_start(15)
-        kernel_box.set_margin_end(15)
-        kernel_box.set_margin_top(10)
-        kernel_box.set_margin_bottom(15)
+        kernel_frame.get_style_context().add_class('soplos-card-compact')
+        kernel_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        
+        # Nested box for content with margins
+        content_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        content_box.set_margin_start(15)
+        content_box.set_margin_end(15)
+        content_box.set_margin_top(10)
         
         kernel_label = Gtk.Label(label=_("Kernel Parameters:"))
         kernel_label.set_halign(Gtk.Align.START)
-        kernel_box.pack_start(kernel_label, False, False, 0)
+        content_box.pack_start(kernel_label, False, False, 0)
         
         self.kernel_entry = Gtk.Entry()
         self.kernel_entry.set_placeholder_text(_("quiet splash resume=UUID=..."))
-        kernel_box.pack_start(self.kernel_entry, False, False, 0)
+        content_box.pack_start(self.kernel_entry, False, False, 0)
+        
+        kernel_box.pack_start(content_box, False, False, 0)
+        
+        # Expanding spacer
+        kernel_box.pack_start(Gtk.Box(), True, True, 0)
+        
+        # Apply button (tucked into the corner with 0px margin, relying on card padding)
+        apply_btn = Gtk.Button(label=_("Apply Changes"))
+        apply_btn.get_style_context().add_class('suggested-action')
+        apply_btn.set_halign(Gtk.Align.END)
+        apply_btn.set_valign(Gtk.Align.END)
+        # We use 0 margins here; the 6px padding from .soplos-card-compact provides the gap
+        apply_btn.set_margin_end(0)
+        apply_btn.set_margin_bottom(0)
+        apply_btn.connect('clicked', self._on_apply)
+        kernel_box.pack_start(apply_btn, False, False, 0)
         
         kernel_frame.add(kernel_box)
         middle_columns_box.pack_start(kernel_frame, True, True, 0)
         
-        # Apply button (right-aligned, normal size)
-        apply_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-        apply_box.set_halign(Gtk.Align.END)
-        apply_btn = Gtk.Button(label=_("Apply Changes"))
-        apply_btn.get_style_context().add_class('suggested-action')
-        apply_btn.connect('clicked', self._on_apply)
-        apply_box.pack_start(apply_btn, False, False, 0)
-        self.pack_start(apply_box, False, False, 10)
-        
-        # Spacer
-        self.pack_start(Gtk.Box(), True, True, 0)
         
         self.show_all()
     
@@ -246,6 +258,10 @@ class GeneralView(Gtk.Box):
             disable_uuid = config.get('GRUB_DISABLE_LINUX_UUID', 'false')
             self.uuid_check.set_active(disable_uuid.lower() != 'true')
             
+            # Submenus - GRUB_DISABLE_SUBMENU=y or true means DISABLED
+            disable_submenu = config.get('GRUB_DISABLE_SUBMENU', 'false')
+            self.disable_submenu_check.set_active(disable_submenu.lower() in ['true', 'y'])
+            
             # Apply UI automation rules for initial state
             self._update_menu_checkbox_state()
             
@@ -305,6 +321,11 @@ class GeneralView(Gtk.Box):
         disable_uuid = 'false' if self.uuid_check.get_active() else 'true'
         if 'GRUB_DISABLE_LINUX_UUID' in original or disable_uuid != 'false':
             config['GRUB_DISABLE_LINUX_UUID'] = disable_uuid
+            
+        # Submenus - checked means DISABLE them (GRUB_DISABLE_SUBMENU=y)
+        disable_submenu = 'y' if self.disable_submenu_check.get_active() else 'false'
+        if 'GRUB_DISABLE_SUBMENU' in original or disable_submenu != 'false':
+            config['GRUB_DISABLE_SUBMENU'] = disable_submenu
         
         return config
     
