@@ -562,3 +562,12 @@ msgstr "Nu s-a putut salva configurația fontului în /etc/default/grub"
 
 msgid "Font deleted. GRUB configuration updated."
 msgstr "Font șters. Configurația GRUB actualizată."
+
+msgid "0: Submenu » Entry"
+msgstr "0: Submeniu » Intrare"
+
+msgid "Silent update"
+msgstr "Actualizare silențioasă"
+
+msgid "Updating GRUB on startup..."
+msgstr "Se actualizează GRUB la pornire..."

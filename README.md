@@ -1,7 +1,7 @@
 # Soplos GRUB Editor
 
 [![License: GPL-3.0+](https://img.shields.io/badge/License-GPL--3.0%2B-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Version](https://img.shields.io/badge/version-2.0.1-green.svg)]()
+[![Version](https://img.shields.io/badge/version-2.0.2-green.svg)]()
 
 Advanced graphical editor for GRUB2 configuration, compatible with XFCE, Plasma and GNOME.
 
@@ -18,6 +18,11 @@ A GTK3 graphical interface to configure and customize the GRUB2 bootloader: entr
 - 🔤 Custom font conversion and installation
 - 📝 Custom boot entry management
 - ⚙️ Advanced kernel parameter configuration
+
+### 🚀 Recent Updates (v2.0.2)
+- **Hierarchical Submenus**: Detailed kernel selection (e.g., "0: Submenu » Entry").
+- **Background Sync**: Automatic `update-grub` on startup to ensure consistency.
+- **UI Compact Mode**: Optimized table layouts for more information at a glance.
 - 💾 Automatic backup and restore
 - 🌍 Complete internationalization (8 languages)
 - 🖥️ Compatible with XFCE, Plasma and GNOME

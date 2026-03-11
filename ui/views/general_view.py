@@ -5,7 +5,7 @@ Replicates legacy v1.x functionality with modern Soplos styling.
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, GLib
+from gi.repository import Gtk, GLib, Pango
 
 from core.i18n_manager import _
 
@@ -43,7 +43,11 @@ class GeneralView(Gtk.Box):
         label1 = Gtk.Label(label=_("Default Boot Entry:"))
         label1.set_halign(Gtk.Align.START)
         label1.set_width_chars(25)
-        self.default_entry_combo = Gtk.ComboBoxText()
+        self.default_entry_combo = Gtk.ComboBox()
+        renderer = Gtk.CellRendererText()
+        renderer.set_property("ellipsize", Pango.EllipsizeMode.END)
+        self.default_entry_combo.pack_start(renderer, True)
+        self.default_entry_combo.add_attribute(renderer, "text", 0)
         self.default_entry_combo.set_hexpand(True)
         # Entries loaded dynamically in _load_data()
         row1.pack_start(label1, False, False, 0)
@@ -170,25 +174,44 @@ class GeneralView(Gtk.Box):
             
             # Load boot entries for Default Boot Entry dropdown
             entries = self.grub_manager.get_menu_entries()
-            self.default_entry_combo.remove_all()
+            
+            # Create a ListStore: Col 0 is display text, Col 1 is full name
+            store = Gtk.ListStore(str, str)
+            self.default_entry_combo.set_model(store)
+            
+            self.entry_names = []
             for i, entry in enumerate(entries):
-                # Format: "0: Entry Name"
-                name = entry.get('name', _('Unknown'))
-                display_text = f"{i}: {name}"
-                self.default_entry_combo.append_text(display_text)
+                full_name = entry.get('name', _('Unknown'))
+                display_name = entry.get('display_name', full_name)
+                
+                # Format for display: "0: Kernel name" or "0: Submenu » Kernel"
+                if '>' in full_name:
+                    display_text = f"{i}: {full_name.replace('>', ' » ')}"
+                else:
+                    display_text = f"{i}: {display_name}"
+                    
+                store.append([display_text, full_name])
+                self.entry_names.append(full_name)
             
             # Select current default
             default = config.get('GRUB_DEFAULT', '0')
+            
+            # Identify current selection either by index or name
             try:
                 default_idx = int(default)
-                if default_idx < len(entries):
+                if 0 <= default_idx < len(self.entry_names):
                     self.default_entry_combo.set_active(default_idx)
                 else:
                     self.default_entry_combo.set_active(0)
             except ValueError:
-                # GRUB_DEFAULT might be a string like "saved"
-                self.default_entry_combo.prepend_text(f"[{default}]")
-                self.default_entry_combo.set_active(0)
+                # Value is a hierarchical name string
+                if default in self.entry_names:
+                    idx = self.entry_names.index(default)
+                    self.default_entry_combo.set_active(idx)
+                else:
+                    # Fallback for "saved" or custom entries
+                    it = store.prepend([f"[{default}]", default])
+                    self.default_entry_combo.set_active_iter(it)
             
             # Timeout
             timeout = config.get('GRUB_TIMEOUT', '5')
@@ -253,7 +276,14 @@ class GeneralView(Gtk.Box):
         config = {}
         
         # Always include these core keys
-        config['GRUB_DEFAULT'] = str(self.default_entry_combo.get_active())
+        # Get selected entry from model (Column 1 is the full name)
+        active_iter = self.default_entry_combo.get_active_iter()
+        if active_iter:
+            model = self.default_entry_combo.get_model()
+            config['GRUB_DEFAULT'] = model.get_value(active_iter, 1)
+        else:
+            config['GRUB_DEFAULT'] = '0'
+                
         config['GRUB_TIMEOUT'] = str(int(self.timeout_spin.get_value()))
         config['GRUB_GFXMODE'] = self.resolution_combo.get_active_text() or 'auto'
         config['GRUB_CMDLINE_LINUX_DEFAULT'] = self.kernel_entry.get_text()

@@ -21,7 +21,7 @@ from utils.logger import log_info, log_error, log_warning
 # Constants (Move to a config file ideally, but here for now)
 APP_ID = "org.soplos.grubeditor"
 APP_NAME = "Soplos GRUB Editor"
-APP_VERSION = "2.0.1"
+APP_VERSION = "2.0.2"
 
 
 class SoplosGrubEditorApplication(Gtk.Application):
@@ -153,6 +153,10 @@ class SoplosGrubEditorApplication(Gtk.Application):
         """Initialize the GRUB manager."""
         try:
             self.grub_manager = get_grub_manager()
+            # Silently update GRUB on startup to ensure latest entries are visible
+            log_info(_("Synchronizing GRUB configuration..."))
+            self.grub_manager.silent_update_grub()
+            
             # Pre-load config to check for errors/access
             self.grub_manager.read_config()
             log_info(_("GRUB Manager initialized"))

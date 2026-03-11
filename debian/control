@@ -22,7 +22,7 @@ Depends: ${python3:Depends},
          pkexec,
          polkitd,
          gir1.2-polkit-1.0
-Version: 2.0.1
+Version: 2.0.2
 Description: Editor gráfico oficial de GRUB para Soplos Linux
  Una interfaz gráfica oficial de Soplos Linux para editar fácilmente la configuración
  del gestor de arranque GRUB2. Permite personalizar temas, fondos, fuentes y

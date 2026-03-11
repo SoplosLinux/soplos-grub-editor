@@ -450,10 +450,35 @@ class GrubManager:
             self.read_config()
         return self.config_data
     
+    def silent_update_grub(self) -> bool:
+        """
+        Run update-grub silently.
+        Does not use pkexec if already root, otherwise attempts pkexec.
+        """
+        import os
+        is_root = os.geteuid() == 0
+        
+        update_grub_paths = ['/usr/sbin/update-grub', '/sbin/update-grub', 'update-grub']
+        update_grub_cmd = None
+        for path in update_grub_paths:
+            if os.path.exists(path):
+                update_grub_cmd = path
+                break
+        
+        if not update_grub_cmd:
+            return False
+            
+        try:
+            cmd = [update_grub_cmd] if is_root else ['pkexec', update_grub_cmd]
+            subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            return True
+        except Exception:
+            return False
+
     def get_menu_entries(self) -> List[Dict]:
         """
-        Parse grub.cfg to get menu entries.
-        Uses cached result to avoid multiple pkexec prompts.
+        Parse grub.cfg to get menu entries, including submenus.
+        Returns a flat list of entries with hierarchical names (e.g. "Submenu > Entry")
         
         Returns:
             List of dictionaries with entry information
@@ -471,7 +496,6 @@ class GrubManager:
             with open(grub_cfg, 'r', encoding='utf-8', errors='ignore') as f:
                 content = f.read()
         except PermissionError:
-            # Use pkexec to read
             try:
                 result = subprocess.run(['pkexec', 'cat', str(grub_cfg)], 
                                         capture_output=True, text=True)
@@ -486,31 +510,61 @@ class GrubManager:
             return entries
             
         try:
-                
-            # Parse menuentry lines
             import re
-            pattern = r"menuentry\s+['\"]([^'\"]+)['\"]"
-            matches = re.findall(pattern, content)
+            lines = content.splitlines()
+            entries = []
+            stack = []
+            brace_depth = 0
             
-            for i, name in enumerate(matches):
-                entry_type = _('system')
-                path = ''
+            for line in lines:
+                line = line.strip()
+                if not line or line.startswith('#'):
+                    continue
                 
-                if 'recovery' in name.lower():
-                    entry_type = _('recovery')
-                elif 'memtest' in name.lower():
-                    entry_type = _('memtest')
-                    path = '/boot/memtest86+x64.bin' if 'x64' in name.lower() else '/boot/memtest86+.bin'
-                elif 'uefi' in name.lower() or 'firmware' in name.lower():
-                    entry_type = _('firmware')
+                # Check for submenu
+                m_sub = re.search(r"submenu\s+['\"]([^'\"]+)['\"]", line)
+                if m_sub and '{' in line:
+                    stack.append(m_sub.group(1))
+                    brace_depth += 1
+                    continue
+                
+                # Check for menuentry
+                m_ent = re.search(r"menuentry\s+['\"]([^'\"]+)['\"]", line)
+                if m_ent and '{' in line:
+                    entry_title = m_ent.group(1)
+                    # Hierarchical name for GRUB_DEFAULT
+                    full_name = ">".join(stack + [entry_title])
                     
-                entries.append({
-                    'name': name,
-                    'type': entry_type,
-                    'path': path,
-                    'enabled': True
-                })
+                    entry_type = _('system')
+                    if 'recovery' in entry_title.lower():
+                        entry_type = _('recovery')
+                    elif 'memtest' in entry_title.lower():
+                        entry_type = _('memtest')
+                    elif 'uefi' in entry_title.lower() or 'firmware' in entry_title.lower():
+                        entry_type = _('firmware')
+                        
+                    entries.append({
+                        'name': full_name,
+                        'display_name': entry_title,
+                        'type': entry_type,
+                        'enabled': True
+                    })
+                    brace_depth += 1
+                    continue
                 
+                # Tracking braces to maintain stack
+                if '{' in line:
+                    brace_depth += line.count('{')
+                
+                if '}' in line:
+                    closed_count = line.count('}')
+                    for i_b in range(closed_count):
+                        # If a submenu level is being closed
+                        if len(stack) > 0 and brace_depth == len(stack):
+                            stack.pop()
+                        if brace_depth > 0:
+                            brace_depth -= 1
+
         except Exception as e:
             log_error(_("Error parsing grub.cfg: {}").format(e))
             

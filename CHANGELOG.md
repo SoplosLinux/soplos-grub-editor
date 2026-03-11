@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.2] - 2026-03-11
+
+### ✨ New Features
+- **Hierarchical Submenu Support** - Full parsing and display of GRUB submenus (e.g., "Advanced > Kernel").
+- **Auto-Sync on Startup** - Implementation of a silent `update-grub` on application launch for better synchronization.
+- **Enhanced Path Display** - Hierarchical naming in Boot Entries list and Default Entry selection.
+
+### 🐛 Fixes
+- **Selection Bug** - Fixed issue where choosing alternative kernels incorrectly defaulted to the primary one.
+- **UI Visual Optimization** - Compacted Boot Entries table by removing excessive padding for a cleaner look.
+
 ## [2.0.1] - 2026-03-07
 
 ### 🐛 Fixes

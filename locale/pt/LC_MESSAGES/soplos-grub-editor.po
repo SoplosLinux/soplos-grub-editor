@@ -567,3 +567,12 @@ msgstr "Falha ao guardar a configuração da fonte em /etc/default/grub"
 
 msgid "Font deleted. GRUB configuration updated."
 msgstr "Fonte eliminada. Configuração do GRUB atualizada."
+
+msgid "0: Submenu » Entry"
+msgstr "0: Submenu » Entrada"
+
+msgid "Silent update"
+msgstr "Atualização silenciosa"
+
+msgid "Updating GRUB on startup..."
+msgstr "A atualizar o GRUB no arranque..."

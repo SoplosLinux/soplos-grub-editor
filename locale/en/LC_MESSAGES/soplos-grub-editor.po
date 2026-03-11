@@ -565,3 +565,12 @@ msgstr "Failed to save font configuration to /etc/default/grub"
 
 msgid "Font deleted. GRUB configuration updated."
 msgstr "Font deleted. GRUB configuration updated."
+
+msgid "0: Submenu » Entry"
+msgstr "0: Submenu » Entry"
+
+msgid "Silent update"
+msgstr "Silent update"
+
+msgid "Updating GRUB on startup..."
+msgstr "Updating GRUB on startup..."

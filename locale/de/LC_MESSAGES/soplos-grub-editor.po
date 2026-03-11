@@ -566,3 +566,12 @@ msgstr "Fehler beim Speichern der Schriftartkonfiguration in /etc/default/grub"
 
 msgid "Font deleted. GRUB configuration updated."
 msgstr "Schriftart gelöscht. GRUB-Konfiguration aktualisiert."
+
+msgid "0: Submenu » Entry"
+msgstr "0: Untermenü » Eintrag"
+
+msgid "Silent update"
+msgstr "Stille Aktualisierung"
+
+msgid "Updating GRUB on startup..."
+msgstr "GRUB wird beim Start aktualisiert..."

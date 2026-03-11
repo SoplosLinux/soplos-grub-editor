@@ -215,6 +215,24 @@
   </provides>
 
   <releases>
+    <release version="2.0.2" date="2026-03-11">
+      <description>
+        <p>Support for hierarchical submenus, silent update on startup and visual optimizations.</p>
+        <p xml:lang="es">Soporte para submenús jerárquicos, actualización silenciosa al inicio y optimizaciones visuales.</p>
+        <p xml:lang="fr">Support des sous-menus hiérarchiques, mise à jour silencieuse au démarrage et optimisations visuelles.</p>
+        <p xml:lang="pt">Suporte para submenus hierárquicos, atualização silenciosa na inicialização e otimizações visuais.</p>
+        <p xml:lang="de">Unterstützung für hierarchische Untermenüs, stille Aktualisierung beim Start und visuelle Optimierungen.</p>
+        <p xml:lang="it">Supporto per sottomenu gerarchici, aggiornamento silenzioso all'avvio e ottimizzazioni visuali.</p>
+        <p xml:lang="ru">Поддержка иерархических подменю, тихое обновление при запуске и визуальные оптимизации.</p>
+        <p xml:lang="ro">Suport pentru submeniuri ierarhice, actualizare silențioasă la pornire și optimizări vizuale.</p>
+        <ul>
+          <li>Full parsing of GRUB submenus</li>
+          <li>Silent update-grub on application launch</li>
+          <li>Compact UI for boot entries table</li>
+          <li>Hierarchical path display in selectors</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.0.1" date="2026-03-07">
       <description>
         <p>Fixes for GRUB boot failures, cache conflicts, and UX improvements for timeout settings.</p>

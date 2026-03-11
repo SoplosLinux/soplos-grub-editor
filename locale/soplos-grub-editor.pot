@@ -522,3 +522,42 @@ msgstr ""
 
 msgid "update-grub not found"
 msgstr ""
+
+msgid "Successfully updated GRUB"
+msgstr ""
+
+msgid "Failed to update GRUB: {err}"
+msgstr ""
+
+msgid "Error running update-grub: {err}"
+msgstr ""
+
+msgid "Successfully saved config to {path}"
+msgstr ""
+
+msgid "Successfully saved config using pkexec"
+msgstr ""
+
+msgid "Failed to save config: {err}"
+msgstr ""
+
+msgid "Error saving GRUB config: {err}"
+msgstr ""
+
+msgid "0: Submenu » Entry"
+msgstr ""
+
+msgid "Silent update"
+msgstr ""
+
+msgid "Updating GRUB on startup..."
+msgstr ""
+
+msgid "Apply Appearance Settings"
+msgstr ""
+
+msgid "This will disable any theme and use your custom background/colors. Continue?"
+msgstr ""
+
+msgid "Settings applied successfully!"
+msgstr ""

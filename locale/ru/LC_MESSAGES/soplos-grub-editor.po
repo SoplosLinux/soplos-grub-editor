@@ -561,3 +561,12 @@ msgstr "Не удалось сохранить конфигурацию шриф
 
 msgid "Font deleted. GRUB configuration updated."
 msgstr "Шрифт удален. Конфигурация GRUB обновлена."
+
+msgid "0: Submenu » Entry"
+msgstr "0: Подменю » Запись"
+
+msgid "Silent update"
+msgstr "Тихое обновление"
+
+msgid "Updating GRUB on startup..."
+msgstr "Обновление GRUB при запуске..."

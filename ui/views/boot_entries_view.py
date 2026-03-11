@@ -121,9 +121,16 @@ class BootEntriesView(Gtk.Box):
         entries = self.grub_manager.get_menu_entries()
         
         for i, entry in enumerate(entries):
+            # Show hierarchical name in the list for clarity
+            full_name = entry.get('name', _('Entry {}').format(i))
+            if '>' in full_name:
+                display_name = full_name.replace('>', ' » ')
+            else:
+                display_name = entry.get('display_name', full_name)
+                
             self.store.append([
                 i,
-                entry.get('name', _('Entry {}').format(i)),
+                display_name,
                 entry.get('type', _('system')),
                 entry.get('path', ''),
                 entry.get('enabled', True)

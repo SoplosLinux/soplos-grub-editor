@@ -562,3 +562,12 @@ msgstr ""
 
 msgid "Font deleted. GRUB configuration updated."
 msgstr "Carattere eliminato. Configurazione GRUB aggiornata."
+
+msgid "0: Submenu » Entry"
+msgstr "0: Sottomenu » Voce"
+
+msgid "Silent update"
+msgstr "Aggiornamento silenzioso"
+
+msgid "Updating GRUB on startup..."
+msgstr "Aggiornamento GRUB all'avvio..."

@@ -11,7 +11,7 @@ from core.i18n_manager import _
 
 # App constants
 APP_NAME = "Soplos GRUB Editor"
-APP_VERSION = "2.0.1"
+APP_VERSION = "2.0.2"
 DEFAULT_WINDOW_WIDTH = 900
 DEFAULT_WINDOW_HEIGHT = 500
 

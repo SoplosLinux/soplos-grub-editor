@@ -42,8 +42,13 @@ msgstr "Inicialización de la aplicación completada"
 msgid "Apply"
 msgstr "Aplicar"
 
+#, fuzzy
 msgid "Apply Appearance Settings"
-msgstr "Aplicar configuración de apariencia"
+msgstr ""
+"#-#-#-#-#  soplos-grub-editor.po (Soplos GRUB Editor 2.0.0)  #-#-#-#-#\n"
+"Aplicar configuración de apariencia\n"
+"#-#-#-#-#  soplos-grub-editor.po (Soplos GRUB Editor 2.0.0)  #-#-#-#-#\n"
+"Aplicar ajustes de apariencia"
 
 msgid "Apply Background Settings"
 msgstr "Aplicar configuración de fondo"
@@ -66,8 +71,13 @@ msgstr ""
 msgid "Background"
 msgstr "Fondo"
 
+#, fuzzy
 msgid "Settings applied successfully!"
-msgstr "¡Configuración aplicada correctamente!"
+msgstr ""
+"#-#-#-#-#  soplos-grub-editor.po (Soplos GRUB Editor 2.0.0)  #-#-#-#-#\n"
+"¡Configuración aplicada correctamente!\n"
+"#-#-#-#-#  soplos-grub-editor.po (Soplos GRUB Editor 2.0.0)  #-#-#-#-#\n"
+"¡Ajustes aplicados con éxito!"
 
 msgid "Background color:"
 msgstr "Color de fondo:"
@@ -406,15 +416,29 @@ msgstr "Iniciando {name} v{ver}..."
 msgid "Success"
 msgstr "Correcto"
 
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Successfully saved config to {path}"
-msgstr "Configuración guardada correctamente en {path}"
+msgstr ""
+"#-#-#-#-#  soplos-grub-editor.po (Soplos GRUB Editor 2.0.0)  #-#-#-#-#\n"
+"Configuración guardada correctamente en {path}\n"
+"#-#-#-#-#  soplos-grub-editor.po (Soplos GRUB Editor 2.0.0)  #-#-#-#-#\n"
+"Configuración guardada con éxito en {path}"
 
+#, fuzzy
 msgid "Successfully saved config using pkexec"
-msgstr "Configuración guardada correctamente usando pkexec"
+msgstr ""
+"#-#-#-#-#  soplos-grub-editor.po (Soplos GRUB Editor 2.0.0)  #-#-#-#-#\n"
+"Configuración guardada correctamente usando pkexec\n"
+"#-#-#-#-#  soplos-grub-editor.po (Soplos GRUB Editor 2.0.0)  #-#-#-#-#\n"
+"Configuración guardada con éxito usando pkexec"
 
+#, fuzzy
 msgid "Successfully updated GRUB"
-msgstr "GRUB ha sido actualizado correctamente"
+msgstr ""
+"#-#-#-#-#  soplos-grub-editor.po (Soplos GRUB Editor 2.0.0)  #-#-#-#-#\n"
+"GRUB ha sido actualizado correctamente\n"
+"#-#-#-#-#  soplos-grub-editor.po (Soplos GRUB Editor 2.0.0)  #-#-#-#-#\n"
+"GRUB actualizado con éxito"
 
 msgid "Text color:"
 msgstr "Color del texto:"
@@ -449,11 +473,16 @@ msgstr ""
 "Los temas incluyen colores y fuentes. Use la pestaña 'Fondo' para una "
 "configuración personalizada."
 
+#, fuzzy
 msgid ""
 "This will disable any theme and use your custom background/colors. Continue?"
 msgstr ""
+"#-#-#-#-#  soplos-grub-editor.po (Soplos GRUB Editor 2.0.0)  #-#-#-#-#\n"
 "Esto desactivará cualquier tema y usará su fondo/colores personalizados. "
-"¿Desea continuar?"
+"¿Desea continuar?\n"
+"#-#-#-#-#  soplos-grub-editor.po (Soplos GRUB Editor 2.0.0)  #-#-#-#-#\n"
+"Esto desactivará cualquier tema y usará tu fondo/colores personalizados. "
+"¿Continuar?"
 
 msgid "This will permanently delete theme '{}'. Are you sure?"
 msgstr "Esto eliminará permanentemente el tema '{}'. ¿Está seguro?"
@@ -564,3 +593,12 @@ msgstr "Error al guardar la configuración de la fuente en /etc/default/grub"
 
 msgid "Font deleted. GRUB configuration updated."
 msgstr "Fuente eliminada. Configuración de GRUB actualizada."
+
+msgid "0: Submenu » Entry"
+msgstr "0: Submenú » Entrada"
+
+msgid "Silent update"
+msgstr "Actualización silenciosa"
+
+msgid "Updating GRUB on startup..."
+msgstr "Actualizando GRUB al inicio..."
