@@ -4,6 +4,7 @@ Replicates legacy v1.x functionality with modern Soplos styling.
 """
 
 import gi
+import subprocess
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GdkPixbuf, GLib
 
@@ -285,7 +286,6 @@ class AppearanceView(Gtk.ScrolledWindow):
     def _on_apply_font(self, button):
         """Apply selected font to GRUB configuration."""
         font_name = self.fonts_combo.get_active_text()
-        print(f"[DEBUG] _on_apply_font called. Selected: {font_name}")
         if font_name:
             font_path = f"/boot/grub/fonts/{font_name}"
             
@@ -317,8 +317,7 @@ class AppearanceView(Gtk.ScrolledWindow):
 
         if response == Gtk.ResponseType.YES:
             import os
-            import subprocess
-            
+
             font_path = f"/boot/grub/fonts/{font_name}"
             
             try:
@@ -519,7 +518,6 @@ class AppearanceView(Gtk.ScrolledWindow):
     
     def _install_theme_from_archive(self, archive_path):
         """Extract and install theme from archive."""
-        import subprocess
         import os
         import tempfile
         
@@ -720,9 +718,7 @@ class AppearanceView(Gtk.ScrolledWindow):
         
         if response != Gtk.ResponseType.YES:
             return
-        
-        import subprocess
-        
+
         theme_path = f"/boot/grub/themes/{theme_name}"
         
         # Remove theme directory
@@ -921,7 +917,6 @@ class AppearanceView(Gtk.ScrolledWindow):
     
     def _on_convert_font(self, button):
         """Convert TTF/OTF to PF2 and install."""
-        import subprocess
         import os
         
         font_path = self.font_entry.get_text().strip()

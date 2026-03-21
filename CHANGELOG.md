@@ -4,6 +4,28 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+## [2.0.2-1] - 2026-03-21
+
+### ✨ Added
+- **F1 — About dialog**: Press F1 to open the About dialog with version, author, license and website.
+- **GNOME menu About**: Application menu About action now opens the actual dialog.
+- **Ctrl+Shift+Tab**: Keyboard shortcut to navigate to the previous tab.
+
+### 🐛 Fixed
+- Notebook tab labels no longer appear orange in inactive tabs — removed `color: inherit` rule that incorrectly propagated the active tab color to all labels.
+- Icon files renamed from `com.soplos` to `org.soplos` for naming consistency.
+- Duplicate `GTK_THEME` environment variable entry in the pkexec launcher eliminated.
+- Wrong i18n domain default (`soplos-repo-selector`) corrected to `soplos-grub-editor`.
+- Inline `import subprocess` statements moved to module level in `appearance_view.py`.
+- Debug `[DEBUG]` print statement removed from production code.
+- Version string in `main.py` docstring and `.desktop` file updated to 2.0.2.
+
+### 🎨 Improved
+- CSS architecture refactored to `base.css` (structural styles) + `dark.css`/`light.css` (color variables only), matching the Soplos standard used by Sys Cleaner.
+- About dialog appearance standardized across XFCE, GNOME and KDE to match all other Soplos apps.
+
+---
+
 ## [2.0.2] - 2026-03-11
 
 ### ✨ New Features

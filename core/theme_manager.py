@@ -1,9 +1,9 @@
 """Theme management for Soplos GRUB Editor.
 
-SIMPLIFIED APPROACH (like Repo Selector):
-- Each theme file (dark.css, light.css) is SELF-CONTAINED
-- NO concatenation, NO separate base.css
-- Single CSS provider loads ONE file directly
+APPROACH (like Sys Cleaner):
+- base.css contains all structural styles using CSS variables
+- dark.css / light.css contain only @define-color variable definitions
+- Both files are concatenated into a single CSS provider
 - Respects SOPLOS_THEME_TYPE when running as root via pkexec
 """
 
@@ -102,9 +102,15 @@ class ThemeManager:
             return False
         
         try:
-            # SIMPLE: Load directly from file (like Repo Selector)
-            self.css_provider.load_from_path(str(theme_path))
-            print(f"[ThemeManager] ✓ Theme loaded from file")
+            # Concatenate base.css + theme file (like Sys Cleaner)
+            base_path = self.themes_path / 'base.css'
+            combined_css = ''
+            for css_path in [theme_path, base_path]:
+                if css_path.exists():
+                    with open(css_path, 'r', encoding='utf-8') as f:
+                        combined_css += f.read() + '\n'
+            self.css_provider.load_from_data(combined_css.encode('utf-8'))
+            print(f"[ThemeManager] ✓ Theme loaded: {theme_name} + base.css")
         except Exception as e:
             print(_("[ThemeManager] ✗ ERROR loading theme: {}").format(e))
             return False

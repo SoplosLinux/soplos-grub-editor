@@ -28,7 +28,7 @@ def read_requirements():
 
 setup(
     name='soplos-grub-editor',
-    version='2.0.2',
+    version='2.0.2-1',
     description='Official GRUB graphical editor for Soplos Linux',
     long_description=read_readme(),
     long_description_content_type='text/markdown',

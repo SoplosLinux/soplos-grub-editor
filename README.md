@@ -1,7 +1,7 @@
 # Soplos GRUB Editor
 
 [![License: GPL-3.0+](https://img.shields.io/badge/License-GPL--3.0%2B-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Version](https://img.shields.io/badge/version-2.0.2-green.svg)]()
+[![Version](https://img.shields.io/badge/version-2.0.2--1-green.svg)]()
 
 Advanced graphical editor for GRUB2 configuration, compatible with XFCE, Plasma and GNOME.
 
@@ -68,9 +68,9 @@ pip3 install -r requirements.txt
 sudo python3 setup.py install
 
 # Install desktop files and icons
-sudo cp assets/com.soplos.grubeditor.desktop /usr/share/applications/
-sudo cp assets/icons/com.soplos.grubeditor.png /usr/share/icons/hicolor/128x128/apps/
-sudo cp debian/com.soplos.grubeditor.metainfo.xml /usr/share/metainfo/
+sudo cp assets/org.soplos.grubeditor.desktop /usr/share/applications/
+sudo cp assets/icons/org.soplos.grubeditor.png /usr/share/icons/hicolor/128x128/apps/
+sudo cp debian/org.soplos.grubeditor.metainfo.xml /usr/share/metainfo/
 sudo update-desktop-database
 sudo gtk-update-icon-cache /usr/share/icons/hicolor/
 ```
@@ -135,11 +135,9 @@ GTK_THEME=Breeze-Dark soplos-grub-editor
 
 ## 🐧 Distribution Compatibility
 
+- ✅ **Soplos Linux Boro** (GNOME + Wayland)
+- ✅ **Soplos Linux Tyron** (XFCE + X11)
 - ✅ **Soplos Linux Tyson** (Plasma 6 + Wayland)
-- ✅ Ubuntu/Debian (GNOME/X11/Wayland)
-- ✅ Fedora (GNOME/KDE/Wayland)
-- ✅ Arch Linux (any DE)
-- ✅ openSUSE (KDE/GNOME)
 
 ## 📄 License
 
@@ -154,6 +152,25 @@ Developed by Sergi Perich
 - [Website](https://soplos.org)
 - [Report Issues](https://github.com/SoplosLinux/soplos-grub-editor/issues)
 - [Documentation](https://soplos.org/docs/soplos-grub-editor)
+
+## 🆕 New in version 2.0.2-1 (March 21, 2026)
+
+### Added
+- **F1 shortcut**: Press F1 to open the About dialog.
+- **GNOME menu About**: Application menu About action now opens the actual dialog.
+- **Ctrl+Shift+Tab**: Keyboard shortcut to navigate to the previous tab.
+
+### Fixed
+- Notebook tab labels no longer appear orange in inactive tabs.
+- Icon files renamed from `com.soplos` to `org.soplos` for naming consistency.
+- Duplicate `GTK_THEME` environment variable entry in the pkexec launcher eliminated.
+- Wrong i18n domain corrected to `soplos-grub-editor`.
+- Inline `import subprocess` statements moved to module level.
+- Debug print statement removed from production code.
+
+### Improved
+- CSS architecture refactored to `base.css` + `dark.css`/`light.css` (color variables only).
+- About dialog appearance standardized across XFCE, GNOME and KDE.
 
 ## 🆕 New in version 2.0.1 (March 7, 2026)
 

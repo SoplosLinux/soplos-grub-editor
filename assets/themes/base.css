@@ -1,7 +1,12 @@
-/* Base Theme for Soplos Grub Editor - GTK3 Compatible */
-/* This file contains only neutral base styles that work across all themes */
+/* Base Theme for Soplos GRUB Editor - GTK3 CSS */
+/* Structural styles only. Colors come from dark.css or light.css variables. */
 
 /* Application Window */
+window {
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
+}
+
 .soplos-window {
     background-color: @theme_bg_color;
     color: @theme_fg_color;
@@ -14,74 +19,114 @@
     border-radius: 8px;
 }
 
-/* Notebook and Tabs Styling */
+/* HeaderBar */
+headerbar,
+.titlebar {
+    background-color: @soplos_header_bg;
+    color: @theme_fg_color;
+    border-bottom: 1px solid @borders;
+    box-shadow: none;
+}
+
+headerbar button.titlebutton {
+    color: @theme_fg_color;
+    background: transparent;
+    border: none;
+    padding: 6px;
+    border-radius: 4px;
+}
+
+headerbar button.titlebutton:hover {
+    background-color: @soplos_button_hover_bg;
+}
+
+headerbar button.titlebutton.close:hover {
+    background-color: @error_color;
+    color: white;
+}
+
+/* Notebook (Tabs) Styling */
 notebook {
+    background-color: @soplos_header_bg;
     border: 1px solid @borders;
-    background-color: @theme_base_color;
 }
 
+notebook>header {
+    background-color: @soplos_header_bg;
+    border: none;
+    box-shadow: none;
+}
+
+notebook>header tabs {
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Tab Styling */
+notebook>header tab {
+    background-color: @soplos_tab_bg;
+    color: @soplos_tab_fg;
+    border: 1px solid @borders;
+    border-bottom: none;
+    margin: 0 2px 0 0;
+    padding: 8px 20px;
+    border-radius: 4px 4px 0 0;
+    box-shadow: none;
+    outline: none;
+}
+
+/* Hover State */
+notebook>header tab:hover {
+    background-color: @soplos_tab_hover_bg;
+    color: @theme_fg_color;
+    box-shadow: none;
+}
+
+/* Checked/Active State */
+notebook>header tab:checked {
+    background-color: @soplos_tab_checked_bg;
+    color: @soplos_orange;
+    border-top: 3px solid @soplos_orange;
+    border-left: 1px solid @borders;
+    border-right: 1px solid @borders;
+    border-bottom: none;
+    box-shadow: none;
+}
+
+/* Remove focus rings */
+notebook>header tab:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Content Area */
 notebook>stack {
-    background-color: @theme_base_color;
-    border-top: 1px solid @borders;
-}
-
-/* Notebook header */
-notebook header {
-    background-color: transparent;
-    border: none;
-    padding: 4px 8px 0 8px;
-}
-
-notebook header tabs {
-    border: none;
-    background-color: transparent;
-}
-
-/* Tab styling */
-notebook header tab {
-    padding: 10px 18px;
-    border: 1px solid @borders;
-    border-bottom: none;
-    background-color: @theme_unfocused_bg_color;
-    color: @theme_fg_color;
-    margin: 0 2px -1px 0;
-    border-radius: 6px 6px 0 0;
-    font-weight: normal;
-    min-height: 28px;
-}
-
-notebook header tab:hover {
     background-color: @theme_bg_color;
+    border: 1px solid @borders;
+    border-top: none;
 }
 
-notebook header tab:checked,
-notebook header tab:active {
-    background-color: @theme_base_color;
-    border-bottom: none;
-    font-weight: bold;
-    margin-bottom: -1px;
-}
-
-notebook header tab label {
-    color: @theme_fg_color;
-}
-
-notebook header tab image {
-    margin-right: 6px;
-    min-height: 16px;
-}
-
-/* Buttons - GTK Compatible */
+/* Buttons */
 button {
     border-radius: 6px;
     padding: 8px 16px;
     border: 1px solid @borders;
-    background-color: @theme_bg_color;
+    background-color: @soplos_button_bg;
     color: @theme_fg_color;
     font-weight: bold;
+    box-shadow: none;
+    text-shadow: none;
 }
 
 button:hover {
+    background-color: @soplos_button_hover_bg;
+    border-color: @soplos_orange;
+    color: @theme_fg_color;
+}
+
+button:active {
     background-color: @theme_selected_bg_color;
     color: @theme_selected_fg_color;
 }
@@ -92,10 +137,18 @@ button.suggested-action {
     border: none;
 }
 
+button.suggested-action:hover {
+    background-color: @soplos_orange_hover;
+}
+
 button.destructive-action {
     background-color: @error_color;
     color: white;
     border: none;
+}
+
+button.destructive-action:hover {
+    background-color: #ff6b6b;
 }
 
 /* Cards and Containers */
@@ -130,6 +183,17 @@ progressbar {
     border-radius: 4px;
 }
 
+progressbar trough {
+    background-color: @soplos_progressbar_trough;
+    border: 1px solid @borders;
+    border-radius: 4px;
+}
+
+progressbar progress {
+    background-color: @soplos_orange;
+    border-radius: 4px;
+}
+
 /* Icons */
 .soplos-icon-large {
     min-width: 48px;
@@ -152,51 +216,13 @@ separator {
     margin: 10px 0;
 }
 
-/* Repo Selector Screen Specific */
-.soplos-repo-selector-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: @theme_selected_bg_color;
-    margin-bottom: 10px;
-}
-
-.soplos-repo-selector-subtitle {
-    font-size: 16px;
-    color: @theme_fg_color;
-    margin-bottom: 20px;
-}
-
-/* Software/Hardware Grids */
-.soplos-software-grid {
-    padding: 10px;
-}
-
-.soplos-software-item {
-    padding: 12px;
-    border-radius: 8px;
-    background-color: @theme_base_color;
-    border: 1px solid @borders;
-    margin: 4px;
-    color: @theme_fg_color;
-}
-
-.soplos-software-item:hover {
-    background-color: @theme_selected_bg_color;
-    color: @theme_selected_fg_color;
-}
-
-.soplos-hardware-info {
-    font-family: monospace;
-    background-color: @theme_base_color;
-    border: 1px solid @borders;
-    border-radius: 4px;
-    padding: 10px;
-    color: @theme_fg_color;
-}
-
 /* Text styles */
 .dim-label {
     color: @insensitive_fg_color;
+}
+
+label {
+    color: @theme_fg_color;
 }
 
 /* Scrolled windows */
@@ -223,18 +249,71 @@ list,
 treeview {
     background-color: @theme_base_color;
     color: @theme_fg_color;
+    font-size: 13px;
 }
 
+/* TreeView headers */
+treeview.view header button {
+    background-color: @soplos_treeview_header_bg;
+    color: @theme_fg_color;
+    border: 1px solid @borders;
+    padding: 6px 8px;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+treeview.view header button:hover {
+    background-color: @soplos_tab_hover_bg;
+}
+
+/* TreeView cells */
+treeview.view {
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
+}
+
+treeview.view:selected,
+treeview.view:selected:focus,
+treeview.view cell:selected {
+    background-color: @soplos_orange;
+    color: #000000;
+}
+
+treeview.view cell {
+    padding: 4px 8px;
+    border: none;
+}
+
+/* Row hover effect */
 list row:hover,
-treeview:hover {
-    background-color: @theme_selected_bg_color;
-    color: @theme_selected_fg_color;
+treeview.view:hover {
+    background-color: @soplos_treeview_hover_bg;
 }
 
-list row:selected,
-treeview:selected {
-    background-color: @theme_selected_bg_color;
-    color: @theme_selected_fg_color;
+/* Grid lines */
+treeview.view.separator {
+    min-height: 1px;
+    background-color: @borders;
+}
+
+/* Checkbox in TreeView */
+treeview.view check,
+treeview.view radio {
+    min-width: 18px;
+    min-height: 18px;
+    margin: 2px;
+}
+
+/* Entry fields */
+entry {
+    background-color: @soplos_entry_bg;
+    color: @theme_fg_color;
+    border: 1px solid @borders;
+    box-shadow: none;
+}
+
+entry:focus {
+    border-color: @soplos_orange;
 }
 
 /* Custom button styles */
@@ -275,4 +354,15 @@ treeview:selected {
 
 .soplos-button-accent:hover {
     background-color: @hover_overlay;
+}
+
+/* Dialog action area */
+.dialog-action-area {
+    background-color: @theme_bg_color;
+}
+
+/* Remove focus outlines */
+* {
+    outline-color: rgba(255, 136, 0, 0.5);
+    outline-style: none;
 }

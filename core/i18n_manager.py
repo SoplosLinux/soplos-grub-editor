@@ -246,7 +246,7 @@ def get_current_language() -> str:
     from core.i18n_manager import get_i18n_manager
     return get_i18n_manager().get_current_language()
 
-def initialize_i18n(locale_dir: str = None, domain: str = 'soplos-repo-selector') -> str:
+def initialize_i18n(locale_dir: str = None, domain: str = 'soplos-grub-editor') -> str:
     """Initialize the internationalization system."""
     manager = get_i18n_manager(locale_dir, domain)
     return manager.get_current_language()

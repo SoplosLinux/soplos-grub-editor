@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Soplos Grub Editor 2.0.1 - GRUB Configuration Editor
+Soplos Grub Editor 2.0.2-1 - GRUB Configuration Editor
 Main application entry point.
 """
 
@@ -81,8 +81,6 @@ def main():
                 env_vars.append(f"SOPLOS_SESSION_TYPE={session_type}")
             if theme_type:
                 env_vars.append(f"SOPLOS_THEME_TYPE={theme_type}")
-            if gtk_theme:
-                env_vars.append(f"GTK_THEME={gtk_theme}")
             if gtk_theme:
                 env_vars.append(f"GTK_THEME={gtk_theme}")
 
